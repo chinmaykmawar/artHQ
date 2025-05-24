@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %} ArtHQ Home {% endblock %}
+
+
+{% block content %}
+{% load static %}
+<div class="container-fluid col-xxl-11 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-12 col-lg-6">
+        <img src='{% static  "assets/common/main.jpg"%}' class="d-block mx-lg-auto img-fluid" alt="art"  height="1000" loading="lazy">
+      </div>
+      <div class="col-sm-12 col-lg-6" id="hero-text">
+        <h1 id="hero-heading"class="display-6 fw-bold text-body-emphasis lh-1 mb-3">For placing order and customizations:</h1>
+        <img src='{% static  "assets/common/phone.jpg"%}' height="20px" >
+        <div id="names">   
+            <p class="lead">Neha Nigam Mawar +918800630700</p>
+            <p class="lead">Chinmay K Mawar +918800156300</p>
+        </div>
+        <img src='{% static  "assets/common/Mail.jpg"%}' height="20px" >
+        <p class="lead">
+            <a href="mailto:artheadquaters@gmail.com" id="emailid">
+                artheadquaters@gmail.com
+            </a>
+        </p>
+        <!--<div class="d-grid gap-2 d-md-flex justify-content-md-start" id="hero-button">
+          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Contact Us</button>
+          <button type="button" class="btn btn-outline-secondary btn-lg px-4">About</button>
+        </div>
+        -->
+      </div>
+    </div>
+{% endblock %}

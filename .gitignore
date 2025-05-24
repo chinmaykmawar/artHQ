@@ -1,0 +1,14 @@
+
+*.jpg
+*.jpeg
+*.png
+*.HEIC
+db.sqlite3
+.vscode/launch.json
+.vscode/settings.json
+.prettierrc
+main/settings.py
+main/templates/test.html
+main/templates/test2.html
+static/js/test.js
+static/js/test2.js

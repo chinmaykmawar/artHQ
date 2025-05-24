@@ -1,0 +1,69 @@
+#logo {
+  margin-left: 5rem;
+  font-size: 30px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#logo_image {
+  width: 80px;
+  height: 50px;
+  object-fit: cover;
+}
+
+#navbar_placeholder {
+  height: 71px;
+  z-index: 0;
+}
+
+.button {
+  background-color: white;
+  color: black;
+}
+
+.no_border {
+  border: 0px !important;
+}
+
+.no_margin {
+  margin: 0px !important;
+}
+
+.no_padding {
+  padding: 0px !important;
+}
+
+.button_disabled {
+  background-color: rgb(194, 194, 194);
+  color: black;
+  font-weight: 200;
+  border: 0;
+}
+
+.button_primary {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+.button_OKCancel{
+  border:0px !important;
+  width:50%;
+}
+
+.button_secondary {
+  
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 20px !important;
+  margin-right: 20px !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.row>*{
+  padding: 0px !important;
+}

@@ -1,0 +1,43 @@
+#emailid {
+    color: #000;
+    text-decoration: none;
+}
+
+#names>p {
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+
+#hero-text {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    grid-template-rows: auto auto auto;
+    justify-content: center;
+    align-items: center;
+}
+
+#hero-text * {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#hero-heading {
+    font-family: "Montserrat", sans-serif;
+    color: #2f4f4f !important;
+    font-weight: 300 !important;
+    line-height: 50px !important;
+    grid-area: 1/1/2/3;
+}
+
+#hero-text>p {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#hero-button {
+    grid-area: 4/1/5/3;
+}
