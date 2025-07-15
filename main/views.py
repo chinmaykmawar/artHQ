@@ -9,8 +9,7 @@ def products_grid(request):
     return render(request, 'products_grid.html')
 
 def product(request, id):
-    print (id)
-    return render(request, 'test.html', {'id':id})
+    return render(request, 'product_page.html', {'id':id})
 
 def test(request):
     return render(request, 'test.html')
