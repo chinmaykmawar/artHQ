@@ -81,7 +81,6 @@ async function getProducts(filterInput) {
   var filteredProducts = []
   for (i = 0; i < productsJson.data.length; i++) {
     var isRetained = false
-
     if (filterInput.length == 0) {
       isRetained = true
     } else {
