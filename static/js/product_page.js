@@ -37,37 +37,95 @@ function getProductImages(product_id){
     var img_file
     var car_html
 
-    for(i=1;i<8;i++)
+    for(i=1;i<6;i++)
     {
-        img_file ='<img id="'+product_id+'" src="'+folder_path+product_id+'_'+i+'.jpg" alt="Product Image"></img>';
-        $("#additional_images").append(img_file);
-        currTime = new Date().getTime() - startLoad;
-        console.log(currTime+"/getProductImages :"+ product_id+'_'+i+'.jpg added')
+        //img_file ='<img id="'+product_id+'" src="'+folder_path+product_id+'_'+i+'.jpg" alt="Product Image"></img>';
+        //$("#additional_images").append(img_file);
+        //currTime = new Date().getTime() - startLoad;
+        //console.log(currTime+"/getProductImages :"+ product_id+'_'+i+'.jpg added')
     } 
 
-    //http://localhost:8000/static/assets/Product_Images/product_page_images/HCo01BiG/HCo01BiG_main.jpg
+}
 
-    /*$.ajax({
-        url : "http://localhost:8000/"+folder_path,
-        success: function (data) {
-            currTime = new Date().getTime() - startLoad;
-            console.log(currTime+"/getProductImages : Ajax Success")
-            $(data).find("a").attr("href", function (i, val) {
-                if( val.match(product_id)) { 
-                    $("#additional_images").append( "<img src='"+ folder_path + val +"'>" );
-                    console.log(folder_path+val);
-                }
-            });
-        },
-        error: function(e, status, errorThrown){
-            currTime = new Date().getTime() - startLoad;
-            console.log(currTime+"/getProductImages : Ajax Fail")
-            console.log(e)
-            console.log(status)
-            console.log(errorThrown)
+// get our elements
+const slider = document.querySelector('.slider-container'),
+  slides = Array.from(document.querySelectorAll('.slide'))
 
-        }
-    });*/
+// set up our state
+let isDragging = false,
+  startPos = 0,
+  currentTranslate = 0,
+  prevTranslate = 0,
+  animationID,
+  currentIndex = 0
 
+// add our event listeners
+slides.forEach((slide, index) => {
+  const slideImage = slide.querySelector('img')
+  // disable default image drag
+  slideImage.addEventListener('dragstart', (e) => e.preventDefault())
+  // pointer events
+  slide.addEventListener('pointerdown', pointerDown(index))
+  slide.addEventListener('pointerup', pointerUp)
+  slide.addEventListener('pointerleave', pointerUp)
+  slide.addEventListener('pointermove', pointerMove)
+})
 
+// make responsive to viewport changes
+window.addEventListener('resize', setPositionByIndex)
+
+// prevent menu popup on long press
+window.oncontextmenu = function (event) {
+  event.preventDefault()
+  event.stopPropagation()
+  return false
+}
+
+// use a HOF so we have index in a closure
+function pointerDown(index) {
+  return function (event) {
+    currentIndex = index
+    startPos = event.clientX
+    isDragging = true
+    animationID = requestAnimationFrame(animation)
+    slider.classList.add('grabbing')
+  }
+}
+
+function pointerMove(event) {
+  if (isDragging) {
+    const currentPosition = event.clientX
+    currentTranslate = prevTranslate + currentPosition - startPos
+  }
+}
+
+function pointerUp() {
+  cancelAnimationFrame(animationID)
+  isDragging = false
+  const movedBy = currentTranslate - prevTranslate
+
+  // if moved enough negative then snap to next slide if there is one
+  if (movedBy < -100 && currentIndex < slides.length - 1) currentIndex += 1
+
+  // if moved enough positive then snap to previous slide if there is one
+  if (movedBy > 100 && currentIndex > 0) currentIndex -= 1
+
+  setPositionByIndex()
+
+  slider.classList.remove('grabbing')
+}
+
+function animation() {
+  setSliderPosition()
+  if (isDragging) requestAnimationFrame(animation)
+}
+
+function setPositionByIndex() {
+  currentTranslate = currentIndex * -window.innerWidth
+  prevTranslate = currentTranslate
+  setSliderPosition()
+}
+
+function setSliderPosition() {
+  slider.style.transform = `translateX(${currentTranslate}px)`
 }
