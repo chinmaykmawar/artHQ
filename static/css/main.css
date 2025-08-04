@@ -17,8 +17,11 @@ body{
   flex-wrap: nowrap;
 }
 
+#navbar .container-fluid{
+  justify-content: center;
+}
+
 #logo {
-  margin-left: 5rem;
   font-size: 30px;
   font-family: 'Montserrat', sans-serif;
 }

@@ -1,73 +1,181 @@
-const url='https://script.google.com/macros/s/AKfycbzJhnOp1Cg0o-wVNMSE_opcnshYy3k6ZJj-t9FAqB5enbuPgS3A3MBxWbqZRe3xZss4/exec?Product_ID='
+const url = 'https://script.google.com/macros/s/AKfycbzJhnOp1Cg0o-wVNMSE_opcnshYy3k6ZJj-t9FAqB5enbuPgS3A3MBxWbqZRe3xZss4/exec?Product_ID='
 var product_data
 var startLoad
 var currTime
+var mouseCurrPos
 
-$(window).on('load', function (event){
-    startLoad = new Date().getTime()
-    console.log(startLoad + ':page loading')
-    var product_id = ($("#product_id").html()).split('/')[2]
-    getProductData(product_id)
+const slides_flexbox = $('.slider-container')
+var content_width
+var slides
 
-    getProductImages(product_id)
+let isDragging = false,
+  mouseStartPos = 0,
+  currTrans = 0,
+  prevTrans = 0,
+  animationID,
+  currentIndex = 0
+
+$(window).on('load', function (event) {
+  startLoad = new Date().getTime()
+  console.log(startLoad + ':page loading')
+  var product_id = $('#product_id').html().split('/')[2]
+  getProductData(product_id)
+  getProductImages(product_id)
+  setSlideAnimation()
+  //setPositionByIndex()
 })
 
 async function getProductData(product_id) {
-    currTime = new Date().getTime() - startLoad
-    console.log(currTime+ "/getProductData:"+product_id)
-    product_data= await $.ajax( url.concat( product_id))
-    $("#product_title").html(product_data['Title'])
-    $("#product_details_price").text(product_data['Price'])
-    $("#product_details_desc").text(product_data['Description'])
-    currTime = new Date().getTime() - startLoad
-    console.log(currTime+"/getProductData:"+product_data)
+  currTime = new Date().getTime() - startLoad
+  console.log(currTime + '/getProductData:' + product_id)
+  product_data = await $.ajax(url.concat(product_id))
+  $('#product_title').html(product_data['Title'])
+  $('#product_details_price').text(product_data['Price'])
+  $('#product_details_desc').text(product_data['Description'])
+  currTime = new Date().getTime() - startLoad
+  console.log(currTime + '/getProductData:' + product_data)
 }
 
-function getProductImages(product_id){
-    currTime = new Date().getTime() - startLoad;
-    console.log(currTime+"/getProductImages : Entering")
+function getProductImages(product_id) {
+  currTime = new Date().getTime() - startLoad
+  console.log(currTime + '/getProductImages : Entering')
 
-    var folder_path = '../static/assets/Product_Images/product_page_images/'+product_id+'/';
-    var img_main ='<img id="'+product_id+'" src="'+folder_path+product_id+'_main.jpg" alt="Product Image"></img>';
-    $("#main_image").html(img_main)
+  var folder_path = '../static/assets/Product_Images/product_page_images/' + product_id + '/'
+  var img_main = '<img id="' + product_id + '" src="' + folder_path + product_id + '_main.jpg" alt="Product Image"></img>'
+  $('#main_image').html(img_main)
 
-    currTime = new Date().getTime() - startLoad;
-    console.log(currTime+"/getProductImages : Main Image Loaded")
-    console.log(currTime+"/getProductImages :"+ folder_path)
-    var img_file
-    var car_html
+  currTime = new Date().getTime() - startLoad
+  console.log(currTime + '/getProductImages : Main Image Loaded')
+  console.log(currTime + '/getProductImages :' + folder_path)
+  var img_html
+  var slide_html
+  var back_colors=['red', 'blue', 'green','black' , 'yellow', 'cyan', 'magenta']
 
-    for(i=1;i<8;i++)
-    {
-        img_file ='<img id="'+product_id+'" src="'+folder_path+product_id+'_'+i+'.jpg" alt="Product Image"></img>';
-        $("#additional_images").append(img_file);
-        currTime = new Date().getTime() - startLoad;
-        console.log(currTime+"/getProductImages :"+ product_id+'_'+i+'.jpg added')
-    } 
+  content_width = $('#product_grid').width()
+  for (i = 1; i < 8; i++) {
+    //img_html = '<img id="' + product_id + '" src="' + folder_path + product_id + '_' + i + '.jpg" alt="Product Image"></img>'
+    block_html ='<div id="' + product_id + '" style="width:'+content_width+'px;height: 300px;background-color:'+back_colors[i-1]+';"></div>'
+    slide_html = '<div class="slide">' + block_html + '</div>'
+    $('#product_images').append(slide_html)
+    $('#product_images>div').css('max-width', content_width)
+    currTime = new Date().getTime() - startLoad
+    console.log(currTime + '/getProductImages :' + product_id + '_' + i + '.jpg added')
+  }
+}
 
-    //http://localhost:8000/static/assets/Product_Images/product_page_images/HCo01BiG/HCo01BiG_main.jpg
+function setSlideAnimation() {
+  slides = Array.from($('.slide'))
 
-    /*$.ajax({
-        url : "http://localhost:8000/"+folder_path,
-        success: function (data) {
-            currTime = new Date().getTime() - startLoad;
-            console.log(currTime+"/getProductImages : Ajax Success")
-            $(data).find("a").attr("href", function (i, val) {
-                if( val.match(product_id)) { 
-                    $("#additional_images").append( "<img src='"+ folder_path + val +"'>" );
-                    console.log(folder_path+val);
-                }
-            });
-        },
-        error: function(e, status, errorThrown){
-            currTime = new Date().getTime() - startLoad;
-            console.log(currTime+"/getProductImages : Ajax Fail")
-            console.log(e)
-            console.log(status)
-            console.log(errorThrown)
+  let isDragging = false,
+    startPos = 0,
+    currentTranslate = 0,
+    prevTranslate = 0,
+    animationID,
+    currentIndex = 0
 
-        }
-    });*/
+  slides.forEach((slide, index) => {
+    const slideImage = slide.querySelector('div')
+    // disable default image drag
+    slideImage.addEventListener('dragstart', (e) => e.preventDefault())
+    // pointer events
+    /*slide.addEventListener('touchStart', pointerDown2(index))
+    slide.addEventListener('touchEnd', pointerUp)
+    slide.addEventListener('touchMove', pointerMove)
+    
+    slide.addEventListener('mousedown', pointerDown(index))
+    slide.addEventListener('mouseup', pointerUp)
+    slide.addEventListener('mouseleave', pointerUp)
+    slide.addEventListener('mousemove', pointerMove)
+    */
 
+    slide.addEventListener('pointerdown', pointerDown(index))
+    slide.addEventListener('pointerup', pointerUp)
+    slide.addEventListener('pointerleave', pointerUp)
+    slide.addEventListener('pointermove', pointerMove)
+  })
 
+  // make responsive to viewport changes
+  window.addEventListener('resize', setPositionByIndex)
+
+  // prevent menu popup on long press
+  window.oncontextmenu = function (event) {
+    event.preventDefault()
+    event.stopPropagation()
+    return false
+  }
+
+  currTime = new Date().getTime() - startLoad
+  console.log(currTime + '/setSlideAnimation : Event Listeners Set')
+}
+
+var ptrId
+
+// use a HOF so we have index in a closure
+function pointerDown(index) {
+  return function (event) {
+    ptrId=event.pointerId
+    currentIndex = index
+    mouseStartPos = event.clientX
+    isDragging = true
+    mouseCurrPos = mouseStartPos
+    animationID = requestAnimationFrame(animation)
+    slides_flexbox.addClass('grabbing')
+    event.target.setPointerCapture(ptrId)
+    currTime = new Date().getTime() - startLoad
+    console.log(currTime + '/pointerDown=> Mouse Start Pos :' + mouseStartPos +', pointerType:'+ event.pointerType)
+  }
+}
+
+function pointerMove(event) {
+  if (isDragging) {
+    mouseCurrPos = event.clientX
+    currTrans = prevTrans + mouseCurrPos - mouseStartPos
+  }
+}
+
+function pointerUp(event) {
+  cancelAnimationFrame(animationID)
+  isDragging = false
+  content_width = $('#product_grid').width()
+  currTime = new Date().getTime() - startLoad
+  console.log(currTime + '/pointerUp=> Entering, eventType:' + event.type)
+  console.log(currTime + '/pointerUp=> MousePos: ' + mouseCurrPos + ', current Index:' + currentIndex + ', grid Width :' + content_width)
+  const movedBy = currTrans - prevTrans
+  console.log(currTime + '/pointerUp=> CurrTrans :' + currTrans + ', PrevTrans:' + prevTrans)
+
+  // if moved enough negative then snap to next slide if there is one
+  if (movedBy < -(content_width / 2) && currentIndex < slides.length - 1) currentIndex += 1
+
+  // if moved enough positive then snap to previous slide if there is one
+  if (movedBy > content_width / 2 && currentIndex > 0) currentIndex -= 1
+
+  slides_flexbox.removeClass('grabbing')
+  event.target.releasePointerCapture(ptrId)
+
+  currTime = new Date().getTime() - startLoad
+  console.log(currTime + '/pointerUp=> MovedBy :' + movedBy + ', current Index:' + currentIndex)
+
+  setPositionByIndex()
+}
+
+function animation() {
+  setFlexBoxPosition()
+  //currTime = new Date().getTime() - startLoad
+  //console.log(currTime + '/Animate=> MousePos: ' + mouseCurrPos)
+  if (isDragging) requestAnimationFrame(animation)
+}
+
+function setPositionByIndex() {
+  currTrans = currentIndex * -content_width
+  prevTrans = currTrans
+  //currTime = new Date().getTime() - startLoad
+  //console.log(currTime + '/setPositionByIndex=> currentTranslate :' + currTrans + ', content Width:' + content_width)
+  setFlexBoxPosition()
+  //hideSlides()
+}
+
+function setFlexBoxPosition() {
+  slides_flexbox.css('transform', `translateX(${currTrans}px)`)
+  //currTime = new Date().getTime() - startLoad
+  //console.log(currTime + '/setSliderPosition=> Execution Complete')
 }

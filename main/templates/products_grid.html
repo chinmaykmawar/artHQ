@@ -1,38 +1,13 @@
-{% extends 'base.html' %} 
-
-{% block title %} ArtHQ Products {% endblock %} 
-
-{% block content %} 
-{% load static %}
-<link rel="stylesheet" href="..\static\css\product_grid.css">
+{% extends 'base.html' %} {% block title %} ArtHQ Products {% endblock %} {% block content %} {% load static %}
+<link rel="stylesheet" href="..\static\css\product_grid.css" />
 <section id="title_section">
   <div class="container d-flex justify-content-center align-items-center">
-    <h1 id="title">Products</h1>
+    <div id="title">Products</div>
   </div>
 </section>
-<section id="filter_section" class="justify-content-center">
-  <div class="row mx-5">
-    <div id="image_size_switch" class="btn-group col-4 d-flex justify-content-center">
-      <button id="image_size-large" type="button" class="btn button no_padding no_margin no_border">
-        <svg role="presentation" width="18" viewBox="0 0 18 18" fill="none">
-          <path fill="currentColor" d="M0 0h8v8H0zM0 10h8v8H0zM10 0h8v8h-8zM10 10h8v8h-8z"></path>
-        </svg>
-      </button>
-      <button id="image_size-medium" type="button" class="btn button no_padding no_margin no_border">
-        <svg role="presentation" width="18" viewBox="0 0 18 18" fill="none">
-          <path fill="currentColor" d="M0 0h4v4H0zM0 7h4v4H0zM0 14h4v4H0zM7 0h4v4H7zM7 7h4v4H7zM7 14h4v4H7zM14 0h4v4h-4zM14 7h4v4h-4zM14 14h4v4h-4z"></path>
-        </svg>
-      </button>
-      <button id="image_size-small" type="button" class="btn button no_padding no_margin no_border">
-        <svg role="presentation" width="18" viewBox="0 0 18 18" fill="none">
-          <path fill="currentColor" d="M0 0h18v2H0zm0 4h18v2H0zm0 4h18v2H0zm0 4h18v2H0zm0 4h18v2H0z"></path>
-        </svg>
-      </button>
-    </div>
-    <div class="col-6">
-      <p id="product_count" class="d-flex justify-content-center align-items-center" style="height: 100%;"></p>
-    </div>
-    <div id="filter_div" class="btn-group col-1 d-flex justify-content-center align-items-center">
+<section id="nav_section" class="justify-content-center">
+  <div id="nav_div" class="d-flex mx-5">
+    <div id="filter_div" class="btn-group d-flex justify-content-center align-items-center">
       <button id="filter_popup_button" class="button_primary button" type="button">Filter</button>
       <div id="filter_popup" class="dropdown-menu">
         <div id="filter_form">
@@ -43,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div id="sort_div" class="btn-group col-1 d-flex justify-content-center align-items-center">
+    <div id="sort_div" class="btn-group col-2 col-sm-1 d-flex justify-content-center align-items-center">
       <button id="sort_popup_button" class="button_primary button" type="button">Sort</button>
       <div id="sort_popup" class="dropdown-menu">
         <div id="sort_form">
@@ -68,6 +43,26 @@
           </div>
         </div>
       </div>
+    </div>
+    <div id="product_count_div" class="flex-grow-1">
+      <p id="product_count" class="d-flex justify-content-center align-items-center"></p>
+    </div>
+    <div id="image_size_switch" class="btn-group col-4 col-sm-4 d-flex justify-content-center">
+      <button id="image_size-large" type="button" class="btn button no_padding no_margin no_border">
+        <svg role="presentation" width="18" viewBox="0 0 18 18" fill="none">
+          <path fill="currentColor" d="M0 0h8v8H0zM0 10h8v8H0zM10 0h8v8h-8zM10 10h8v8h-8z"></path>
+        </svg>
+      </button>
+      <button id="image_size-medium" type="button" class="btn button no_padding no_margin no_border">
+        <svg role="presentation" width="18" viewBox="0 0 18 18" fill="none">
+          <path fill="currentColor" d="M0 0h4v4H0zM0 7h4v4H0zM0 14h4v4H0zM7 0h4v4H7zM7 7h4v4H7zM7 14h4v4H7zM14 0h4v4h-4zM14 7h4v4h-4zM14 14h4v4h-4z"></path>
+        </svg>
+      </button>
+      <button id="image_size-small" type="button" class="btn button no_padding no_margin no_border">
+        <svg role="presentation" width="18" viewBox="0 0 18 18" fill="none">
+          <path fill="currentColor" d="M0 0h18v2H0zm0 4h18v2H0zm0 4h18v2H0zm0 4h18v2H0zm0 4h18v2H0z"></path>
+        </svg>
+      </button>
     </div>
   </div>
 </section>
