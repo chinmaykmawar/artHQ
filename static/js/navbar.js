@@ -4,8 +4,13 @@ $(window).on('load', onLoadFunction)
 
 function onLoadFunction() {
   startLoad = new Date().getTime()
-  console.log(startLoad + ':page loading')
+  console.log(startLoad + '/navbar :page loading')
   $('#search_button').on('click', search)
+  $('#search_textbox').on('keydown', function(e){
+    if(e.keyCode==13){
+      search()
+    }
+  })
 }
 
 function search() {

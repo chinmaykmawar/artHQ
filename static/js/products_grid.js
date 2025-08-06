@@ -1,5 +1,5 @@
 const allProductsURL = 'https://script.google.com/macros/s/AKfycbxYeGDrnh4Hl-MCrz3ySfmnJ0ZaSd9N30tAuff4HQ-U-eA0yfL6aCePTTPJGg4ybmOh/exec'
-const searchURL = 'https://script.google.com/macros/s/AKfycbzgrqYsmy812tsMexwKFqxprXriMP75WSpEVScsDwQGrb85Ep5is-WRQtVu3SSrTUUXcw/exec'+'?searchText='
+const searchURL = 'https://script.google.com/macros/s/AKfycbzgrqYsmy812tsMexwKFqxprXriMP75WSpEVScsDwQGrb85Ep5is-WRQtVu3SSrTUUXcw/exec' + '?searchText='
 
 var filterInput
 
@@ -7,6 +7,11 @@ var startLoad
 var startFilter
 var startSort
 var baseURL
+
+port = '8000'
+currURL = window.location.href
+baseURL = currURL.split(port + '/')[0] + port + '/'
+products_gridURL = baseURL + '/products'
 
 $(window).on('load', onLoadFunction)
 
@@ -18,14 +23,16 @@ $(window).on('load', onLoadFunction)
 
 async function onLoadFunction() {
   startLoad = new Date().getTime()
-  console.log(startLoad + ':page loading')
+  console.log(startLoad + '/product_grid :page loading')
+
+  $('#product_grid').html('Loading......')
   var displayedProducts = await getProducts(setFilterInputsfromSessionStorage())
 
   setFilterPopupOptions(displayedProducts)
-  setImageResizeEventHandlers()
+  resizeGridImages()
   createDiv(displayedProducts)
   var currTime = new Date().getTime() - startLoad
-  console.log(currTime + ':page loaded')
+  console.log(currTime + '/product_grid :page loaded')
 }
 
 async function getProducts(filterInput) {
@@ -35,8 +42,8 @@ async function getProducts(filterInput) {
     productsJson = await $.ajax(allProductsURL)
   } else {
     productsJson = await $.ajax(searchURL + filterInput['searchCriteria'])
-    var currTime = (new Date().getTime()) - startLoad;
-    console.log(currTime + ": ajax executed with  " + productsJson.length + " products");  
+    var currTime = new Date().getTime() - startLoad
+    console.log(currTime + ': ajax executed with  ' + productsJson.length + ' products')
   }
 
   var filteredProducts = []
@@ -60,18 +67,16 @@ function checkProductJSON(product) {
 function createDiv(products) {
   //var currTime = new Date().getTime() - startLoad;
   //console.log(currTime + ": entering createDiv. no of products:" + products.length);
-  $('#product_grid').html('')
-  $('#product_count').html(products.length + ' products')
   currURL = window.location.href
   baseURL = currURL.replace('/products', '')
-
+  $('#product_grid').html('')
   $.each(products, function (i) {
     var id = products[i].Product_ID
     var category = getCategory(products[i].Sub_Category)
     var title = products[i].Title
     var price = products[i].Price
 
-    var html = '<div id="' + id + '_div" class="Product ' + category + ' ' + products[i].Sub_Category + ' ' + products[i].Material + ' ' + products[i].Base_Color + '_Base ' + products[i].Highlight + '_Highlight"' + ' style="flex-direction: column;"><a href="' + baseURL + '/product/' + id + '"><img id="' + id + '" src="static/assets/Product_Images/grid_images/' + id + '.jpg" alt="Product Image"></a><div class="Product_title">' + title + '</div><div class="price row"><div class="MRP_text col">MRP</div><div class="price_text col">' + price + '</div></div></div>'
+    var html = '<div id="' + id + '_div" class="Product ' + category + ' ' + products[i].Sub_Category + ' ' + products[i].Material + ' ' + products[i].Base_Color + '_Base ' + products[i].Highlight + '_Highlight"' + ' style="flex-direction: column;"><a href="' + baseURL + '/product/' + id + '"><img id="' + id + '" src="static/assets/Product_Images/grid_images/' + id + '.jpg" alt="Product Image"></a><div class="Product_title">' + title + '</div><div class="price row">&#8377;' + price + '</div></div></div>'
     $('#product_grid').append(html)
   })
   //var currTime = new Date().getTime() - startLoad;
@@ -182,7 +187,8 @@ function clearFilter() {
   })
   filterInput = {searchCriteria: '', 'sub-category': []}
   hideFilterPopup()
-  onLoadFunction()
+
+  window.location.href = products_gridURL
 }
 
 function showSortPopup() {
@@ -273,24 +279,31 @@ function getSubCategories(cat) {
   }
 }
 
-function setImageResizeEventHandlers() {
-  $('#image_size-large').on('click', function () {
-    var currTime = new Date().getTime() - startLoad
-    console.log(currTime + ':image size large clicked')
-    setImageSizes(210)
-  })
-  $('#image_size-medium').on('click', function () {
-    setImageSizes(150)
-  })
-  $('#image_size-small').on('click', function () {
-    setImageSizes(90)
-  })
+function resizeGridImages() {
+  content_width = $('#product_grid').width()
+  
+  if (content_width < 456) {
+    $('#image_size-large').on('click', function(){ 
+      var width=(content_width-parseInt($('#product_grid').css('column-gap').replace('px','')))/2
+      var height= ($(window).innerHeight()-$('#navbar_section').innerHeight()-$('#title_section').innerHeight()-$('#nav_section').innerHeight()-parseInt($('#product_grid').css('row-gap').replace('px','')))/2
+      setImageSizes(width,height)
+    })
+    $('#image_size-small').on('click', function(){
+      var width=(content_width)
+      var height= ($(window).innerHeight()-$('#navbar_section').innerHeight()-$('#title_section').innerHeight()-$('#nav_section').innerHeight())
+      setImageSizes(width,height)})
+  } else {
+    
+    $('#image_size-large').on('click', function(){ setImageSizes(210,210*4/3)})
+    $('#image_size-medium').removeClass('disabled')
+    $('#image_size-medium').on('click', function(){ setImageSizes(150,150*4/3)})
+    $('#image_size-small').on('click', function(){ setImageSizes(90,90*4/3)})
+  }
 }
 
-function setImageSizes(width) {
+function setImageSizes(width, height) {
   var currTime = new Date().getTime() - startLoad
   console.log(currTime + ':entering set Image size for width -' + width)
-  height = (width * 4) / 3
   $('#product_grid').css('grid-template-columns', 'repeat(auto-fill, ' + width + 'px)')
   $('#product_grid img').each(function () {
     $(this).css('width', width)

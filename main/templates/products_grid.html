@@ -6,7 +6,7 @@
   </div>
 </section>
 <section id="nav_section" class="justify-content-center">
-  <div id="nav_div" class="d-flex mx-5">
+  <div id="nav_div" class="d-flex">
     <div id="filter_div" class="btn-group d-flex justify-content-center align-items-center">
       <button id="filter_popup_button" class="button_primary button" type="button">Filter</button>
       <div id="filter_popup" class="dropdown-menu">
@@ -24,19 +24,19 @@
         <div id="sort_form">
           <div class="dropdown-item">
             <input class="" type="radio" id="sort_radio_alphaasc" name="sort_radio_button" value="alphaasc" />
-            <label class="" for="sort_radio_button">Alphabetically A-Z</label>
+            <label class="" for="sort_radio_alphaasc">Alphabetically A-Z</label>
           </div>
           <div class="dropdown-item">
             <input class="" type="radio" id="sort_radio_alphades" name="sort_radio_button" value="alphadec" />
-            <label class="" for="sort_radio_button">Alphabetically Z-A</label>
+            <label class="" for="sort_radio_alphades">Alphabetically Z-A</label>
           </div>
           <div class="dropdown-item">
             <input class="" type="radio" id="sort_radio_colorasc" name="sort_radio_button" value="colorasc" />
-            <label class="" for="sort_radio_button">Color Ascending</label>
+            <label class="" for="sort_radio_colorasc">Color Ascending</label>
           </div>
           <div class="dropdown-item">
             <input class="" type="radio" id="sort_radio_colordes" name="sort_radio_button" value="colordec" />
-            <label class="" for="sort_radio_button">Color Descending</label>
+            <label class="" for="sort_radio_colordes">Color Descending</label>
           </div>
           <div id="sort_button_div" class="justify-content-center">
             <button id="sort_button" class="button button_OKCancel" type="submit">Apply</button>
@@ -44,16 +44,13 @@
         </div>
       </div>
     </div>
-    <div id="product_count_div" class="flex-grow-1">
-      <p id="product_count" class="d-flex justify-content-center align-items-center"></p>
-    </div>
     <div id="image_size_switch" class="btn-group col-4 col-sm-4 d-flex justify-content-center">
       <button id="image_size-large" type="button" class="btn button no_padding no_margin no_border">
         <svg role="presentation" width="18" viewBox="0 0 18 18" fill="none">
           <path fill="currentColor" d="M0 0h8v8H0zM0 10h8v8H0zM10 0h8v8h-8zM10 10h8v8h-8z"></path>
         </svg>
       </button>
-      <button id="image_size-medium" type="button" class="btn button no_padding no_margin no_border">
+      <button id="image_size-medium" type="button" class="btn button no_padding no_margin no_border disabled">
         <svg role="presentation" width="18" viewBox="0 0 18 18" fill="none">
           <path fill="currentColor" d="M0 0h4v4H0zM0 7h4v4H0zM0 14h4v4H0zM7 0h4v4H7zM7 7h4v4H7zM7 14h4v4H7zM14 0h4v4h-4zM14 7h4v4h-4zM14 14h4v4h-4z"></path>
         </svg>
@@ -67,7 +64,7 @@
   </div>
 </section>
 <section id="main_content">
-  <div id="product_grid" class="grid mx-5 my-4 justify-content-center"></div>
+  <div id="product_grid" class="grid mx-3 my-3 justify-content-center"></div>
 </section>
 <section id="scripts">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
