@@ -15,22 +15,38 @@ products_gridURL = baseURL + '/products'
 
 $(window).on('load', onLoadFunction)
 
-/*$(document).on('click', function (event) {
-  if ($(event.target)[0].id) {
-  
-  }
-})*/
-
 async function onLoadFunction() {
   startLoad = new Date().getTime()
   console.log(startLoad + '/product_grid :page loading')
+
+  $(document).on('click', function (event) {
+    if ($('#filter_popup').hasClass('show')) {
+      if ($(event.target)[0].id.split('_')[0] != 'filter') {
+        event.preventDefault()
+        $('#filter_form input').each(function () {
+          this.checked = false
+        })
+        hideFilterPopup()
+        console.log('filter Popup shown and click outside')
+      }
+    } else if ($('#sort_popup').hasClass('show')) {
+      if ($(event.target)[0].id.split('_')[0] != 'sort') {
+        event.preventDefault()
+        $('#filter_form input').each(function () {
+          this.checked = false
+        })
+        hideSortPopup()
+        console.log('sort Popup shown and click outside')
+      }
+    }
+  })
 
   $('#product_grid').html('Loading......')
   var displayedProducts = await getProducts(setFilterInputsfromSessionStorage())
 
   setFilterPopupOptions(displayedProducts)
-  resizeGridImages()
   createDiv(displayedProducts)
+  setResizeImageEH()
   var currTime = new Date().getTime() - startLoad
   console.log(currTime + '/product_grid :page loaded')
 }
@@ -49,8 +65,8 @@ async function getProducts(filterInput) {
   var filteredProducts = []
   filteredProducts = productsJson.filter(checkProductJSON)
 
-  if (filterInput['sub-category'].length != 0) {
-    filteredProducts = productsJson.filter(checkProductJSON).filter((prod) => filterInput['sub-category'].includes(prod.Sub_Category))
+  if (filterInput.sub_category.length != 0) {
+    filteredProducts = productsJson.filter(checkProductJSON).filter((prod) => filterInput['sub_category'].includes(prod.Sub_Category))
   }
   //var currTime2 = (new Date().getTime()) - startLoad;
   //console.log(currTime2 + ": Returning filtered List with " + filteredProducts.length + " products");
@@ -76,9 +92,11 @@ function createDiv(products) {
     var title = products[i].Title
     var price = products[i].Price
 
-    var html = '<div id="' + id + '_div" class="Product ' + category + ' ' + products[i].Sub_Category + ' ' + products[i].Material + ' ' + products[i].Base_Color + '_Base ' + products[i].Highlight + '_Highlight"' + ' style="flex-direction: column;"><a href="' + baseURL + '/product/' + id + '"><img id="' + id + '" src="static/assets/Product_Images/grid_images/' + id + '.jpg" alt="Product Image"></a><div class="Product_title">' + title + '</div><div class="price row">&#8377;' + price + '</div></div></div>'
+    var html =
+      '<div id="' + id + '_div" class="Product ' + category + ' ' + products[i].Sub_Category + ' ' + products[i].Material + ' ' + products[i].Base_Color + '_Base ' + products[i].Highlight + '_Highlight"' + ' style="flex-direction: column;"><a href="' + baseURL + '/product/' + id + '"><img id="' + id + '" src="static/assets/Product_Images/grid_images/' + id + '.jpg" alt="Product Image"></a><div class="Product_title">' + title + '</div><div class="price row">&#8377;' + price + '</div></div></div>'
     $('#product_grid').append(html)
   })
+  $('#image_size-medium').click()
   //var currTime = new Date().getTime() - startLoad;
   //console.log(currTime + ":  Exiting CreateDiv");
 }
@@ -88,14 +106,14 @@ async function filterFormSubmit() {
   //console.log(startFilter + ": filter form submitted");
 
   hideFilterPopup()
-  filterInput['sub-category'] = []
+  filterInput['sub_category'] = []
 
   $('#filter_form input').each(function () {
     if (this.checked) {
-      filterInput['sub-category'].push(this.id.split('_')[2])
+      filterInput['sub_category'].push(this.id.split('_')[2])
     }
   })
-  8
+  $('#product_grid').html('Loading...')
   var displayedProducts = await getProducts(filterInput)
   createDiv(displayedProducts)
 }
@@ -103,7 +121,7 @@ async function filterFormSubmit() {
 function setFilterInputsfromSessionStorage() {
   //var currTime = new Date().getTime() - startLoad
   //console.log(currTime + ':entering Set Filter')
-  filterInput = {searchCriteria: '', 'sub-category': []}
+  filterInput = {searchCriteria: '', sub_category: []}
 
   var filterType
   var filterText
@@ -129,12 +147,15 @@ function setFilterInputsfromSessionStorage() {
     })
     $('#filter_form input').each(function () {
       if (this.checked) {
-        filterInput['sub-category'].push(this.id.split('_')[2])
+        filterInput['sub_category'].push(this.id.split('_')[2])
       }
     })
   }
+
   if (sessionStorage.getItem('searchText') != null) {
-    filterInput['searchCriteria'] = sessionStorage.getItem('searchText')
+    var searchText = sessionStorage.getItem('searchText')
+    $('#search_textbox').val(searchText)
+    filterInput['searchCriteria'] = searchText
     sessionStorage.removeItem('searchText')
   }
   return filterInput
@@ -153,7 +174,7 @@ function setFilterPopupOptions(sortedProducts) {
     //console.log(currTime + ':adding filter option for' + this)
     divhtml1 = '<div class="dropdown-item">\n'
     divhtml2 = '  <input class="" type="checkbox" id="filter_checkbox_' + this + '" />\n'
-    divhtml3 = '  <label class="" for="filter_checkbox_' + this + '">' + this + '</label>\n'
+    divhtml3 = '  <label class="" for="filter_checkbox_' + this + '" id="filter_label_' + this + '">' + this + '</label>\n'
     divhtml4 = '</div>'
     divhtml = divhtml1 + divhtml2 + divhtml3 + divhtml4 + divhtml
   })
@@ -185,10 +206,14 @@ function clearFilter() {
   $('#filter_form input').each(function () {
     this.checked = false
   })
-  filterInput = {searchCriteria: '', 'sub-category': []}
-  hideFilterPopup()
+  if (filterInput.searchCriteria != '' || filterInput.sub_category.length != 0) {
+    filterInput = {searchCriteria: '', sub_category: []}
+    hideFilterPopup()
 
-  window.location.href = products_gridURL
+    window.location.href = products_gridURL
+  }else{
+    hideFilterPopup()
+  }
 }
 
 function showSortPopup() {
@@ -279,29 +304,36 @@ function getSubCategories(cat) {
   }
 }
 
-function resizeGridImages() {
-  content_width = $('#product_grid').width()
-  
-  if (content_width < 456) {
-    $('#image_size-large').on('click', function(){ 
-      var width=(content_width-parseInt($('#product_grid').css('column-gap').replace('px','')))/2
-      var height= ($(window).innerHeight()-$('#navbar_section').innerHeight()-$('#title_section').innerHeight()-$('#nav_section').innerHeight()-parseInt($('#product_grid').css('row-gap').replace('px','')))/2
-      setImageSizes(width,height)
+function setResizeImageEH() {
+  content_width = $('#main_content').width()
+  if (content_width < 450) {
+    $('#image_size-medium').on('click', function () {
+      var width = ($('#product_grid').width() - parseInt($('#product_grid').css('column-gap').replace('px', ''))) / 2
+      var height = ($(window).innerHeight() - $('#navbar_section').innerHeight() - $('#title_section').innerHeight() - $('#nav_section').innerHeight() - parseInt($('#product_grid').css('row-gap').replace('px', ''))) / 2
+      resizeImages(width, height)
     })
-    $('#image_size-small').on('click', function(){
-      var width=(content_width)
-      var height= ($(window).innerHeight()-$('#navbar_section').innerHeight()-$('#title_section').innerHeight()-$('#nav_section').innerHeight())
-      setImageSizes(width,height)})
+    $('#image_size-large').on('click', function () {
+      var width = $('#product_grid').width()
+      var height = $(window).innerHeight() - $('#navbar_section').innerHeight() - $('#title_section').innerHeight() - $('#nav_section').innerHeight()
+      resizeImages(width, height)
+    })
   } else {
-    
-    $('#image_size-large').on('click', function(){ setImageSizes(210,210*4/3)})
-    $('#image_size-medium').removeClass('disabled')
-    $('#image_size-medium').on('click', function(){ setImageSizes(150,150*4/3)})
-    $('#image_size-small').on('click', function(){ setImageSizes(90,90*4/3)})
+    $('#image_size-large').on('click', function () {
+      resizeImages(210, (210 * 4) / 3)
+    })
+    $('#image_size-medium').on('click', function () {
+      resizeImages(150, (150 * 4) / 3)
+    })
+    $('#image_size-small').removeClass('hidden')
+    $('#image_size-small').on('click', function () {
+      resizeImages(90, (90 * 4) / 3)
+    })
   }
+
+  $('#image_size-medium').click()
 }
 
-function setImageSizes(width, height) {
+function resizeImages(width, height) {
   var currTime = new Date().getTime() - startLoad
   console.log(currTime + ':entering set Image size for width -' + width)
   $('#product_grid').css('grid-template-columns', 'repeat(auto-fill, ' + width + 'px)')

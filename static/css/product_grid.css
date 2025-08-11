@@ -1,7 +1,9 @@
 #product_grid img {
-  width: 150px;
-  height: 200px;
   object-fit: cover;
+}
+
+.click_disabled{
+  cursor: default;
 }
 
 #product_grid {
@@ -71,14 +73,22 @@
   flex: 1 1 80px
 }
 
-#image_size_switch button {
-  display: flex;
+#image_size-small{
+  display: flex; 
   justify-content: center;
   align-items: center;
+  flex: 0 0 0px;
+  @media screen and (min-width: 450px) {
+    flex: 1 1 20px;
+  }
 }
 
-#image_size-medium{
-  flex: 0 0 auto
+#image_size-medium, 
+#image_size-large {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 20px;
 }
 
 #filter_popup,
@@ -121,15 +131,4 @@
   width: 100%;
 }
 
-.disabled {
-  visibility: hidden;
-  width: 0px;
-  height: 0px;
-  margin: 0px;
-}
 
-@media screen and (min-width: 450px) {
-  #image_size_switch {
-    width: 120px;
-  }
-}

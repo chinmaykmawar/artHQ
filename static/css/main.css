@@ -1,40 +1,91 @@
-html{
+html {
   width: 100vw;
+  scrollbar-width: none;
+  overflow-x: hidden;
+  @media screen and (min-width: 450px) {
+    scrollbar-width: thin;
+    padding-right: 10px;
+  }
 }
 
-body{
-  display: flex; 
-  flex-direction: column; 
+body {
+  display: flex;
+  flex-direction: column;
 }
 
-#navbar_section{
+#navbar_section {
   flex-shrink: 0;
   flex-grow: 0;
-  
 }
 
-#navbar{
-  flex-wrap: nowrap;
+#navbar {
+  padding: 0;
 }
 
-#navbar .container-fluid{
+#navbar_div {
   justify-content: center;
+  display: flex;
+  flex-wrap: inherit;
+  align-items: center;
 }
 
-#logo {
-  font-size: 30px;
-  font-family: 'Montserrat', sans-serif;
+#navbar_div.expanded {
+  justify-content: start;
 }
 
-#logo_image {
+.crop {
+  overflow: hidden;
+  padding: 0;
+  padding-top: 10px;
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.crop img {
   width: 80px;
-  height: 50px;
-  object-fit: cover;
+  margin: -17px 0px -23px 0px;
 }
 
-#navbar_placeholder {
-  height: 71px;
-  z-index: 0;
+#search_div {
+  position: absolute;
+  right: 1.5rem;
+  display: inline-flex;
+  padding: 0px;
+  border: none;
+}
+
+#search_textbox {
+  padding: 5px 0px;
+  width: 0px;
+  height: 25px;
+  box-sizing: content-box;
+  border: none;
+}
+
+#search_textbox:focus-visible {
+  outline: none;
+}
+
+#search_button {
+  width: 25px;
+  height: 25px;
+  padding: 3px 0px 7px 0px;
+  border: none;
+  box-sizing: content-box;
+}
+
+.expanded #search_div{
+  border: solid #b3b3b3 1px !important;
+  border-radius: 10px;
+  padding: 0px 10px !important;
+}
+
+.expanded input {
+  width: 150px !important ;
+}
+
+#search_button:hover {
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .button {
@@ -61,6 +112,13 @@ body{
   border: 0;
 }
 
+.hidden {
+  visibility: hidden;
+  width: 0px;
+  height: 0px;
+  margin: 0px;
+}
+
 .button_primary {
   font-size: 18px;
   font-weight: 400;
@@ -71,13 +129,12 @@ body{
   width: 100%;
 }
 
-.button_OKCancel{
-  border:0px !important;
-  width:50%;
+.button_OKCancel {
+  border: 0px !important;
+  width: 50%;
 }
 
 .button_secondary {
-  
   padding-left: 10px;
   padding-right: 10px;
   margin-left: 20px !important;
@@ -86,6 +143,12 @@ body{
   margin-bottom: 10px !important;
 }
 
-.row>*{
+.row > * {
   padding: 0px !important;
+}
+
+.fixed_top {
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
