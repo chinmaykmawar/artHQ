@@ -1,0 +1,17 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "inputs": [
+    {"id": "ip_address", "type": "promptString", "description": "Input IP address", "default": "192.168.1.17"},
+    {"id": "port", "type": "promptString", "description": "Input Port No", "default": "8000"}
+  ],
+  "configurations": [
+    {"name": "Product", "request": "launch", "type": "chrome", "url": "http://${input:ip_address}:${input:port}/product/HCo01BiG"},
+    {"name": "Products", "request": "launch", "type": "chrome", "url": "http://${input:ip_address}:${input:port}/products"},
+    {"name": "HomePage", "request": "launch", "type": "chrome", "url": "http://${input:ip_address}:${input:port}/"},
+    {"name": "Test1", "request": "launch", "type": "chrome", "url": "http://${input:ip_address}:${input:port}/products"},
+    {"name": "Test2", "request": "launch", "type": "chrome", "url": "http://${input:ip_address}:${input:port}/test/abcd"}
+  ]
+}

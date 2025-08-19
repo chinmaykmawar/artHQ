@@ -1,10 +1,5 @@
 const url = 'https://script.google.com/macros/s/AKfycbzJhnOp1Cg0o-wVNMSE_opcnshYy3k6ZJj-t9FAqB5enbuPgS3A3MBxWbqZRe3xZss4/exec?Product_ID='
-var product_id
-var product_data
-var startLoad
-var currTime
-var mouseCurrPos
-var ptrId
+var product_id, product_data, startLoad, currTime, mouseCurrPos, ptrId
 
 const slides_flexbox = $('.slider-container')
 var content_width
@@ -68,15 +63,11 @@ function getProductImages(product_id) {
   currTime = new Date().getTime() - startLoad
   console.log(currTime + '/getProductImages : Entering')
 
-  var folder_path = baseURL+'static/assets/Product_Images/product_page_images/' + product_id + '/'
-  //var img_main = '<img id="' + product_id + '" src="' + folder_path + product_id + '_main.jpg" alt="Product Image"></img>'
-  //$('#main_image').html(img_main)
+  var folder_path = baseURL + 'static/assets/Product_Images/product_page_images/' + product_id + '/'
 
   currTime = new Date().getTime() - startLoad
   console.log(currTime + '/getProductImages :' + folder_path)
   var img_html
-  //var slide_html
-  //var back_colors=['red', 'blue', 'green','black' , 'yellow', 'cyan', 'magenta']
 
   content_width = $('#product_grid').width()
   for (i = 1; i < 8; i++) {
@@ -140,20 +131,16 @@ function setSlideAnimation() {
     animationID,
     currentIndex = 0
 
-  slides.forEach((slide, index) => {
-    const slideImage = slide.querySelector('img')
-    // disable default image drag
-    slideImage.addEventListener('dragstart', (e) => e.preventDefault())
-    // pointer events
-
-    slide.addEventListener('pointerdown', pointerDown(index))
-    slide.addEventListener('pointerup', pointerUp)
-    slide.addEventListener('pointerleave', pointerUp)
-    slide.addEventListener('pointermove', pointerMove)
+  $('.slide img').each(function (index) {
+    $(this).on('dragstart', (e) => e.preventDefault())
+    $(this).on('pointerdown', pointerDown(index))
+    $(this).on('pointerup', pointerUp)
+    $(this).on('pointerleave', pointerUp)
+    $(this).on('pointermove', pointerMove)
   })
 
   // make responsive to viewport changes
-  window.addEventListener('resize', setPositionByIndex)
+  $(window).on('resize', setPositionByIndex)
 
   // prevent menu popup on long press
   window.oncontextmenu = function (event) {
@@ -162,22 +149,26 @@ function setSlideAnimation() {
     return false
   }
 
+  $('#carousel_buttton1').on('click', carouselButttonClick)
+
   currTime = new Date().getTime() - startLoad
   console.log(currTime + '/setSlideAnimation : Event Listeners Set')
 }
 
 function pointerDown(index) {
   return function (event) {
-    ptrId = event.pointerId
+    event.stopPropagation()
+    var tmstp
+    tmstp = event.timeStamp
     currentIndex = index
     mouseStartPos = event.clientX
     isDragging = true
     mouseCurrPos = mouseStartPos
     animationID = requestAnimationFrame(animation)
     slides_flexbox.addClass('grabbing')
-    event.target.setPointerCapture(ptrId)
+    //event.target.setPointerCapture(ptrId)
     currTime = new Date().getTime() - startLoad
-    console.log(currTime + '/pointerDown=> Mouse Start Pos :' + mouseStartPos + ', pointerType:' + event.pointerType)
+    console.log(currTime + '/pointerDown=> Mouse Start Pos :' + mouseStartPos + ', pointerType:' + event.pointerType + ', timestamp:' + tmstp)
   }
 }
 
@@ -189,14 +180,22 @@ function pointerMove(event) {
 }
 
 function pointerUp(event) {
+  event.stopPropagation()
+  var logText = ''
   cancelAnimationFrame(animationID)
   isDragging = false
   content_width = $('#product_grid').width()
-  currTime = new Date().getTime() - startLoad
-  console.log(currTime + '/pointerUp=> Entering, eventType:' + event.type)
-  console.log(currTime + '/pointerUp=> MousePos: ' + mouseCurrPos + ', current Index:' + currentIndex + ', grid Width :' + content_width)
-  const movedBy = currTrans - prevTrans
-  console.log(currTime + '/pointerUp=> CurrTrans :' + currTrans + ', PrevTrans:' + prevTrans)
+
+  logText = logText + '/pointerUp=> Entering'
+  logText = logText + (', eventType:' + event.type)
+  logText = logText + (', target: ' + event.target.id)
+  logText = logText + (', MousePos: ' + mouseCurrPos)
+  logText = logText + (', mouse Start Pos: ' + mouseStartPos)
+  logText = logText + (', current Index:' + currentIndex)
+  logText = logText + (', grid Width :' + content_width)
+  var movedBy = currTrans - prevTrans
+  logText = logText + (', CurrTrans :' + currTrans)
+  logText = logText + (', PrevTrans:' + prevTrans)
 
   // if moved enough negative then snap to next slide if there is one
   if (movedBy < -(content_width / 2) && currentIndex < slides.length - 1) currentIndex += 1
@@ -205,18 +204,25 @@ function pointerUp(event) {
   if (movedBy > content_width / 2 && currentIndex > 0) currentIndex -= 1
 
   slides_flexbox.removeClass('grabbing')
-  event.target.releasePointerCapture(ptrId)
+  //event.target.releasePointerCapture(ptrId)
 
+  logText = logText + (', MovedBy :' + movedBy)
+  logText = logText + (', current Index:' + currentIndex)
+  logText = logText + (', X pos:' + event.clientX)
   currTime = new Date().getTime() - startLoad
-  console.log(currTime + '/pointerUp=> MovedBy :' + movedBy + ', current Index:' + currentIndex)
+  console.log(currTime + logText)
 
   setPositionByIndex()
 }
 
 function animation() {
   setFlexBoxPosition()
-  //currTime = new Date().getTime() - startLoad
-  //console.log(currTime + '/Animate=> MousePos: ' + mouseCurrPos)
+
+  logText = ''
+  logText = logText + ('MousePos: ' + mouseCurrPos)
+  logText = logText + (', Curr Trans: ' + currTrans)
+  currTime = new Date().getTime() - startLoad
+  console.log(currTime + '/Animate=>' + logText)
   if (isDragging) requestAnimationFrame(animation)
 }
 
@@ -232,5 +238,52 @@ function setPositionByIndex() {
 function setFlexBoxPosition() {
   slides_flexbox.css('transform', `translateX(${currTrans}px)`)
   //currTime = new Date().getTime() - startLoad
-  //console.log(currTime + '/setSliderPosition=> Execution Complete')
+  //console.log(currTime + '/setFlexBoxPosition=> currTranslate:'+currTrans+', Execution Complete')
+}
+
+function carouselButttonClick() {
+  console.log('working.......')
+  var first_img, testMouseStartPos, testMouseEndPos, testMouseCurrPos, down_event, up_event, move_event, leave_event, increment, intervalID, route
+
+  first_img = $('.slide img')[0]
+  testMouseStartPos = 300
+  testMouseEndPos = 100
+  increment = -1
+
+  down_event = new PointerEvent('pointerdown', {clientX: testMouseStartPos})
+  first_img.dispatchEvent(down_event)
+
+  route = 1
+
+  switch (route) {
+    case 0:
+      testMouseCurrPos = testMouseStartPos
+      intervalID = setInterval(() => {
+        testMouseCurrPos += increment
+        move_event = new PointerEvent('pointermove', {clientX: testMouseCurrPos})
+        first_img.dispatchEvent(move_event)
+        console.log(testMouseCurrPos)
+        if (testMouseCurrPos < testMouseEndPos) {
+          clearInterval(intervalID)
+          up_event = new PointerEvent('pointerup', {clientX: testMouseEndPos})
+          leave_event = new PointerEvent('pointerleave', {clientX: testMouseEndPos})
+          first_img.dispatchEvent(up_event)
+        }
+      }, 10)
+      break
+    case 1:
+      for (testMouseCurrPos = testMouseStartPos; testMouseCurrPos > testMouseEndPos; testMouseCurrPos += increment) {
+        //for(var i = 300; i < 8; i++){
+        move_event = new PointerEvent('pointermove', {clientX: testMouseCurrPos})
+        first_img.dispatchEvent(move_event)
+        setTimeout(() => {
+        console.log(testMouseCurrPos)  
+        }, 10);
+        
+      }
+      up_event = new PointerEvent('pointerup', {clientX: testMouseEndPos})
+      leave_event = new PointerEvent('pointerleave', {clientX: testMouseEndPos})
+      first_img.dispatchEvent(up_event)
+      break
+  }
 }

@@ -84,6 +84,11 @@ body {
   width: 150px !important ;
 }
 
+.expanded #search_button{
+  width:0px;
+  overflow: hidden;
+}
+
 #search_button:hover {
   background-color: rgba(0, 0, 0, 0);
 }

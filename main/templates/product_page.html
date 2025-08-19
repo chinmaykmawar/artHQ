@@ -1,4 +1,9 @@
-{% extends 'base.html' %} {% block title %} ArtHQ Products {% endblock %} {% block content %} {% load static %}
+{% extends 'base.html' %} 
+
+{% block title %} ArtHQ Products {% endblock %} 
+
+{% block content %} 
+{% load static %}
 <link rel="stylesheet" href="..\static\css\product_page.css" />
 <section id="title_section" class="mt-4">
   <div class="container d-flex justify-content-center align-items-center">
@@ -7,7 +12,11 @@
 </section>
 <section id="main_content" class="mx-5 my-4">
   <div id="product_grid" class="layout_grid">
-    <div id="product_images" class="grid_item slider-container">
+    <div id="images_carousel" class="carousel_slide" data-ride="carousel">
+      <div id="product_images" class="grid_item slider-container"></div>
+      <ol id="carousel_butttons">
+        <button id="carousel_buttton1"></button>
+      </ol>
     </div>
     <div id="product_details">
       <div id="product_details_nav" class="grid_item"></div>
