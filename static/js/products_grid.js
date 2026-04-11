@@ -15,7 +15,7 @@ products_gridURL = baseURL + '/products'
 
 $(window).on('load', onLoadFunction)
 
-$(document).on('error', 'img', logFailedProdIDs)
+//$(document).on('error', 'img', logFailedProdIDs)
 
 async function onLoadFunction() {
   startLoad = new Date().getTime()
