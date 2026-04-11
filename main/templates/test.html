@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block title %} ArtHQ Products {% endblock %} {% block content %} {% load static %}
+<link rel="stylesheet" href="..\static\css\test.css" />
+<section id="title_section">
+  <div class="container d-flex justify-content-center align-items-center">
+    <div id="product_title">Test</div>
+  </div>
+</section>
+<section id="main_content" class="mx-3 my-2">
+  <div id="product_grid" class="layout_grid">
+    <div id="images_carousel" class="carousel_slide" data-ride="carousel">
+      <div id="product_images" class="grid_item slides_flexbox"></div>
+      <div id="carousel_butttons"></div>
+    </div>
+    <div id="product_details">
+      <div id="product_details_nav"></div>
+      <h1 id="product_title_right"></h1>
+      <div id="product_rating">★★★★☆ <span>(120 reviews)</span></div>
+      <div id="product_details_price"></div>
+      <div id="product_tax">Inclusive of all taxes</div>
+      <div id="product_details_desc_wrapper">
+        <div id="product_details_desc"></div>
+        <button id="desc_toggle_btn">View More</button>
+      </div>
+      <div id="product_actions">
+        <button id="add_to_cart_btn">ADD TO CART</button>
+        <button id="buy_now_btn">BUY IT NOW</button>
+      </div>
+    </div>
+  </div>
+  <div id="product_id">{% url 'product_page' id %}</div>
+</section>
+<section id="scripts">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="../static/js/test.js" charset="utf-8"></script>
+</section>
+{% endblock %}
