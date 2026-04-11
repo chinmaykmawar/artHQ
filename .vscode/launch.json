@@ -5,13 +5,14 @@
   "version": "0.2.0",
   "inputs": [
     {"id": "ip_address", "type": "promptString", "description": "Input IP address", "default": "192.168.1.17"},
-    {"id": "port", "type": "promptString", "description": "Input Port No", "default": "8000"}
+    {"id": "port", "type": "promptString", "description": "Input Port No", "default": "8000"},
+    {"id": "ip_address_and_port", "type": "promptString", "description": "Input IP address and Port No", "default": "192.168.1.17:8000"}
   ],
   "configurations": [
-    {"name": "Product", "request": "launch", "type": "chrome", "url": "http://${input:ip_address}:${input:port}/product/HCo01BiG"},
-    {"name": "Products", "request": "launch", "type": "chrome", "url": "http://${input:ip_address}:${input:port}/products"},
-    {"name": "HomePage", "request": "launch", "type": "chrome", "url": "http://${input:ip_address}:${input:port}/"},
-    {"name": "Test1", "request": "launch", "type": "chrome", "url": "http://${input:ip_address}:${input:port}/products"},
-    {"name": "Test2", "request": "launch", "type": "chrome", "url": "http://${input:ip_address}:${input:port}/test/abcd"}
+    {"name": "Product", "request": "launch", "type": "chrome", "url": "http://${input:ip_address_and_port}/product/JBR30002GrP"},
+    {"name": "Products", "request": "launch", "type": "chrome", "url": "http://${input:ip_address_and_port}/products"},
+    {"name": "HomePage", "request": "launch", "type": "chrome", "url": "http://${input:ip_address_and_port}/"},
+    {"name": "Test1", "request": "launch", "type": "chrome", "url": "http://${input:ip_address_and_port}/test"},
+    {"name": "Test2", "request": "launch", "type": "chrome", "url": "http://${input:ip_address_and_port}/test/JBR30002GrP"}
   ]
 }

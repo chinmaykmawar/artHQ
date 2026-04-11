@@ -1,29 +1,30 @@
-{% extends 'base.html' %} 
-
-{% block title %} ArtHQ Products {% endblock %} 
-
-{% block content %} 
-{% load static %}
+{% extends 'base.html' %} {% block title %} ArtHQ Products {% endblock %} {% block content %} {% load static %}
 <link rel="stylesheet" href="..\static\css\product_page.css" />
-<section id="title_section" class="mt-4">
+<section id="title_section">
   <div class="container d-flex justify-content-center align-items-center">
-    <h1 id="product_title" class="mx-3 my-2">Test</h1>
+    <div id="product_title">Test</div>
   </div>
 </section>
-<section id="main_content" class="mx-5 my-4">
+<section id="main_content" class="mx-3 my-2">
   <div id="product_grid" class="layout_grid">
     <div id="images_carousel" class="carousel_slide" data-ride="carousel">
-      <div id="product_images" class="grid_item slider-container"></div>
-      <ol id="carousel_butttons">
-        <button id="carousel_buttton1"></button>
-      </ol>
+      <div id="product_images" class="grid_item slides_flexbox"></div>
+      <div id="carousel_butttons"></div>
     </div>
     <div id="product_details">
-      <div id="product_details_nav" class="grid_item"></div>
-      <div id="product_details_desc">Desc</div>
-      <div id="product_details_price">Price</div>
-      <div id="product_details_addToCart"></div>
-      <div id="product_details_buyNow"></div>
+      <div id="product_details_nav"></div>
+      <h1 id="product_title_right"></h1>
+      <div id="product_rating">★★★★☆ <span>(120 reviews)</span></div>
+      <div id="product_details_price"></div>
+      <div id="product_tax">Inclusive of all taxes</div>
+      <div id="product_details_desc_wrapper">
+        <div id="product_details_desc"></div>
+        <button id="desc_toggle_btn">View More</button>
+      </div>
+      <div id="product_actions">
+        <button id="add_to_cart_btn">ADD TO CART</button>
+        <button id="buy_now_btn">BUY IT NOW</button>
+      </div>
     </div>
   </div>
   <div id="product_id">{% url 'product_page' id %}</div>

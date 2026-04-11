@@ -1,5 +1,5 @@
-const allProductsURL = 'https://script.google.com/macros/s/AKfycbxYeGDrnh4Hl-MCrz3ySfmnJ0ZaSd9N30tAuff4HQ-U-eA0yfL6aCePTTPJGg4ybmOh/exec'
-const searchURL = 'https://script.google.com/macros/s/AKfycbzgrqYsmy812tsMexwKFqxprXriMP75WSpEVScsDwQGrb85Ep5is-WRQtVu3SSrTUUXcw/exec' + '?searchText='
+const allProductsURL = 'https://script.google.com/macros/s/AKfycbw30Y_it1AKRYAZeuXPsFkoVw0Ku_sBLgvd-odIfU1wBy2eCoY75hPuMHTnYLsB3OxErw/exec'
+const searchURL = 'https://script.google.com/macros/s/AKfycbwdWCAIweIvAWYJdS3O68gFFRXEYdMUhdPGjGxBMhRgl6bmWh40PhIyl6dwxGwHvA-yGQ/exec' + '?searchText='
 
 var filterInput
 
@@ -15,9 +15,13 @@ products_gridURL = baseURL + '/products'
 
 $(window).on('load', onLoadFunction)
 
+$(document).on('error', 'img', logFailedProdIDs)
+
 async function onLoadFunction() {
   startLoad = new Date().getTime()
   console.log(startLoad + '/product_grid :page loading')
+
+  // attach once using jQuery (delegated)
 
   $(document).on('click', function (event) {
     if ($('#filter_popup').hasClass('show')) {
@@ -42,7 +46,8 @@ async function onLoadFunction() {
   })
 
   $('#product_grid').html('Loading......')
-  var displayedProducts = await getProducts(setFilterInputsfromSessionStorage())
+  //var displayedProducts = await getProducts(setFilterInputsfromSessionStorage())
+  var displayedProducts = await getFilteredProducts()
 
   setFilterPopupOptions(displayedProducts)
   createDiv(displayedProducts)
@@ -51,25 +56,50 @@ async function onLoadFunction() {
   console.log(currTime + '/product_grid :page loaded')
 }
 
-async function getProducts(filterInput) {
-  var productsJson
+async function getFilteredProducts() {
+  let productsJson
 
-  if (filterInput['searchCriteria'] == '') {
-    productsJson = await $.ajax(allProductsURL)
+  // 🔥 1. Try sessionStorage first
+  const stored = sessionStorage.getItem('ALL_PRODUCTS')
+
+  if (stored) {
+    productsJson = JSON.parse(stored)
+    console.log('⚡ Loaded products from sessionStorage')
   } else {
-    productsJson = await $.ajax(searchURL + filterInput['searchCriteria'])
-    var currTime = new Date().getTime() - startLoad
-    console.log(currTime + ': ajax executed with  ' + productsJson.length + ' products')
+    // 🔥 2. Fetch from API
+    productsJson = await $.ajax(allProductsURL)
+
+    // 🔥 3. Store in sessionStorage
+    sessionStorage.setItem('ALL_PRODUCTS', JSON.stringify(productsJson))
+    console.log('🌐 Fetched products from API')
   }
 
-  var filteredProducts = []
-  filteredProducts = productsJson.filter(checkProductJSON)
+  // 🔥 4. Get filters
+  const filterInput = setFilterInputsfromSessionStorage()
 
-  if (filterInput.sub_category.length != 0) {
-    filteredProducts = productsJson.filter(checkProductJSON).filter((prod) => filterInput['sub_category'].includes(prod.Sub_Category))
+  let filteredProducts = productsJson
+
+  // 🔥 5. Apply search filter
+  if (filterInput.searchCriteria) {
+    const words = filterInput.searchCriteria
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, '')
+      .split(/\s+/)
+      .filter(Boolean)
+
+    filteredProducts = filteredProducts.filter((product) => {
+      const text = Object.values(product).join(' ').toLowerCase()
+      return words.some((word) => text.includes(word))
+    })
   }
-  //var currTime2 = (new Date().getTime()) - startLoad;
-  //console.log(currTime2 + ": Returning filtered List with " + filteredProducts.length + " products");
+
+  // 🔥 6. Apply sub_category filter
+  if (filterInput.sub_category.length > 0) {
+    filteredProducts = filteredProducts.filter((product) => filterInput.sub_category.includes(product.Sub_Category))
+  }
+
+  console.log(`✅ Returning ${filteredProducts.length} products`)
+
   return filteredProducts
 }
 
@@ -92,8 +122,15 @@ function createDiv(products) {
     var title = products[i].Title
     var price = products[i].Price
 
-    var html =
-      '<div id="' + id + '_div" class="Product ' + category + ' ' + products[i].Sub_Category + ' ' + products[i].Material + ' ' + products[i].Base_Color + '_Base ' + products[i].Highlight + '_Highlight"' + ' style="flex-direction: column;"><a href="' + baseURL + '/product/' + id + '"><img id="' + id + '" src="static/assets/Product_Images/grid_images/' + id + '.jpg" alt="Product Image"></a><div class="Product_title">' + title + '</div><div class="price row">&#8377;' + price + '</div></div></div>'
+    var openingDiv = '<div id="' + id + '_div"'
+
+    var class_html = 'class="Product ' + category + ' ' + products[i].Sub_Category + ' ' + products[i].Material + ' ' + products[i].Base_Color + '_Base ' + products[i].Highlight + '_Highlight"'
+    var style_html = ' style="flex-direction: column;">'
+    var a_html = '<a href="' + baseURL + '/product/' + id + '">'
+    var img_html = '<img id="' + id + '" src="static/assets/Product_Images/' + id + '/' + id + '_1.jpg" alt="Product Image"></a>'
+    var title_html = '<div class="Product_title">' + title + '</div>'
+    var price_html = '<div class="price row">&#8377;' + price + '</div></div></div>'
+    var html = openingDiv + ' ' + class_html + ' ' + style_html + a_html + img_html + title_html + price_html
     $('#product_grid').append(html)
   })
   $('#image_size-medium').click()
@@ -211,7 +248,7 @@ function clearFilter() {
     hideFilterPopup()
 
     window.location.href = products_gridURL
-  }else{
+  } else {
     hideFilterPopup()
   }
 }

@@ -1,0 +1,151 @@
+<!-- file: templates/product.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Page</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        display: flex;
+        gap: 40px;
+        padding: 40px;
+      }
+
+      /* LEFT: IMAGE SECTION */
+      .image-section {
+        width: 50%;
+      }
+
+      .main-image {
+        width: 100%;
+        border: 1px solid #ddd;
+      }
+
+      .thumbnail-container {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .thumbnail {
+        width: 70px;
+        cursor: pointer;
+        border: 1px solid #ccc;
+      }
+
+      /* RIGHT: PRODUCT INFO */
+      .product-info {
+        width: 50%;
+      }
+
+      .product-title {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .price {
+        font-size: 20px;
+        color: #e60023;
+        margin: 10px 0;
+      }
+
+      .description {
+        margin: 20px 0;
+      }
+
+      button {
+        padding: 12px 20px;
+        border: none;
+        cursor: pointer;
+        margin-right: 10px;
+      }
+
+      .add-cart {
+        background: black;
+        color: white;
+      }
+
+      .buy-now {
+        background: #e60023;
+        color: white;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- LEFT: IMAGES -->
+      <div class="image-section">
+        <img id="mainImage" class="main-image" src="" />
+
+        <div id="thumbnails" class="thumbnail-container"></div>
+      </div>
+
+      <!-- RIGHT: INFO -->
+      <div class="product-info">
+        <div id="title" class="product-title"></div>
+        <div id="price" class="price"></div>
+        <div id="description" class="description"></div>
+
+        <button class="add-cart">Add to Cart</button>
+        <button class="buy-now">Buy Now</button>
+      </div>
+    </div>
+
+    <script>
+      // =====================
+      // 🔥 YOUR DATA HERE
+      // =====================
+      const product = {
+        title: 'Jaipur Gardens Kulhad Gift Box',
+        price: 1714,
+        description: 'Beautiful handcrafted kulhads inspired by Indian art.',
+        images: ['static/images/product1_1.jpg', 'static/images/product1_2.jpg', 'static/images/product1_3.jpg'],
+      }
+
+      // =====================
+      // RENDER FUNCTION
+      // =====================
+      function renderProduct(product) {
+        document.getElementById('title').innerText = product.title
+        document.getElementById('price').innerText = '₹ ' + product.price
+        document.getElementById('description').innerText = product.description
+
+        const mainImage = document.getElementById('mainImage')
+        const thumbnailContainer = document.getElementById('thumbnails')
+
+        mainImage.src = product.images[0]
+
+        product.images.forEach((img, index) => {
+          const thumb = document.createElement('img')
+          thumb.src = img
+          thumb.className = 'thumbnail'
+
+          thumb.onclick = () => {
+            mainImage.src = img
+          }
+
+          thumbnailContainer.appendChild(thumb)
+        })
+      }
+
+      // INIT
+      renderProduct(product)
+    </script>
+  </body>
+</html>

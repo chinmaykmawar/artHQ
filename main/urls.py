@@ -24,5 +24,6 @@ urlpatterns = [
     path('products', views.products_grid, name='products_grid'),
     path('product/<slug:id>', views.product, name='product_page'),
     path('test/<slug:id>', views.test2, name='test2'),
-    path('test', views.test, name='test1')
+    path('test', views.test, name='test1'),
+    path('get-images/<str:product_id>/', views.get_product_images)
 ]

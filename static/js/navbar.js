@@ -58,3 +58,32 @@ function search() {
     window.location.href = products_gridURL
   }
 }
+
+// static/js/search.js
+
+function searchProductsFromSession(searchText) {
+  const stored = sessionStorage.getItem('ALL_PRODUCTS')
+
+  if (!stored) {
+    console.error('❌ No products in sessionStorage')
+    return []
+  }
+
+  const products = JSON.parse(stored)
+
+  // 🔥 Clean + split search text
+  const words = searchText
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '') // remove special chars
+    .split(/\s+/)
+    .filter(Boolean)
+
+  // 🔥 Filter products
+  const results = products.filter((product) => {
+    const text = Object.values(product).join(' ').toLowerCase()
+
+    return words.some((word) => text.includes(word)) // ANY match
+  })
+
+  return results
+}

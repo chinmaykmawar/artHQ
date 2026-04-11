@@ -1,0 +1,1 @@
+web: gunicorn artHQ_website_django.wsgi
