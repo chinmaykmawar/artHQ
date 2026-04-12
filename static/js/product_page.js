@@ -47,35 +47,28 @@ async function getProductData(product_id) {
   populateProductDetails(product_data)
 }
 
-async function getProductImages(product_id) {
-  const folder_path = baseURL + 'static/assets/Product_Images/' + product_id + '/'
+function getProductImages(product_id) {
+  let folder_path = '/static/assets/Product_Images/' + product_id + '/'
 
-  const images = await $.ajax(`/get-images/${product_id}/`)
+  $('#product_images').html('')
+  $('#carousel_butttons').html('')
 
-  const content_width = $('#product_grid').width()
-
-  $('#product_images').empty()
-  $('#carousel_butttons').empty()
-
-  images.forEach((file, index) => {
-    const img_html = `<img src="${folder_path}${file}" alt="Product Image">`
-    const slide_html = `<div class="slide">${img_html}</div>`
+  for (let index = 1; index < 8; index++) {
+    let img_html = '<img src="' + folder_path + product_id + '_' + index + '.jpg" onerror="this.style.display=\'none\'">'
+    let slide_html = '<div class="slide">' + img_html + '</div>'
 
     $('#product_images').append(slide_html)
-    $('#product_images>div').css('max-width', content_width)
 
-    const btn_html = `<button id="carousel_buttton_${index + 1}"></button>`
+    let btn_html = '<button id="carousel_button_' + index + '"></button>'
     $('#carousel_butttons').append(btn_html)
 
-    $(`#carousel_buttton_${index + 1}`).on('click', function (event) {
+    $('#carousel_button_' + index).on('click', function (event) {
       event.stopPropagation()
-      productImageButton_click(event.target.id.split('_')[2])
+      productImageButton_click(index)
     })
-  })
+  }
 
-  setSlideAnimation()
-
-  $('#carousel_buttton_1').addClass('active')
+  $('#carousel_button_1').addClass('active')
 }
 
 function populateProductDetails(product_data) {

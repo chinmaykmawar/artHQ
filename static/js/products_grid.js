@@ -127,7 +127,7 @@ function createDiv(products) {
     var class_html = 'class="Product ' + category + ' ' + products[i].Sub_Category + ' ' + products[i].Material + ' ' + products[i].Base_Color + '_Base ' + products[i].Highlight + '_Highlight"'
     var style_html = ' style="flex-direction: column;">'
     var a_html = '<a href="' + baseURL + '/product/' + id + '">'
-    var img_html = '<img id="' + id + '" src="static/assets/Product_Images/' + id + '/' + id + '_1.jpg" alt="Product Image"></a>'
+    var img_html = '<img id="' + id + '" src="/static/assets/Product_Images/' + id + '/' + id + '_1.jpg" alt="Product Image"></a>'
     var title_html = '<div class="Product_title">' + title + '</div>'
     var price_html = '<div class="price row">&#8377;' + price + '</div></div></div>'
     var html = openingDiv + ' ' + class_html + ' ' + style_html + a_html + img_html + title_html + price_html
