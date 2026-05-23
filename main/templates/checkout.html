@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block title %} ArtHQ Products {% endblock %} {% block content %} {% load static %}
+<link rel="stylesheet" href="/static/css/checkout.css" />
+<section id="title_section">
+  <title>Checkout</title>
+</section>
+<section id="main_content" class="mx-3 my-2">
+  <div id="checkout_container">
+    <!-- ADDRESS -->
+    <div class="section">
+      <h3>Delivery Address</h3>
+
+      <input type="text" id="name" placeholder="Full Name" />
+      <input type="text" id="phone" placeholder="Phone Number" />
+      <input type="text" id="address" placeholder="Address" />
+      <input type="text" id="city" placeholder="City" />
+      <input type="text" id="pincode" placeholder="Pincode" />
+    </div>
+
+    <!-- ORDER SUMMARY -->
+    <div class="section">
+      <h3>Order Summary</h3>
+      <div id="checkout_items"></div>
+    </div>
+
+    <!-- TOTAL -->
+    <div id="checkout_total">
+      <span>Total</span>
+      <span id="total_price">₹0</span>
+    </div>
+
+    <!-- CTA -->
+    <button id="place_order_btn">PLACE ORDER</button>
+  </div>
+</section>
+
+<section id="scripts">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="/static/js/checkout.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</section>
+{% endblock %}

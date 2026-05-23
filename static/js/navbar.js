@@ -6,7 +6,7 @@ $(window).on('load', onLoadFunction)
 
 function onLoadFunction() {
   startLoad = new Date().getTime()
-  console.log(startLoad + '/navbar :page loading')
+  //console.log(startLoad + '/navbar :page loading')
   $('#search_button').on('click', function (event) {
     tb_width = $('#search_textbox').width()
     if (tb_width < 25) {
@@ -87,3 +87,9 @@ function searchProductsFromSession(searchText) {
 
   return results
 }
+
+$('#viewcart_button').on('click', function (event) {
+  event.stopPropagation()
+  renderCart()
+  openCart()
+})

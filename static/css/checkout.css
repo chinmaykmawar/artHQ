@@ -1,0 +1,68 @@
+body {
+  font-family: Arial;
+  margin: 0;
+  background: #f5f5f5;
+}
+
+/* MOBILE FIRST */
+#checkout_container {
+  padding: 15px;
+}
+
+.section {
+  background: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+/* ITEMS */
+.checkout_item {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.checkout_item img {
+  width: 60px;
+  height: 60px;
+}
+
+.checkout_item_details {
+  flex: 1;
+}
+
+/* TOTAL */
+#checkout_total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  margin: 15px 0;
+  font-weight: bold;
+}
+
+/* CTA */
+#place_order_btn {
+  width: 100%;
+  background: black;
+  color: white;
+  padding: 15px;
+  border: none;
+  font-size: 16px;
+}
+
+/* DESKTOP */
+@media (min-width: 768px) {
+  #checkout_container {
+    max-width: 600px;
+    margin: auto;
+  }
+}

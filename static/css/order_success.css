@@ -1,0 +1,9 @@
+#success_container {
+  text-align: center;
+  padding: 30px;
+}
+
+#order_id {
+  color: green;
+  margin: 15px 0;
+}

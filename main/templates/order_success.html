@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block title %} ArtHQ Products {% endblock %} {% block content %} {% load static %}
+<link rel="stylesheet" href="/static/css/order_success.css" />
+<section id="title_section">
+  <title>Order Success</title>
+</section>
+<section id="main_content" class="mx-3 my-2">
+  <div id="success_container">
+    <h2>🎉 Order Placed Successfully</h2>
+
+    <p>Your Order ID:</p>
+    <h3 id="order_id">{{ order_id }}</h3>
+
+    <p>Feel free to contact us if you have any questions.</p>
+
+    <div class="contact">
+      <p>📞 Support: 8800156300</p>
+      <p>📧 Email: hello@arthq.in</p>
+    </div>
+
+    <button onclick="window.location.href = '/products'">Continue Shopping</button>
+  </div>
+</section>
+<section id="scripts">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</section>
+{% endblock %}

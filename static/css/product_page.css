@@ -302,3 +302,21 @@ f #product_details_buyNow {
     flex: 1;
   }
 }
+
+#category_buttons {
+  gap: 8px;
+}
+
+.category_btn {
+  font-size: 12px;
+  padding: 4px 10px;
+  border: 1px solid #000;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+}
+
+.category_btn.active {
+  background: black;
+  color: white;
+}

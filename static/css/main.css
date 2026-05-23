@@ -48,7 +48,7 @@ body {
 
 #search_div {
   position: absolute;
-  right: 1.5rem;
+  right: 3.5rem;
   display: inline-flex;
   padding: 0px;
   border: none;
@@ -74,7 +74,7 @@ body {
   box-sizing: content-box;
 }
 
-.expanded #search_div{
+.expanded #search_div {
   border: solid #b3b3b3 1px !important;
   border-radius: 10px;
   padding: 0px 10px !important;
@@ -84,13 +84,29 @@ body {
   width: 150px !important ;
 }
 
-.expanded #search_button{
-  width:0px;
+.expanded #search_button {
+  width: 0px;
   overflow: hidden;
 }
 
 #search_button:hover {
   background-color: rgba(0, 0, 0, 0);
+}
+
+#viewcart_div {
+  position: absolute;
+  right: 1.5rem;
+  display: inline-flex;
+  padding: 0px;
+  border: none;
+}
+
+#viewcart_button {
+  width: 25px;
+  height: 25px;
+  padding: 3px 0px 7px 0px;
+  border: none;
+  box-sizing: content-box;
 }
 
 .button {

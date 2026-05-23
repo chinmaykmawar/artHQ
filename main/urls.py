@@ -25,5 +25,9 @@ urlpatterns = [
     path('product/<slug:id>', views.product, name='product_page'),
     path('test/<slug:id>', views.test2, name='test2'),
     path('test', views.test, name='test1'),
-    path('get-images/<str:product_id>/', views.get_product_images)
+    path('get-images/<str:product_id>/', views.get_product_images),
+    path('checkout/', views.checkout_view, name='checkout'),
+    path('create-order/', views.create_order),
+    path('verify-payment/', views.verify_payment),
+    path('order-success/', views.order_success)
 ]

@@ -1,5 +1,3 @@
-const url = 'https://script.google.com/macros/s/AKfycbyeW87ky7AVIRbHrjIfU6TGPmr93cPCG4svGsGhf40pkxAeV0rT6tODsV5KWcuQJAKC/exec?Product_ID='
-
 var product_id, product_data, startLoad, currTime, mouseCurrPos, ptrId
 var content_width
 var slides
@@ -16,10 +14,20 @@ currURL = window.location.href
 baseURL = currURL.split(port + '/')[0] + port + '/'
 products_gridURL = baseURL + '/products'
 
+console.log(typeof addToCart)
+
+/* ===== EVENTS ===== */
+
+/* INIT */
+$(document).ready(function () {
+  renderCart()
+})
+
 $(window).on('load', function (event) {
   startLoad = new Date().getTime()
   console.log(startLoad + ':page loading')
-  product_id = window.location.href.split('/')[4]
+  url = window.location.href.split('/')
+  product_id = url[url.length - 1]
   getProductData(product_id)
   getProductImages(product_id)
   setSlideAnimation()
@@ -37,7 +45,7 @@ async function getProductData(product_id) {
 
   const products = JSON.parse(stored)
 
-  const product_data = products.find((p) => p.Product_ID === product_id)
+  product_data = products.find((p) => p.Product_ID === product_id)
 
   if (!product_data) {
     console.error('❌ Product not found:', product_id)
@@ -47,28 +55,35 @@ async function getProductData(product_id) {
   populateProductDetails(product_data)
 }
 
-function getProductImages(product_id) {
-  let folder_path = '/static/assets/Product_Images/' + product_id + '/'
+async function getProductImages(product_id) {
+  const folder_path = baseURL + 'static/assets/Product_Images/' + product_id + '/'
 
-  $('#product_images').html('')
-  $('#carousel_butttons').html('')
+  const images = await $.ajax(`/get-images/${product_id}/`)
 
-  for (let index = 1; index < 8; index++) {
-    let img_html = '<img src="' + folder_path + product_id + '_' + index + '.jpg" onerror="this.style.display=\'none\'">'
-    let slide_html = '<div class="slide">' + img_html + '</div>'
+  const content_width = $('#product_grid').width()
+
+  $('#product_images').empty()
+  $('#carousel_butttons').empty()
+
+  images.forEach((file, index) => {
+    const img_html = `<img src="${folder_path}${file}" alt="Product Image">`
+    const slide_html = `<div class="slide">${img_html}</div>`
 
     $('#product_images').append(slide_html)
+    $('#product_images>div').css('max-width', content_width)
 
-    let btn_html = '<button id="carousel_button_' + index + '"></button>'
+    const btn_html = `<button id="carousel_buttton_${index + 1}"></button>`
     $('#carousel_butttons').append(btn_html)
 
-    $('#carousel_button_' + index).on('click', function (event) {
+    $(`#carousel_buttton_${index + 1}`).on('click', function (event) {
       event.stopPropagation()
-      productImageButton_click(index)
+      productImageButton_click(event.target.id.split('_')[2])
     })
-  }
+  })
 
-  $('#carousel_button_1').addClass('active')
+  setSlideAnimation()
+
+  $('#carousel_buttton_1').addClass('active')
 }
 
 function populateProductDetails(product_data) {
@@ -299,29 +314,32 @@ function prevImage() {
   }, 5)
 }
 
-$(document).on('click', function (event) {
-  if (event.target.id) {
-    switch (event.target.parentNode.id) {
-      case 'product_details_nav':
-        switch (event.target.id) {
-          case 'product_details_nav_home':
-            window.location.href = products_gridURL
-            break
-          case 'product_details_nav_cat':
-            sessionStorage.setItem('filtertype', 'category')
-            sessionStorage.setItem('filtertext', event.target.innerHTML)
-            window.location.href = products_gridURL
-            break
-          case 'product_details_nav_cat':
-            sessionStorage.setItem('filtertype', 'sub_category')
-            sessionStorage.setItem('filtertext', event.target.html())
-            window.location.href = products_gridURL
-            break
-        }
-        break
-      case 'carousel_butttons':
-        console.log('document click for button')
-        break
-    }
+$('#product_details_nav').on('click', 'a', function () {
+  switch (this.id) {
+    case 'product_details_nav_home':
+      window.location.href = products_gridURL
+      break
+
+    case 'product_details_nav_cat':
+      sessionStorage.setItem('filtertype', 'category')
+      sessionStorage.setItem('filtertext', this.innerHTML)
+      window.location.href = products_gridURL
+      break
+
+    case 'product_details_nav_subcat':
+      sessionStorage.setItem('filtertype', 'sub_category')
+      sessionStorage.setItem('filtertext', this.innerHTML)
+      window.location.href = products_gridURL
+      break
   }
+})
+
+$('#carousel_buttons').on('click', '.carousel_button', function () {
+  console.log('carousel button clicked')
+})
+
+$('#buy_now_btn').on('click', function () {
+  product_data.qty = 1
+  sessionStorage.setItem('CHECKOUT', JSON.stringify([product_data]))
+  window.location.href = '/checkout'
 })
