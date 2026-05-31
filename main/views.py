@@ -1,10 +1,12 @@
+from asyncio.log import logger
 import os
+from unittest import result
 import razorpay
 import json
 import hmac
 import hashlib
 import requests
-import json
+import logging
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
 from django.conf import settings
@@ -23,10 +25,6 @@ def product(request, id):
 
 def test(request):
     return render(request, 'test.html')
-    #data= {'razorpay_order_id': 'order_SusxLSisJmQY4e', 'razorpay_payment_id': 'pay_SusxdudoAxgw5q', 'razorpay_signature': '72a65e063c71f000618e775007a8a82790cf2a3647b50e2e935e6c11b5b7113f', 'name': 'Name_Chinmay', 'phone': '8800156300', 'address': 'Addressssssssss', 'city': 'City', 'pincode': '226022', 'email': 'chinmaykmawar@gmail.com', 'cart': [{'Name': 'JER10005PiW', 'Price': 199, 'Title': 'Handcrafted Dual-Tone Earrings with Iridescent Studs & Textured Pink Floral Accents – Artistic Statement Jewelry for Women', 'Description': 'Celebrate artistry and individuality with these handcrafted dual-tone earrings, featuring a unique blend of elegance and bold design. The upper studs glow with a soft iridescent sheen, shifting colors gently like moonlight, while the lower textured pink floral discs sparkle with golden accents and delicate detailing. Together, they create a playful yet sophisticated balance — perfect for women who embrace both subtle charm and vibrant expression.\n\nLightweight and versatile, these earrings can elevate everyday outfits, add a festive pop to traditional wear, or become the highlight of a creative, contemporary look. Each pair is uniquely made, ensuring your earrings are as distinctive as you are.', 'Product_ID': 'JER10005PiW', 'Sub_Category': 'Earrings', 'Base_Color': 'Pink', 'Highlight': 'White', 'Design': 10005, 'Bar Code': '', 'Sub-Cat Code': 'ER', 'qty': 1}], 'delivery_charge': 99, 'items_total': 199, 'grand_total': 298}
-    #save_to_sheets(data)
-    #return JsonResponse({"status": "success"})
-
 
 def test2(request, id):
     return render(request, 'test.html', {'id':id})
@@ -73,28 +71,35 @@ def get_product_images(request, product_id):
     return JsonResponse(images, safe=False)
 
 # TEST KEYS (replace later)
-RAZORPAY_SECRET = 'xSwba14fAdI9j1a9I96wZuzD'
-RAZORPAY_KEY_ID = 'rzp_test_Sh4tdflR7VHLCl'
-
-client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_SECRET))
-
+RAZORPAY_KEY_ID_TEST = 'rzp_test_Sh4tdflR7VHLCl'
+RAZORPAY_SECRET_TEST = 'xSwba14fAdI9j1a9I96wZuzD'
+RAZORPAY_KEY_ID_LIVE = 'rzp_live_Svwpu3AEgbK6V6'
+RAZORPAY_SECRET_LIVE = 'HcvnBy1Z4vyuOZpmZ8pu6pcd'
 
 # ✅ CREATE ORDER
 @csrf_exempt
 def create_order(request):
+    logger.info(f"Create order request received: {request.body}")
+    data = json.loads(request.body)
+    amount = float(data.get('amount', 0))
+    if amount <= 0:
+        return JsonResponse({"error": "Invalid amount"}, status=400)
+    
+
     try:
-        data = json.loads(request.body)
-
-        amount = float(data.get('amount', 0))
-
-        if amount <= 0:
-            return JsonResponse({"error": "Invalid amount"}, status=400)
-
+        client = razorpay.Client(auth=(RAZORPAY_KEY_ID_LIVE, RAZORPAY_SECRET_LIVE))
+        logger.info("Razorpay client initialized successfully.")
+    except Exception as e:
+        logger.error(f"Error initializing Razorpay client: {str(e)}")
+    
+    try:
         order = client.order.create({
             "amount": int(amount * 100),  # paise
             "currency": "INR",
             "receipt": str(data.get('receipt'))
         })
+        
+        logger.info("Razorpay order created successfully.")
 
         return JsonResponse({
             "order_id": order['id'],
@@ -102,12 +107,14 @@ def create_order(request):
         })
 
     except Exception as e:
+        logger.error(f"Error creating Razorpay order: {str(e)}")
         return JsonResponse({"error": str(e)}, status=500)
 
 
 # ✅ VERIFY PAYMENT + SAVE
 @csrf_exempt
 def verify_payment(request):
+    logger.info(f"Verify payment request received: {request.body}")
     data = json.loads(request.body)
 
     razorpay_order_id = data['razorpay_order_id']
@@ -116,7 +123,7 @@ def verify_payment(request):
 
     # 🔐 Verify signature
     generated_signature = hmac.new(
-        bytes(RAZORPAY_SECRET, 'utf-8'),
+        bytes(RAZORPAY_SECRET_LIVE, 'utf-8'),
         bytes(razorpay_order_id + "|" + razorpay_payment_id, 'utf-8'),
         hashlib.sha256
     ).hexdigest()
@@ -125,9 +132,10 @@ def verify_payment(request):
 
         # ✅ SAVE TO GOOGLE SHEETS
         save_to_sheets(data)
-
+        logger.info(f"Payment verified and saved for order: {razorpay_order_id}")
         return JsonResponse({"status": "success"})
     else:
+        logger.warning(f"Payment verification failed for order: {razorpay_order_id}")
         return JsonResponse({"status": "failed"})
 
 
@@ -138,7 +146,7 @@ def save_to_sheets(data):
     url = "https://script.google.com/macros/s/AKfycbx7XwBXljynHLRc3PtAkItuW2WSDN0jwr1gQHw7k0tC2PP3GkR3XVll4gHbynQTs0p-/exec"
     cart_items = data.get("cart", [])
 
-    print(f"Data: {data}\n\n")
+    logger.info(f"Saving order data to Google Sheets: {data}\n\n")
 
     cart_summary = []
     for item in cart_items:
@@ -166,16 +174,18 @@ def save_to_sheets(data):
         "cart": cart_string
     }
 
-    print(f"Payload: {payload}\n\n")
+    logger.info(f"Payload: {payload}\n\n")
 
     try:
         response = requests.post(url, json=payload)
+        result=response.json()
 
-        print("STATUS:", response.status_code)
-        print("RESPONSE:", response.text)
-
+        if result.get("status")!="success":
+            raise Exception(result.get("message"))
+        logger.info(f"Google Sheets response: {response.status_code} - {response.text}")
     except Exception as e:
-        print("ERROR:", str(e))
+        logger.error(f"Error saving data to Google Sheets: {str(e)}")
+    
 
 @csrf_exempt
 def get_orders(request):
@@ -183,6 +193,8 @@ def get_orders(request):
     url = "https://script.google.com/macros/s/AKfycbx7XwBXljynHLRc3PtAkItuW2WSDN0jwr1gQHw7k0tC2PP3GkR3XVll4gHbynQTs0p-/exec"
     try:
         response = requests.post(url,json=data)
+        logger.info(f"Get orders response: {response.status_code} - {response.text}")   
         return HttpResponse(response.text,content_type='application/json')
     except Exception as e:
+        logger.error(f"Error fetching orders from Google Sheets: {str(e)}")
         return JsonResponse({"error": str(e)},status=500)

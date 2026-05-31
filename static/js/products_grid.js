@@ -1,8 +1,5 @@
-const allProductsURL =
-  'https://script.google.com/macros/s/AKfycbx7XwBXljynHLRc3PtAkItuW2WSDN0jwr1gQHw7k0tC2PP3GkR3XVll4gHbynQTs0p-/exec'
-const searchURL =
-  'https://script.google.com/macros/s/AKfycbwdWCAIweIvAWYJdS3O68gFFRXEYdMUhdPGjGxBMhRgl6bmWh40PhIyl6dwxGwHvA-yGQ/exec' +
-  '?searchText='
+const allProductsURL = 'https://script.google.com/macros/s/AKfycbx7XwBXljynHLRc3PtAkItuW2WSDN0jwr1gQHw7k0tC2PP3GkR3XVll4gHbynQTs0p-/exec'
+const searchURL = 'https://script.google.com/macros/s/AKfycbwdWCAIweIvAWYJdS3O68gFFRXEYdMUhdPGjGxBMhRgl6bmWh40PhIyl6dwxGwHvA-yGQ/exec' + '?searchText='
 
 let startLoad
 let allProducts
@@ -78,9 +75,7 @@ function getFilteredProducts(filteredProducts, filterAttributes) {
   }
 
   if (filterAttributes.Sub_Category.length > 0) {
-    filteredProducts = filteredProducts.filter((product) =>
-      filterAttributes.Sub_Category.includes(product.Sub_Category)
-    )
+    filteredProducts = filteredProducts.filter((product) => filterAttributes.Sub_Category.includes(product.Sub_Category))
   }
 
   console.log(`✅ Returning ${filteredProducts.length} products`)
@@ -99,16 +94,8 @@ function setFilterPopupOptions(allProducts, filterAttributes) {
 
   $.each(lookup, function () {
     filter_options_html += '<div class="dropdown-item">\n'
-    filter_options_html +=
-      '  <input class="" type="checkbox" id="filter_checkbox_' + this + '" />\n'
-    filter_options_html +=
-      '  <label class="" for="filter_checkbox_' +
-      this +
-      '" id="filter_label_' +
-      this +
-      '">' +
-      this +
-      '</label>\n'
+    filter_options_html += '  <input class="" type="checkbox" id="filter_checkbox_' + this + '" />\n'
+    filter_options_html += '  <label class="" for="filter_checkbox_' + this + '" id="filter_label_' + this + '">' + this + '</label>\n'
     filter_options_html += '</div>'
   })
   $('#filter_options_div').html(filter_options_html)
@@ -128,15 +115,7 @@ function displayProducts(products) {
   var baseURL = currURL.replace('/products', '')
   $('#product_grid').html('')
 
-  ignored_products = [
-    'HCo01BlG',
-    'JER10002PiG',
-    'JER30001Pin',
-    'JNK20001Pin',
-    'JBR30001BlW',
-    'JER10002ReG',
-    'JER10006PiG',
-  ]
+  ignored_products = ['HCo01BlG', 'JER10002PiG', 'JER30001Pin', 'JNK20001Pin', 'JBR30001BlW', 'JER10002ReG', 'JER10006PiG']
 
   $.each(products, function (i) {
     if (ignored_products.includes(products[i].Product_ID)) {
@@ -149,32 +128,13 @@ function displayProducts(products) {
 
     var openingDiv = '<div id="' + id + '_div"'
 
-    var class_html =
-      'class="Product ' +
-      category +
-      ' ' +
-      products[i].Sub_Category +
-      ' ' +
-      products[i].Material +
-      ' ' +
-      products[i].Base_Color +
-      '_Base ' +
-      products[i].Highlight +
-      '_Highlight"'
+    var class_html = 'class="Product ' + category + ' ' + products[i].Sub_Category + ' ' + products[i].Material + ' ' + products[i].Base_Color + '_Base ' + products[i].Highlight + '_Highlight"'
     var style_html = ' style="flex-direction: column;">'
     var a_html = '<a href="' + baseURL + '/product/' + id + '">'
-    var img_html =
-      '<img id="' +
-      id +
-      '" src="/static/assets/Product_Images/' +
-      id +
-      '/' +
-      id +
-      '_1.jpg" alt="Product Image"></a>'
+    var img_html = '<img id="' + id + '" src="/static/assets/Product_Images/' + id + '/' + id + '_1.jpg" alt="Product Image"></a>'
     var title_html = '<div class="Product_title">' + title + '</div>'
     var price_html = '<div class="price row">&#8377;' + price + '</div></div></div>'
-    var html =
-      openingDiv + ' ' + class_html + ' ' + style_html + a_html + img_html + title_html + price_html
+    var html = openingDiv + ' ' + class_html + ' ' + style_html + a_html + img_html + title_html + price_html
     $('#product_grid').append(html)
   })
   $('#image_size-medium').click()
@@ -337,6 +297,9 @@ function sortFormSubmit() {
     case 'color':
       filteredProducts.sort(sortByColor)
       break
+    case 'price':
+      filteredProducts.sort(sortByPrice)
+      break
   }
   if (params[1] != 'asc') {
     filteredProducts = filteredProducts.reverse()
@@ -360,6 +323,10 @@ function sortByProduct_ID(a, b) {
 
 function sortByColor(a, b) {
   return a.Base_Color < b.Base_Color ? -1 : a.Base_Color > b.Base_Color ? 1 : 0
+}
+
+function sortByPrice(a, b) {
+  return a.Price < b.Price ? -1 : a.Price > b.Price ? 1 : 0
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -418,9 +385,7 @@ function renderCategoryButtons(products) {
   $('#category_buttons_div').append(`<div class="category_btn active" data-cat="ALL">ALL</div>`)
 
   Object.keys(Category_dict).forEach((cat) => {
-    $('#category_buttons_div').append(
-      `<div class="category_btn" data-cat="${cat}">${cat.replace('_', ' ').toUpperCase()}</div>`
-    )
+    $('#category_buttons_div').append(`<div class="category_btn" data-cat="${cat}">${cat.replace('_', ' ').toUpperCase()}</div>`)
   })
 
   $('.category_btn').on('click', function () {
@@ -471,10 +436,7 @@ function setProductPageEventHandlers() {
   content_width = $('#main_content').width()
   if (content_width < 450) {
     $('#image_size-medium').on('click', function () {
-      var width =
-        ($('#product_grid').width() -
-          parseInt($('#product_grid').css('column-gap').replace('px', ''))) /
-        2
+      var width = ($('#product_grid').width() - parseInt($('#product_grid').css('column-gap').replace('px', ''))) / 2
       var height =
         ($(window).innerHeight() -
           $('#navbar_section').innerHeight() -
@@ -486,11 +448,7 @@ function setProductPageEventHandlers() {
     })
     $('#image_size-large').on('click', function () {
       var width = $('#product_grid').width()
-      var height =
-        $(window).innerHeight() -
-        $('#navbar_section').innerHeight() -
-        $('#title_section').innerHeight() -
-        $('#nav_section').innerHeight()
+      var height = $(window).innerHeight() - $('#navbar_section').innerHeight() - $('#title_section').innerHeight() - $('#nav_section').innerHeight()
       resizeImages(width, height)
     })
   } else {

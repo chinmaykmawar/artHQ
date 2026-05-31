@@ -17,3 +17,6 @@ staticfiles/
 
 # VS Code
 .vscode/
+
+#logs
+.log

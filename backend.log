@@ -1,0 +1,57 @@
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /favicon.ico
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /favicon.ico
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Create order request received: b'{"amount":499,"receipt":1780222229667}'
+Razorpay client initialized successfully.
+Razorpay order created successfully.
+Verify payment request received: b'{"razorpay_order_id":"order_SvvvtLpgRaOqYn","razorpay_payment_id":"pay_Svvw11KEurI1Ii","razorpay_signature":"09402719455ec9ab0d3e22f4588f8f990c28cd90262a52136e5c6d281c9cca81","name":"Name_Chinmay","phone":"8800156300","address":"Addressssssssss","city":"City","pincode":"226022","email":"chinmaykmawar@gmail.com","cart":[{"Name":"JER10001Pur","Price":499,"Title":"Handcrafted Purple Cosmic Sparkling Earrings \xe2\x80\x93 Unique Artistic Jewelry for Women","Description":"Step into a galaxy of elegance with these handcrafted earrings, designed in deep purple tones that shimmer with cosmic swirls and star-like sparkles. Embedded gold foil adds a radiant accent, giving each piece the allure of a miniature universe. No two pairs are alike, making your earrings as distinctive as your own style.\\n\\nLightweight yet bold, these earrings are perfect for women who love jewelry that feels mystical, modern, and timeless. Pair them with evening wear for a celestial vibe or with casual outfits for a chic everyday glow. A thoughtful gift for dreamers and stargazers alike.","Product_ID":"JER10001Pur","Sub_Category":"Earrings","Base_Color":"Purple","Highlight":"Nil","Design":10001,"Bar Code":"","Sub-Cat Code":"ER","qty":1}],"delivery_charge":0,"items_total":499,"grand_total":499}'
+Saving order data to Google Sheets: {'razorpay_order_id': 'order_SvvvtLpgRaOqYn', 'razorpay_payment_id': 'pay_Svvw11KEurI1Ii', 'razorpay_signature': '09402719455ec9ab0d3e22f4588f8f990c28cd90262a52136e5c6d281c9cca81', 'name': 'Name_Chinmay', 'phone': '8800156300', 'address': 'Addressssssssss', 'city': 'City', 'pincode': '226022', 'email': 'chinmaykmawar@gmail.com', 'cart': [{'Name': 'JER10001Pur', 'Price': 499, 'Title': 'Handcrafted Purple Cosmic Sparkling Earrings – Unique Artistic Jewelry for Women', 'Description': 'Step into a galaxy of elegance with these handcrafted earrings, designed in deep purple tones that shimmer with cosmic swirls and star-like sparkles. Embedded gold foil adds a radiant accent, giving each piece the allure of a miniature universe. No two pairs are alike, making your earrings as distinctive as your own style.\n\nLightweight yet bold, these earrings are perfect for women who love jewelry that feels mystical, modern, and timeless. Pair them with evening wear for a celestial vibe or with casual outfits for a chic everyday glow. A thoughtful gift for dreamers and stargazers alike.', 'Product_ID': 'JER10001Pur', 'Sub_Category': 'Earrings', 'Base_Color': 'Purple', 'Highlight': 'Nil', 'Design': 10001, 'Bar Code': '', 'Sub-Cat Code': 'ER', 'qty': 1}], 'delivery_charge': 0, 'items_total': 499, 'grand_total': 499}
+
+
+Payload: {'order_id': 'order_SvvvtLpgRaOqYn', 'payment_id': 'pay_Svvw11KEurI1Ii', 'name': 'Name_Chinmay', 'phone': '8800156300', 'email': 'chinmaykmawar@gmail.com', 'address': 'Addressssssssss', 'city': 'City', 'pincode': '226022', 'item_amount': 499, 'delivery_charge': 0, 'total_amount': 499, 'cart': 'JER10001Pur x 1'}
+
+
+Google Sheets response: 200 - <!DOCTYPE html><html><head><link rel="shortcut icon" href="//ssl.gstatic.com/docs/script/images/favicon.ico"><title>Error</title><style type="text/css" nonce="gF5cPotAwKxh4BQOIeEflg">body {background-color: #fff; margin: 0; padding: 0;}.errorMessage {font-family: Arial,sans-serif; font-size: 12pt; font-weight: bold; line-height: 150%; padding-top: 25px;}</style></head><body style="margin:20px"><div><img alt="Google Apps Script" src="//ssl.gstatic.com/docs/script/images/logo.png"></div><div style="text-align:center;font-family:monospace;margin:50px auto 0;max-width:600px">ReferenceError: sheet is not defined (line 35, file &quot;Code&quot;)</div></body></html>
+Payment verified and saved for order: order_SvvvtLpgRaOqYn
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Create order request received: b'{"amount":999,"receipt":1780223432318}'
+Razorpay client initialized successfully.
+Razorpay order created successfully.
+Verify payment request received: b'{"razorpay_order_id":"order_SvwH41olfd2M6L","razorpay_payment_id":"pay_SvwHWdUvenLvDt","razorpay_signature":"3c85e9b3735cc08c84943706e4aea313d8ea43f0872cd70369a2a89b293e8262","name":"Name_Chinmay","phone":"8800156300","address":"Addressssssssss","city":"City","pincode":"226022","email":"chinmaykmawar@gmail.com","cart":[{"Name":"JST40002BlG","Price":999,"Title":"Royal Blue Teardrop Pendant Necklace Set with Green Beaded Chain & Matching Earrings","Description":"Elevate your jewelry collection with this striking handcrafted necklace set that beautifully blends vibrant colors with elegant detailing. The necklace features a meticulously woven green beaded chain, accented with faceted deep blue beads that add rhythm and contrast to the design. At the center sits a bold royal blue teardrop pendant, polished to a smooth finish and secured with gold-tone hardware, creating a rich and luxurious focal point. The matching drop earrings echo the same beadwork pattern, ensuring a cohesive and refined look.Designed to stand out yet remain lightweight and wearable, this set is perfect for festive occasions, evening wear, or adding a statement touch to contemporary outfits.","Product_ID":"JST40002BlG","Sub_Category":"Set","Base_Color":"Blue","Highlight":"Green","Design":40002,"Bar Code":"","Sub-Cat Code":"ST","qty":1}],"delivery_charge":0,"items_total":999,"grand_total":999}'
+Saving order data to Google Sheets: {'razorpay_order_id': 'order_SvwH41olfd2M6L', 'razorpay_payment_id': 'pay_SvwHWdUvenLvDt', 'razorpay_signature': '3c85e9b3735cc08c84943706e4aea313d8ea43f0872cd70369a2a89b293e8262', 'name': 'Name_Chinmay', 'phone': '8800156300', 'address': 'Addressssssssss', 'city': 'City', 'pincode': '226022', 'email': 'chinmaykmawar@gmail.com', 'cart': [{'Name': 'JST40002BlG', 'Price': 999, 'Title': 'Royal Blue Teardrop Pendant Necklace Set with Green Beaded Chain & Matching Earrings', 'Description': 'Elevate your jewelry collection with this striking handcrafted necklace set that beautifully blends vibrant colors with elegant detailing. The necklace features a meticulously woven green beaded chain, accented with faceted deep blue beads that add rhythm and contrast to the design. At the center sits a bold royal blue teardrop pendant, polished to a smooth finish and secured with gold-tone hardware, creating a rich and luxurious focal point. The matching drop earrings echo the same beadwork pattern, ensuring a cohesive and refined look.Designed to stand out yet remain lightweight and wearable, this set is perfect for festive occasions, evening wear, or adding a statement touch to contemporary outfits.', 'Product_ID': 'JST40002BlG', 'Sub_Category': 'Set', 'Base_Color': 'Blue', 'Highlight': 'Green', 'Design': 40002, 'Bar Code': '', 'Sub-Cat Code': 'ST', 'qty': 1}], 'delivery_charge': 0, 'items_total': 999, 'grand_total': 999}
+
+
+Payload: {'order_id': 'order_SvwH41olfd2M6L', 'payment_id': 'pay_SvwHWdUvenLvDt', 'name': 'Name_Chinmay', 'phone': '8800156300', 'email': 'chinmaykmawar@gmail.com', 'address': 'Addressssssssss', 'city': 'City', 'pincode': '226022', 'item_amount': 999, 'delivery_charge': 0, 'total_amount': 999, 'cart': 'JST40002BlG x 1'}
+
+
+Google Sheets response: 200 - <!DOCTYPE html><html><head><link rel="shortcut icon" href="//ssl.gstatic.com/docs/script/images/favicon.ico"><title>Error</title><style type="text/css" nonce="rcKwdIQwFABvHS0Sg4cABw">body {background-color: #fff; margin: 0; padding: 0;}.errorMessage {font-family: Arial,sans-serif; font-size: 12pt; font-weight: bold; line-height: 150%; padding-top: 25px;}</style></head><body style="margin:20px"><div><img alt="Google Apps Script" src="//ssl.gstatic.com/docs/script/images/logo.png"></div><div style="text-align:center;font-family:monospace;margin:50px auto 0;max-width:600px">ReferenceError: sheet is not defined (line 35, file &quot;Code&quot;)</div></body></html>
+Payment verified and saved for order: order_SvwH41olfd2M6L
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+C:\Data\artHQ\Website_django\main\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /favicon.ico
+Watching for file changes with StatReloader
+C:\Data\artHQ\Website_django\main\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /favicon.ico
+Create order request received: b'{"amount":29,"receipt":1780225746126}'
+Razorpay client initialized successfully.
+Razorpay order created successfully.

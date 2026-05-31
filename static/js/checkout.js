@@ -1,4 +1,6 @@
-const DELIVERY_CHARGE = 99
+RAZORPAY_KEY_ID_TEST = 'rzp_test_Sh4tdflR7VHLCl'
+RAZORPAY_KEY_ID_LIVE = 'rzp_live_Svwpu3AEgbK6V6'
+const DELIVERY_CHARGE = 0
 const FREE_DELIVERY_THRESHOLD = 2500
 
 function getCart() {
@@ -122,9 +124,7 @@ function removePurchasedItems(purchasedCart) {
   let imm_checkout = JSON.parse(sessionStorage.getItem('CHECKOUT') || '[]')
   if (imm_checkout.length > 0) {
     imm_checkout.forEach((checkoutItem) => {
-      const purchasedItem = purchasedCart.find(
-        (item) => item.Product_ID === checkoutItem.Product_ID
-      )
+      const purchasedItem = purchasedCart.find((item) => item.Product_ID === checkoutItem.Product_ID)
       if (purchasedItem) {
         checkoutItem.qty -= purchasedItem.qty
       }
@@ -132,9 +132,7 @@ function removePurchasedItems(purchasedCart) {
 
     imm_checkout = imm_checkout.filter((item) => item.qty > 0)
     if (imm_checkout.length > 0) {
-      alert(
-        `Not all items in immediate checkout were purchased. Removing only the purchased items from checkout...`
-      )
+      alert(`Not all items in immediate checkout were purchased. Removing only the purchased items from checkout...`)
     } else {
       sessionStorage.setItem('CHECKOUT', JSON.stringify([]))
     }
@@ -200,7 +198,7 @@ async function startPayment() {
   $('#place_order_btn').prop('disabled', true)
 
   var options = {
-    key: RAZORPAY_KEY_ID,
+    key: RAZORPAY_KEY_ID_LIVE,
     amount: orderData.amount,
     currency: 'INR',
     name: 'ArtHQ',
