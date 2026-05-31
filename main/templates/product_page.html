@@ -1,9 +1,20 @@
-{% extends 'base.html' %} {% block title %} ArtHQ Products {% endblock %} {% block content %} {% load static %}
+<!-- prettier-ignore -->
+{% extends 'base.html' %}
+<!-- prettier-ignore -->
+{% block title %} ArtHQ Products {% endblock %}
+<!-- prettier-ignore -->
+{% block styles %}
+
 <link rel="stylesheet" href="..\static\css\product_page.css" />
 <link rel="stylesheet" href="..\static\css\cart.css" />
+<!-- prettier-ignore -->
+{%endblock %}
+
+<!-- prettier-ignore -->
+{% block content %}
 <section id="title_section">
   <div class="container d-flex justify-content-center align-items-center">
-    <div id="product_title">Test</div>
+    <div id="product_title" class="page_title">Test</div>
   </div>
 </section>
 <section id="main_content" class="mx-3 my-2">
@@ -30,11 +41,15 @@
   </div>
   <div id="product_id">{% url 'product_page' id %}</div>
 </section>
+<!-- prettier-ignore -->
 {% include 'cart.html' %}
-<section id="scripts">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<!-- prettier-ignore -->
+{% endblock %}
+<section id="product_page_scripts">
+  <!-- prettier-ignore -->
+  {% block scripts %}
   <script src="../static/js/cart.js" charset="utf-8"></script>
   <script src="../static/js/product_page.js" charset="utf-8"></script>
+  <!-- prettier-ignore -->
+  {% endblock %}
 </section>
-{% endblock %}

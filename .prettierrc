@@ -1,10 +1,10 @@
 {
-    "printWidth": 500,
-    "bracketSpacing": false,
-    "objectWrap":"preserve",
-    "bracketSameLine": true,
-    "trailingComma": "es5",
-    "tabWidth": 2,
-    "semi": false,
-    "singleQuote": true
-  }
+  "printWidth": 100,
+  "bracketSpacing": false,
+  "objectWrap": "preserve",
+  "bracketSameLine": true,
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "semi": false,
+  "singleQuote": true
+}

@@ -1,0 +1,20 @@
+#our_story_section {
+  padding: 40px 20px 60px;
+}
+
+.our_story_container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.our_story_card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.our_story_card p {
+  margin-bottom: 15px;
+  line-height: 1.7;
+}

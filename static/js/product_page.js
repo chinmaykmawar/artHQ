@@ -66,7 +66,14 @@ async function getProductImages(product_id) {
   $('#carousel_butttons').empty()
 
   images.forEach((file, index) => {
-    const img_html = `<img src="${folder_path}${file}" alt="Product Image">`
+    const img_html =
+      '<img src="/static/assets/Product_Images/' +
+      product_id +
+      '/' +
+      product_id +
+      '_' +
+      (index + 1) +
+      '.jpg" alt="Product Image">'
     const slide_html = `<div class="slide">${img_html}</div>`
 
     $('#product_images').append(slide_html)
@@ -89,7 +96,7 @@ async function getProductImages(product_id) {
 function populateProductDetails(product_data) {
   let category
 
-  switch (product_data['Cat Code']) {
+  switch (product_data['Product_ID'][0]) {
     case 'H':
       category = 'Home Decor'
       break
@@ -106,9 +113,9 @@ function populateProductDetails(product_data) {
   $('#product_title').html(sub_Cat)
 
   $('#product_details_nav').html(`
-      <span id="product_details_nav_home">Home</span> >
-      <span id="product_details_nav_cat">${category}</span> >
-      <span id="product_details_nav_subCat">${sub_Cat}</span>
+      <a id="product_details_nav_home">Home</a> >
+      <a id="product_details_nav_cat">${category}</a> >
+      <a id="product_details_nav_subCat">${sub_Cat}</a>
     `)
 
   // TITLE
@@ -183,7 +190,15 @@ function pointerDown(index) {
     $('.slides_flexbox').addClass('grabbing')
     //event.target.setPointerCapture(ptrId)
     currTime = new Date().getTime() - startLoad
-    console.log(currTime + '/pointerDown=> Mouse Start Pos :' + mouseStartPos + ', pointerType:' + event.pointerType + ', timestamp:' + tmstp)
+    console.log(
+      currTime +
+        '/pointerDown=> Mouse Start Pos :' +
+        mouseStartPos +
+        ', pointerType:' +
+        event.pointerType +
+        ', timestamp:' +
+        tmstp
+    )
   }
 }
 
@@ -217,7 +232,17 @@ function pointerUp(event) {
 
   currTime = new Date().getTime() - startLoad
   console.group('🧪 Product Debug')
-  console.log(currTime + '/pointerUp : movedBy :' + movedBy + ', content_width:' + content_width + ', currentIndex:' + currentIndex + ', prevIndex:' + prevIndex)
+  console.log(
+    currTime +
+      '/pointerUp : movedBy :' +
+      movedBy +
+      ', content_width:' +
+      content_width +
+      ', currentIndex:' +
+      currentIndex +
+      ', prevIndex:' +
+      prevIndex
+  )
   console.groupEnd()
 
   setFlexBoxPositionFromIndex()
@@ -249,10 +274,19 @@ function productImageButton_click(index) {
 
 function nextImage() {
   console.log('nextImage Entering')
-  var curr_img, testMouseStartPos, testMouseEndPos, testMouseCurrPos, down_event, up_event, move_event, leave_event
+  var curr_img,
+    testMouseStartPos,
+    testMouseEndPos,
+    testMouseCurrPos,
+    down_event,
+    up_event,
+    move_event,
+    leave_event
   var increment, intervalID, curr_index
 
-  curr_index = -Math.round(parseInt($('.slides_flexbox').css('transform').split(',')[4]) / content_width)
+  curr_index = -Math.round(
+    parseInt($('.slides_flexbox').css('transform').split(',')[4]) / content_width
+  )
 
   if (isNaN(curr_index)) {
     curr_index = 0
@@ -282,11 +316,20 @@ function nextImage() {
 
 function prevImage() {
   console.log('working.......')
-  var curr_img, testMouseStartPos, testMouseEndPos, testMouseCurrPos, down_event, up_event, move_event, leave_event
+  var curr_img,
+    testMouseStartPos,
+    testMouseEndPos,
+    testMouseCurrPos,
+    down_event,
+    up_event,
+    move_event,
+    leave_event
 
   var increment, intervalID, curr_index
 
-  curr_index = -Math.round(parseInt($('.slides_flexbox').css('transform').split(',')[4]) / content_width)
+  curr_index = -Math.round(
+    parseInt($('.slides_flexbox').css('transform').split(',')[4]) / content_width
+  )
 
   if (isNaN(curr_index)) {
     curr_index = 0
@@ -314,22 +357,31 @@ function prevImage() {
   }, 5)
 }
 
-$('#product_details_nav').on('click', 'a', function () {
+$('#product_details_nav').on('click', 'a', function (event) {
+  /*filterAttributes = {
+    Sub_Category: [],
+    search: '',
+  }*/
   switch (this.id) {
     case 'product_details_nav_home':
       window.location.href = products_gridURL
       break
 
     case 'product_details_nav_cat':
-      sessionStorage.setItem('filtertype', 'category')
-      sessionStorage.setItem('filtertext', this.innerHTML)
+      Category_dict = JSON.parse(sessionStorage.getItem('Category_dict'))
+      sessionStorage.setItem(
+        'filterAttributes',
+        JSON.stringify({Sub_Category: Category_dict[this.innerHTML], search: ''})
+      )
       window.location.href = products_gridURL
       break
 
-    case 'product_details_nav_subcat':
-      sessionStorage.setItem('filtertype', 'sub_category')
-      sessionStorage.setItem('filtertext', this.innerHTML)
-      window.location.href = products_gridURL
+    case 'product_details_nav_subCat':
+      sessionStorage.setItem(
+        'filterAttributes',
+        JSON.stringify({Sub_Category: [this.innerHTML], search: ''})
+      )
+      window.location.href = '/products'
       break
   }
 })
@@ -342,4 +394,8 @@ $('#buy_now_btn').on('click', function () {
   product_data.qty = 1
   sessionStorage.setItem('CHECKOUT', JSON.stringify([product_data]))
   window.location.href = '/checkout'
+})
+
+$(document).on('click', function (event) {
+  console.log(`Click at: ${event.target.id}`)
 })

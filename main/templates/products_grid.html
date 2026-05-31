@@ -1,11 +1,21 @@
-{% extends 'base.html' %} {% block title %} ArtHQ Products {% endblock %} {% block content %} {% load static %}
-<link rel="stylesheet" href="..\static\css\product_grid.css" />
-<link rel="stylesheet" href="..\static\css\cart.css" />
+<!-- prettier-ignore -->
+{% extends 'base.html' %} 
+<!-- prettier-ignore -->
+{% block title %} ArtHQ Products {% endblock %} 
+
+<!-- prettier-ignore -->
+{% block styles %}
+<link rel="stylesheet" href="static\css\product_grid.css" />
+<link rel="stylesheet" href="static\css\cart.css" />
+<!-- prettier-ignore -->
+{% endblock %}  
+<!-- prettier-ignore -->
+{% block content %}
 <section id="title_section">
   <div class="container d-flex justify-content-center align-items-center">
-    <div id="title">Products</div>
+    <div id="title" class="page_title">Products</div>
   </div>
-  <div id="category_buttons" class="d-flex flex-wrap justify-content-center mb-1"></div>
+  <div id="category_buttons_div" class="d-flex flex-wrap justify-content-center mb-1"></div>
 </section>
 <section id="nav_section" class="justify-content-center">
   <div id="nav_div" class="d-flex">
@@ -15,31 +25,63 @@
         <div id="filter_form">
           <div id="filter_options_div"></div>
           <div id="filter_button_div" class="d-flex">
-            <button id="clear_filter_button" class="button button_OKCancel" type="submit">Clear</button>
+            <button id="clear_filter_button" class="button button_OKCancel" type="submit">
+              Clear
+            </button>
             <button id="filter_button" class="button button_OKCancel" type="submit">Apply</button>
           </div>
         </div>
       </div>
     </div>
-    <div id="sort_div" class="btn-group col-2 col-sm-1 d-flex justify-content-center align-items-center">
+    <div
+      id="sort_div"
+      class="btn-group col-2 col-sm-1 d-flex justify-content-center align-items-center">
       <button id="sort_popup_button" class="button_primary button" type="button">Sort</button>
       <div id="sort_popup" class="dropdown-menu">
         <div id="sort_form">
           <div class="dropdown-item">
-            <input class="" type="radio" id="sort_radio_alphaasc" name="sort_radio_button" value="alphaasc" />
-            <label class="" for="sort_radio_alphaasc" id="sort_label_alphaasc">Alphabetically A-Z</label>
+            <input
+              class=""
+              type="radio"
+              id="sort_radio_alphaasc"
+              name="sort_radio_button"
+              value="alphaasc" />
+            <label class="" for="sort_radio_alphaasc" id="sort_label_alphaasc"
+              >Alphabetically A-Z</label
+            >
           </div>
           <div class="dropdown-item">
-            <input class="" type="radio" id="sort_radio_alphades" name="sort_radio_button" value="alphadec" />
-            <label class="" for="sort_radio_alphades" id="sort_label_alphades">Alphabetically Z-A</label>
+            <input
+              class=""
+              type="radio"
+              id="sort_radio_alphades"
+              name="sort_radio_button"
+              value="alphadec" />
+            <label class="" for="sort_radio_alphades" id="sort_label_alphades"
+              >Alphabetically Z-A</label
+            >
           </div>
           <div class="dropdown-item">
-            <input class="" type="radio" id="sort_radio_colorasc" name="sort_radio_button" value="colorasc" />
-            <label class="" for="sort_radio_colorasc" id="sort_label_colorasc">Color Ascending</label>
+            <input
+              class=""
+              type="radio"
+              id="sort_radio_colorasc"
+              name="sort_radio_button"
+              value="colorasc" />
+            <label class="" for="sort_radio_colorasc" id="sort_label_colorasc"
+              >Color Ascending</label
+            >
           </div>
           <div class="dropdown-item">
-            <input class="" type="radio" id="sort_radio_colordes" name="sort_radio_button" value="colordec" />
-            <label class="" for="sort_radio_colordes" id="sort_label_colordes">Color Descending</label>
+            <input
+              class=""
+              type="radio"
+              id="sort_radio_colordes"
+              name="sort_radio_button"
+              value="colordec" />
+            <label class="" for="sort_radio_colordes" id="sort_label_colordes"
+              >Color Descending</label
+            >
           </div>
           <div id="sort_button_div" class="justify-content-center">
             <button id="sort_button" class="button button_OKCancel" type="submit">Apply</button>
@@ -53,14 +95,22 @@
           <path d="M 6 6 L 6 26 L 26 26 L 26 6 L 6 6 z" />
         </svg>
       </button>
-      <button id="image_size-medium" type="button" class="btn button no_padding no_margin no_border">
+      <button
+        id="image_size-medium"
+        type="button"
+        class="btn button no_padding no_margin no_border">
         <svg role="presentation" width="18" viewBox="0 0 18 18" fill="none">
           <path fill="currentColor" d="M0 0h8v8H0zM0 10h8v8H0zM10 0h8v8h-8zM10 10h8v8h-8z"></path>
         </svg>
       </button>
-      <button id="image_size-small" type="button" class="btn button no_padding no_margin no_border hidden">
+      <button
+        id="image_size-small"
+        type="button"
+        class="btn button no_padding no_margin no_border hidden">
         <svg role="presentation" width="18" viewBox="0 0 18 18" fill="none">
-          <path fill="currentColor" d="M0 0h4v4H0zM0 7h4v4H0zM0 14h4v4H0zM7 0h4v4H7zM7 7h4v4H7zM7 14h4v4H7zM14 0h4v4h-4zM14 7h4v4h-4zM14 14h4v4h-4z"></path>
+          <path
+            fill="currentColor"
+            d="M0 0h4v4H0zM0 7h4v4H0zM0 14h4v4H0zM7 0h4v4H7zM7 7h4v4H7zM7 14h4v4H7zM14 0h4v4h-4zM14 7h4v4h-4zM14 14h4v4h-4z"></path>
         </svg>
       </button>
     </div>
@@ -69,11 +119,17 @@
 <section id="main_content">
   <div id="product_grid" class="grid mx-3 my-3 justify-content-center"></div>
 </section>
+<!-- prettier-ignore -->
 {% include 'cart.html' %}
-<section id="scripts">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<!-- prettier-ignore -->
+{% endblock %}
+<section id="product_grid_scripts"></section>
+  <!-- prettier-ignore -->
+  {% block scripts %}
+
   <script src="../static/js/products_grid.js" charset="utf-8"></script>
   <script src="../static/js/cart.js" charset="utf-8"></script>
+
+  <!-- prettier-ignore -->
+  {% endblock %}
 </section>
-{% endblock %}

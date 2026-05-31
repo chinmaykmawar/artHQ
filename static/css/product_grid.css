@@ -21,15 +21,6 @@
   max-height: 100%;
 }
 
-#title {
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin: 0 !important;
-  font-weight: 300;
-  font-family: lato;
-  font-size: 30px;
-}
-
 #nav_div {
   background: black;
   gap: 1px;
@@ -131,6 +122,19 @@
   width: 100%;
 }
 
-#category_buttons {
+#category_buttons_div {
   gap: 30px;
+}
+
+.category_btn {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #808080;
+  cursor: pointer;
+}
+
+.category_btn.active {
+  color: black;
+  font-weight: 600;
 }

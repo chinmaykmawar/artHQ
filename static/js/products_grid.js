@@ -1,23 +1,25 @@
-//const allProductsURL = 'https://script.google.com/macros/s/AKfycbw30Y_it1AKRYAZeuXPsFkoVw0Ku_sBLgvd-odIfU1wBy2eCoY75hPuMHTnYLsB3OxErw/exec'
-const allProductsURL = 'https://script.google.com/macros/s/AKfycbx7XwBXljynHLRc3PtAkItuW2WSDN0jwr1gQHw7k0tC2PP3GkR3XVll4gHbynQTs0p-/exec'
-const searchURL = 'https://script.google.com/macros/s/AKfycbwdWCAIweIvAWYJdS3O68gFFRXEYdMUhdPGjGxBMhRgl6bmWh40PhIyl6dwxGwHvA-yGQ/exec' + '?searchText='
+const allProductsURL =
+  'https://script.google.com/macros/s/AKfycbx7XwBXljynHLRc3PtAkItuW2WSDN0jwr1gQHw7k0tC2PP3GkR3XVll4gHbynQTs0p-/exec'
+const searchURL =
+  'https://script.google.com/macros/s/AKfycbwdWCAIweIvAWYJdS3O68gFFRXEYdMUhdPGjGxBMhRgl6bmWh40PhIyl6dwxGwHvA-yGQ/exec' +
+  '?searchText='
 
-var startLoad
-var allProducts
-var filteredProducts
+let startLoad
+let allProducts
+let filteredProducts
 
-var Category_dict = {}
-var filterAttributes = {
+let Category_dict = {}
+let filterAttributes = {
   Sub_Category: [],
   search: '',
 }
 
-var sortingAttributes
+let sortingAttributes
 
-port = '8000'
-currURL = window.location.href
-baseURL = currURL.split(port + '/')[0] + port + '/'
-products_gridURL = baseURL + '/products'
+const port = '8000'
+const currURL = window.location.href
+const baseURL = currURL.replace('/products', '')
+const products_gridURL = baseURL + '/products'
 
 $(window).on('load', onLoadFunction)
 
@@ -34,13 +36,13 @@ async function onLoadFunction() {
   updateFilterAttributes([], '')
   filteredProducts = getFilteredProducts(allProducts, filterAttributes)
   setFilterPopupOptions(allProducts, filterAttributes)
-  renderCategoryButtons(filteredProducts)
+  renderCategoryButtons(allProducts)
   displayProducts(filteredProducts)
 
   endLoad = new Date().getTime()
   console.log(endLoad + '/product_grid : exiting onLoad Function')
   console.log('Time taken to load product grid : ' + (endLoad - startLoad) / 1000 + ' seconds')
-  setEventHandlers()
+  setProductPageEventHandlers()
 }
 
 async function getAllProducts() {
@@ -62,7 +64,7 @@ async function getAllProducts() {
 }
 
 function getFilteredProducts(filteredProducts, filterAttributes) {
-  if (filterAttributes.search !== '') {
+  if (filterAttributes.search !== '' && filterAttributes.search.trim() !== '') {
     const words = filterAttributes.search
       .toLowerCase()
       .replace(/[^a-z0-9\s]/g, '')
@@ -76,7 +78,9 @@ function getFilteredProducts(filteredProducts, filterAttributes) {
   }
 
   if (filterAttributes.Sub_Category.length > 0) {
-    filteredProducts = filteredProducts.filter((product) => filterAttributes['Sub_Category'].includes(product.Sub_Category))
+    filteredProducts = filteredProducts.filter((product) =>
+      filterAttributes.Sub_Category.includes(product.Sub_Category)
+    )
   }
 
   console.log(`✅ Returning ${filteredProducts.length} products`)
@@ -95,8 +99,16 @@ function setFilterPopupOptions(allProducts, filterAttributes) {
 
   $.each(lookup, function () {
     filter_options_html += '<div class="dropdown-item">\n'
-    filter_options_html += '  <input class="" type="checkbox" id="filter_checkbox_' + this + '" />\n'
-    filter_options_html += '  <label class="" for="filter_checkbox_' + this + '" id="filter_label_' + this + '">' + this + '</label>\n'
+    filter_options_html +=
+      '  <input class="" type="checkbox" id="filter_checkbox_' + this + '" />\n'
+    filter_options_html +=
+      '  <label class="" for="filter_checkbox_' +
+      this +
+      '" id="filter_label_' +
+      this +
+      '">' +
+      this +
+      '</label>\n'
     filter_options_html += '</div>'
   })
   $('#filter_options_div').html(filter_options_html)
@@ -116,7 +128,15 @@ function displayProducts(products) {
   var baseURL = currURL.replace('/products', '')
   $('#product_grid').html('')
 
-  ignored_products = ['HCo01BlG', 'JER10002PiG', 'JER30001Pin', 'JNK20001Pin']
+  ignored_products = [
+    'HCo01BlG',
+    'JER10002PiG',
+    'JER30001Pin',
+    'JNK20001Pin',
+    'JBR30001BlW',
+    'JER10002ReG',
+    'JER10006PiG',
+  ]
 
   $.each(products, function (i) {
     if (ignored_products.includes(products[i].Product_ID)) {
@@ -129,13 +149,32 @@ function displayProducts(products) {
 
     var openingDiv = '<div id="' + id + '_div"'
 
-    var class_html = 'class="Product ' + category + ' ' + products[i].Sub_Category + ' ' + products[i].Material + ' ' + products[i].Base_Color + '_Base ' + products[i].Highlight + '_Highlight"'
+    var class_html =
+      'class="Product ' +
+      category +
+      ' ' +
+      products[i].Sub_Category +
+      ' ' +
+      products[i].Material +
+      ' ' +
+      products[i].Base_Color +
+      '_Base ' +
+      products[i].Highlight +
+      '_Highlight"'
     var style_html = ' style="flex-direction: column;">'
     var a_html = '<a href="' + baseURL + '/product/' + id + '">'
-    var img_html = '<img id="' + id + '" src="/static/assets/Product_Images/' + id + '/' + id + '_1.jpg" alt="Product Image"></a>'
+    var img_html =
+      '<img id="' +
+      id +
+      '" src="/static/assets/Product_Images/' +
+      id +
+      '/' +
+      id +
+      '_1.jpg" alt="Product Image"></a>'
     var title_html = '<div class="Product_title">' + title + '</div>'
     var price_html = '<div class="price row">&#8377;' + price + '</div></div></div>'
-    var html = openingDiv + ' ' + class_html + ' ' + style_html + a_html + img_html + title_html + price_html
+    var html =
+      openingDiv + ' ' + class_html + ' ' + style_html + a_html + img_html + title_html + price_html
     $('#product_grid').append(html)
   })
   $('#image_size-medium').click()
@@ -167,10 +206,17 @@ function filterFormSubmit() {
   displayProducts(filteredProducts)
 }
 
-function updateFilterAttributes(Sub_Categories, searchText) {
+function updateFilterAttributes(Sub_Categories, searchText, forcedUpdate = false) {
+  if (forcedUpdate) {
+    filterAttributes.Sub_Category = Sub_Categories
+    filterAttributes.search = searchText
+    sessionStorage.setItem('filterAttributes', JSON.stringify(filterAttributes))
+    return
+  }
+
   var savedFilterAttributes = sessionStorage.getItem('filterAttributes')
 
-  if (savedFilterAttributes !== null) {
+  if (savedFilterAttributes !== null && savedFilterAttributes.trim() !== '') {
     filterAttributes = JSON.parse(savedFilterAttributes)
   } else {
     filterAttributes = {
@@ -179,13 +225,16 @@ function updateFilterAttributes(Sub_Categories, searchText) {
     }
   }
 
-  if (Array.isArray(Sub_Categories)) {
+  if (Array.isArray(Sub_Categories) && Sub_Categories.length > 0) {
     filterAttributes.Sub_Category = Sub_Categories
   }
+
+  console.log('Sub_Category filter:' + filterAttributes.Sub_Category.join(', '))
 
   if (typeof searchText === 'string') {
     filterAttributes.search = searchText
   }
+  console.log('search filter:' + filterAttributes.search)
 
   sessionStorage.setItem('filterAttributes', JSON.stringify(filterAttributes))
 }
@@ -217,7 +266,12 @@ function clearFilter() {
   $('#filter_form input').each(function () {
     this.checked = false
   })
-  updateFilterAttributes([], filterAttributes.search)
+
+  filterAttributes = {
+    Sub_Category: [],
+    search: filterAttributes.search, // Retain the search text while clearing filters
+  }
+  sessionStorage.setItem('filterAttributes', JSON.stringify(filterAttributes))
   filteredProducts = getFilteredProducts(allProducts, filterAttributes)
   setFilterPopupOptions(allProducts, filterAttributes)
   displayProducts(filteredProducts)
@@ -353,15 +407,20 @@ function renderCategoryButtons(products) {
     if (!Category_dict[cat]) {
       Category_dict[cat] = []
     }
-    Category_dict[cat].push(p.Sub_Category)
+    if (!Category_dict[cat].includes(p.Sub_Category)) {
+      Category_dict[cat].push(p.Sub_Category)
+    }
   })
+  sessionStorage.setItem('Category_dict', JSON.stringify(Category_dict))
 
-  $('#category_buttons').html('')
+  $('#category_buttons_div').html('')
 
-  $('#category_buttons').append(`<div class="category_btn active" data-cat="ALL">All</div>`)
+  $('#category_buttons_div').append(`<div class="category_btn active" data-cat="ALL">ALL</div>`)
 
   Object.keys(Category_dict).forEach((cat) => {
-    $('#category_buttons').append(`<div class="category_btn" data-cat="${cat}">${cat.replace('_', ' ').toUpperCase()}</div>`)
+    $('#category_buttons_div').append(
+      `<div class="category_btn" data-cat="${cat}">${cat.replace('_', ' ').toUpperCase()}</div>`
+    )
   })
 
   $('.category_btn').on('click', function () {
@@ -375,7 +434,7 @@ function renderCategoryButtons(products) {
       selected_Sub_Categories = Category_dict[selected_Category[0]]
     }
 
-    updateFilterAttributes(selected_Sub_Categories, filterAttributes.search)
+    updateFilterAttributes(selected_Sub_Categories, filterAttributes.search, true)
     filteredProducts = getFilteredProducts(allProducts, filterAttributes)
     setFilterPopupOptions(allProducts, filterAttributes)
     displayProducts(filteredProducts)
@@ -397,9 +456,9 @@ function shuffleArray(array) {
 /////////////////////////Event Handlers///////////////////////////
 ///////////////////////////////////////////////////////////////////
 
-function setEventHandlers() {
+function setProductPageEventHandlers() {
   var currTime = new Date().getTime() - startLoad
-  console.log(currTime + ': entering setEventHandlers')
+  console.log(currTime + ': entering setProductPageEventHandlers')
 
   $(document).on('click', function (event) {
     if ($('#filter_popup').hasClass('show') && $(event.target)[0].id.split('_')[0] != 'filter') {
@@ -412,13 +471,26 @@ function setEventHandlers() {
   content_width = $('#main_content').width()
   if (content_width < 450) {
     $('#image_size-medium').on('click', function () {
-      var width = ($('#product_grid').width() - parseInt($('#product_grid').css('column-gap').replace('px', ''))) / 2
-      var height = ($(window).innerHeight() - $('#navbar_section').innerHeight() - $('#title_section').innerHeight() - $('#nav_section').innerHeight() - parseInt($('#product_grid').css('row-gap').replace('px', ''))) / 2
+      var width =
+        ($('#product_grid').width() -
+          parseInt($('#product_grid').css('column-gap').replace('px', ''))) /
+        2
+      var height =
+        ($(window).innerHeight() -
+          $('#navbar_section').innerHeight() -
+          $('#title_section').innerHeight() -
+          $('#nav_section').innerHeight() -
+          parseInt($('#product_grid').css('row-gap').replace('px', ''))) /
+        2
       resizeImages(width, height)
     })
     $('#image_size-large').on('click', function () {
       var width = $('#product_grid').width()
-      var height = $(window).innerHeight() - $('#navbar_section').innerHeight() - $('#title_section').innerHeight() - $('#nav_section').innerHeight()
+      var height =
+        $(window).innerHeight() -
+        $('#navbar_section').innerHeight() -
+        $('#title_section').innerHeight() -
+        $('#nav_section').innerHeight()
       resizeImages(width, height)
     })
   } else {

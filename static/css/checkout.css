@@ -49,6 +49,38 @@ input {
   font-weight: bold;
 }
 
+#checkout_pricing {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.price_row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.total_row {
+  font-size: 18px;
+  font-weight: bold;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+#free_delivery_message {
+  background: #eef9f1;
+  color: #0b7a33;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+
 /* CTA */
 #place_order_btn {
   width: 100%;

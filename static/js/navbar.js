@@ -1,41 +1,39 @@
-var startLoad
+// var startLoad
 
-var searchTextBoxExtened = false
+// var port = '8000'
+// var currURL = window.location.href
+// var baseURL = currURL.split(port + '/')[0] + port + '/'
+// var products_gridURL = baseURL + '/products'
+
+$(document).ready(function () {
+  setNavBarEventHandlers()
+})
 
 $(window).on('load', onLoadFunction)
 
 function onLoadFunction() {
   startLoad = new Date().getTime()
   //console.log(startLoad + '/navbar :page loading')
-  $('#search_button').on('click', function (event) {
-    tb_width = $('#search_textbox').width()
-    if (tb_width < 25) {
-      event.stopPropagation()
-      extendSearchTextBox()
-    } else {
-      search()
-    }
-  })
-  //$('#search_textbox').on('mousedown', extendSearchTextBox)
-  $('#search_textbox').on('touchstart', extendSearchTextBox)
-  $('#search_textbox').on('keydown', function (event) {
-    if (event.keyCode == 13) {
-      search()
-    }
-  })
+  var searchtext = ''
+  if (sessionStorage.getItem('filterAttributes')) {
+    searchtext = JSON.parse(sessionStorage.getItem('filterAttributes')).search
+  }
+
+  if (searchtext !== '') {
+    extendSearchTextBox(false)
+    $('#search_textbox').val(searchtext)
+    console.log('search textboxt loaded with text: ' + searchtext)
+  }
 }
 
-function extendSearchTextBox() {
+function extendSearchTextBox(focus = true) {
   console.log('extend called')
-  $(document).on('click', function (event) {
-    if (event.target.id != 'search_textbox') {
-      event.preventDefault()
-      reduceSearchTextBox()
-    }
-  })
+
   $('img').addClass('click_disabled')
   $('#navbar_div').addClass('expanded')
-  $('#search_textbox').focus()
+  if (focus) {
+    $('#search_textbox').focus()
+  }
   console.log('search textbox extended')
 }
 
@@ -47,19 +45,17 @@ function reduceSearchTextBox() {
   console.log('search textbox reduced')
 }
 
-function search() {
-  var text = $('#search_textbox')[0].value
-  if (text != '') {
-    sessionStorage.setItem('searchText', $('#search_textbox')[0].value)
-    port = '8000'
-    currURL = window.location.href
-    baseURL = currURL.split(port + '/')[0] + port + '/'
-    products_gridURL = baseURL + '/products'
-    window.location.href = products_gridURL
+function searchTextUpdated(searchText) {
+  filterAttributes = JSON.parse(sessionStorage.getItem('filterAttributes'))
+  sessionStorage.setItem(
+    'filterAttributes',
+    JSON.stringify({Sub_Category: filterAttributes.Sub_Category, search: searchText})
+  )
+  if (searchText === '') {
+    reduceSearchTextBox()
   }
+  window.location.href = products_gridURL
 }
-
-// static/js/search.js
 
 function searchProductsFromSession(searchText) {
   const stored = sessionStorage.getItem('ALL_PRODUCTS')
@@ -93,3 +89,35 @@ $('#viewcart_button').on('click', function (event) {
   renderCart()
   openCart()
 })
+
+function setNavBarEventHandlers() {
+  $('#search_button').on('click', function (event) {
+    tb_width = $('#search_textbox').width()
+    if (tb_width < 25) {
+      event.stopPropagation()
+      extendSearchTextBox(true)
+      console.log('search textboxt extended from search button click')
+    } else {
+      searchTextUpdated($('#search_textbox').val())
+    }
+  })
+
+  $('#search_textbox').on('touchstart', extendSearchTextBox)
+
+  $('#search_textbox').keydown(function (event) {
+    if (event.key === 'Enter') {
+      searchTextUpdated($('#search_textbox').val())
+    } else if (event.key === 'Escape') {
+      $('#search_textbox').val('')
+      searchTextUpdated('')
+    }
+  })
+
+  $('#search_textbox').focusout(function () {
+    searchTextUpdated($('#search_textbox').val())
+  })
+
+  $('#logo').on('click', function () {
+    window.location.href = '/'
+  })
+}

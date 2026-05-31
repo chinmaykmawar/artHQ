@@ -8,10 +8,10 @@
   letter-spacing: 1px;
   margin: 0 !important;
   margin-top: 4px !important;
-  font-weight: 300;
+  /* font-weight: 300;
   font-family: lato;
   font-size: 20px;
-  text-align: center;
+   */
 }
 
 #product_grid {
@@ -319,4 +319,8 @@ f #product_details_buyNow {
 .category_btn.active {
   background: black;
   color: white;
+}
+
+#product_details_nav a {
+  cursor: pointer;
 }

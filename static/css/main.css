@@ -49,6 +49,7 @@ body {
 #search_div {
   position: absolute;
   right: 3.5rem;
+  top: 12.5px;
   display: inline-flex;
   padding: 0px;
   border: none;
@@ -172,4 +173,16 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
+}
+
+.page_title {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  font-weight: 300;
+  font-family: lato;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 12px;
+  /* margin: 0 !important; */
 }

@@ -29,5 +29,12 @@ urlpatterns = [
     path('checkout/', views.checkout_view, name='checkout'),
     path('create-order/', views.create_order),
     path('verify-payment/', views.verify_payment),
-    path('order-success/', views.order_success)
+    path('order-success/', views.order_success),
+    path('track-order/', views.track_order, name='track_order'),
+    path('get-orders/',views.get_orders,name='get_orders'),
+    path('returns-exchange', views.returns_exchange, name='returns_exchange'),
+    path('privacy-policy',views.privacy_policy,name='privacy_policy'),
+    path('terms',views.terms,name='terms'),
+    path('our-story',views.our_story,name='our_story'),
+    path('contact-us',views.contact_us,name='contact_us'),
 ]

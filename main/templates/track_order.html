@@ -1,0 +1,33 @@
+<!-- prettier-ignore -->
+{% extends 'base.html' %}
+<!-- prettier-ignore -->
+{% block title %} ArtHQ Products {% endblock %}
+<!-- prettier-ignore -->
+{% block styles %}
+<link rel="stylesheet" href="/static/css/track_order.css" />
+<!-- prettier-ignore -->
+{% endblock %}
+<!-- prettier-ignore -->
+{% block content %}
+<div id="track_order_container">
+  <div class="page_title">Track your order</div>
+
+  <div id="track_order_form">
+    <input type="text" id="order_ids" placeholder="Order ID" />
+
+    <input type="text" id="phone" placeholder="Phone Number" autocomplete="tel" />
+
+    <button id="track_order_btn">Track Order</button>
+  </div>
+
+  <div id="track_results"></div>
+</div>
+<!-- prettier-ignore -->
+{% endblock %}
+<section id="scripts">
+  <!-- prettier-ignore -->
+  {% block scripts %}
+  <script src="/static/js/track_order.js"></script>
+  <!-- prettier-ignore -->
+  {% endblock %}
+</section>
