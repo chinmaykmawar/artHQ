@@ -1,6 +1,6 @@
 RAZORPAY_KEY_ID_TEST = 'rzp_test_Sh4tdflR7VHLCl'
 RAZORPAY_KEY_ID_LIVE = 'rzp_live_Svwpu3AEgbK6V6'
-const DELIVERY_CHARGE = 0
+const DELIVERY_CHARGE = 99
 const FREE_DELIVERY_THRESHOLD = 2500
 
 function getCart() {
