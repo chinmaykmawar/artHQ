@@ -1,0 +1,195 @@
+const SKUSheetID = "13EAHInwR2HyjF-nCTXbBycYY_x-aIcqG4CpR-5XzNQ0";
+const OrdersSheetID="1D7KcgV1GcC3FiPnvfj59VmfAO8IyuiNe0RhdAWx-ElY";
+
+function doGet() {
+  const sheet = SpreadsheetApp.openById(SKUSheetID).getSheetByName("SKUs");
+  var data = sheet.getDataRange().getValues();
+
+  var jsonData=[];
+  var headers = data[0];
+
+  jsonData=[]
+
+  for (var i=1; i<data.length; i++){
+    var row={}
+    for (var j=1; j<12;j++){
+        row[headers[j]]=data[i][j]
+    }
+    jsonData.push(row);
+  }
+
+Logger.log(jsonData);
+
+return ContentService.createTextOutput(JSON.stringify(jsonData)).setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  const data =JSON.parse(e.postData.contents)
+  if (data.action ==='get_orders') {
+    return getOrders(data)
+  }
+  return saveOrder(data)
+}
+
+function saveOrder(data) {
+  try {
+    const sheet = SpreadsheetApp.openById(OrdersSheetID).getSheetByName("Orders");
+
+    sheet.appendRow([
+      new Date(),
+      data.order_id,
+      data.payment_id,
+      data.name,
+      data.phone,
+      data.email,
+      data.address,
+      data.city,
+      data.pincode,
+      data.item_amount,
+      data.delivery_charge,
+      data.total_amount,
+      data.cart
+    ]);
+
+    sendOrderEmail(data);
+
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "success"
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  catch (err) {
+    Logger.log(err);
+
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "error",
+      message: err.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function sendOrderEmail(data) {
+  const skuSheet = SpreadsheetApp.openById(SKUSheetID).getSheetByName("SKUs")
+
+  const skuData =skuSheet.getDataRange().getValues()
+
+  // -----------------------------------
+  // Build SKU → Title dictionary
+  // -----------------------------------
+
+  const skuDict = {}
+  for (let i = 1; i < skuData.length; i++) {
+    const row = skuData[i]
+    const sku = row[5]
+    const title = row[3]
+    skuDict[sku] = title
+    }
+
+  // -----------------------------------
+  // Convert cart string into readable list
+  // -----------------------------------
+
+  let productLines = ""
+  const cartItems =data.cart.split(",")
+  cartItems.forEach(function (item) {
+    item = item.trim()
+    if (item === "") {
+      return
+    }
+    const parts = item.split(" x ")
+    const sku = parts[0].trim()
+    const qty =parts.length > 1? parts[1].trim(): "1"
+
+    const title =skuDict[sku] || sku
+    productLines +="• " +title +" (Qty: " +qty +")\n"
+    })
+
+  // -----------------------------------
+  // Email
+  // -----------------------------------
+
+  const subject ="ArtHQ Order Confirmed - " +data.order_id
+  const body =
+    "Dear " +data.name +",\n\n" +
+    "Thank you for shopping with ArtHQ ❤️\n\n" +
+    "Your order has been successfully placed.\n\n" +
+    "Order ID: " +data.order_id +"\n\n" +
+    "Products Ordered:\n\n" +
+    productLines +
+    "\nAmount Paid: ₹" +data.total_amount +
+    "\n\nOur team will begin processing your order shortly.\n\n" +
+    "For any queries regarding your order:\n\n" +
+    "📞 Phone/Whatsapp: +91-8800156300\n" +
+    "📧 Email: hello@arthq.in\n\n" +
+    "Thank you for supporting handcrafted art and design ✨\n\n" +
+    "— Team ArtHQ"
+  
+  MailApp.sendEmail({to: data.email,subject: subject,body: body,})
+}
+
+function getOrders(data) {
+  const sheet = SpreadsheetApp.openById(OrdersSheetID).getSheetByName('Orders')
+  const values = sheet.getDataRange().getValues()
+  const skuDict = getSkuDictionary()
+  const results = []
+  const orderIds = data.order_ids ? data.order_ids.split(',').map(x => x.trim()) : []
+
+  for (let i = 1;i < values.length;i++) {
+    const row =values[i]
+    const orderId =row[1]
+    const phone =row[4]
+    const trackingId =row[13]
+
+    let include = false
+
+    if (orderIds.length) {
+      include =orderIds.includes(orderId)
+      }
+
+    else if (data.phone) {
+      include =phone ==data.phone
+    }
+
+    if (include) {
+      let orderSummary = ''
+      const cartItems = row[12].split(',')
+      cartItems.forEach(item => {
+        const parts = item.trim().split(' x ')
+        const sku = parts[0]
+        const qty = parts[1]
+        const title = skuDict[sku] || sku
+        orderSummary += `<div>${title} × ${qty}</div>`
+      })
+      results.push({
+        order_id: orderId,
+        order_summary: orderSummary,
+        total_amount: row[11],
+        tracking_id: trackingId && trackingId.toString().trim() !== '' ? trackingId : 'Yet to be dispatched'
+      })
+    }
+  }
+  Logger.log(data)
+  Logger.log(results)
+  
+  return ContentService.createTextOutput(JSON.stringify(results)).setMimeType(ContentService.MimeType.JSON)
+}
+
+function getSkuDictionary() {
+  const skuSheet = SpreadsheetApp.openById(SKUSheetID).getSheetByName('SKUs')
+  const data = skuSheet.getDataRange().getValues()
+  const dict = {}
+  for (let i = 1; i < data.length; i++) {
+    dict[data[i][5]] = data[i][3]
+  }
+  return dict
+}
+
+function testMail() {
+
+  MailApp.sendEmail({
+    to: "chinmaykmawar@gmail.com",
+    subject: "Test Email",
+    body: "Mail permissions working"
+  })
+
+}
