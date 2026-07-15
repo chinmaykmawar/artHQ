@@ -71,3 +71,5 @@ Not Found: /.well-known/appspecific/com.chrome.devtools.json
 Not Found: /favicon.ico
 Not Found: /favicon.ico
 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
