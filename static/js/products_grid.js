@@ -51,7 +51,8 @@ async function getAllProducts() {
     shuffled_productsJson = JSON.parse(stored)
     console.log('⚡ Loaded products from sessionStorage')
   } else {
-    productsJson = await $.ajax(allProductsURL)
+    //productsJson = await $.ajax(allProductsURL)
+    productsJson = await $.ajax('/api/products/')
     shuffled_productsJson = shuffleArray(productsJson) // Shuffle products to ensure different order on each load, showcasing more products on the top
 
     sessionStorage.setItem('ALL_PRODUCTS', JSON.stringify(shuffled_productsJson))

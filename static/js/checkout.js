@@ -160,90 +160,114 @@ async function startPayment() {
     return
   }
 
+  const checkoutData = get_checkoutData()
+
+  // 1️⃣ Create order from backend
+
+  const result = await createOrder(checkoutData)
+
+  if (result.status === 'failed') {
+    alert(`Error creating order: ${result.error}`)
+    console.log('Error creating Order:', result)
+    return
+  } else if (result.amount !== checkoutData.totals.grand_total) {
+    alert(`Order amount mismatch. Please contact support.`)
+    console.log('Order amount mismatch', result)
+    return
+  } else {
+    checkoutData.paymentData = {
+      order_id: result.order_id,
+      key: result.key,
+    }
+  }
+
+  $('#place_order_btn').prop('disabled', true)
+
+  const params = get_orderParams(checkoutData)
+  console.log('Razorpay Options:', params)
+
+  // 2️⃣ Open Razorpay checkout
+  const rzp = new Razorpay(params)
+  rzp.open()
+}
+
+function get_checkoutData() {
   const cart = getCart()
 
   let itemsTotal = 0
   let qty = 0
 
   cart.forEach((item) => {
-    itemsTotal += item.Price * item.qty
+    itemsTotal += item.Price * item.qty * 100 //total in paise
     qty += item.qty
   })
 
-  let deliveryCharge = DELIVERY_CHARGE
+  let deliveryCharge = DELIVERY_CHARGE * 100 //in paise
 
-  if (itemsTotal >= FREE_DELIVERY_THRESHOLD) {
+  if (itemsTotal / 100 >= FREE_DELIVERY_THRESHOLD) {
     deliveryCharge = 0
   }
 
-  const total = itemsTotal + deliveryCharge
+  const checkoutData = {
+    cart: cart,
+    totals: {
+      items_total: itemsTotal,
+      delivery_charge: deliveryCharge,
+      grand_total: itemsTotal + deliveryCharge,
+      quantity: qty,
+    },
+    customer: {
+      name: $('#name').val(),
+      phone: $('#phone').val(),
+      address: $('#address').val(),
+      city: $('#city').val(),
+      pincode: $('#pincode').val(),
+      email: $('#email').val(),
+    },
+  }
+  return checkoutData
+}
 
-  // 1️⃣ Create order from backend
-  order = {
+async function createOrder(checkoutData) {
+  const order = {
     method: 'POST',
     body: JSON.stringify({
-      amount: total,
+      amount: checkoutData.totals.grand_total,
       receipt: Date.now(),
     }),
   }
   console.log('Razorpay Order:', order)
+  try {
+    const orderRes = await fetch('/create-order/', order)
+    console.log('Razorpay Order creation response:', orderRes)
 
-  const orderRes = await fetch('/create-order/', order)
-  console.log('Razorpay Order creation response:', orderRes)
+    if (orderRes.ok) {
+      const result = await orderRes.json()
+      console.log('Razorpay Order Data:', result)
+      return result
+    } else {
+      result = {status: 'failed', error: 'Create Order response invalid'}
+      return result
+    }
+  } catch (e) {
+    alert(`Unable to contact Server`)
+    console.log('Unbale to reach Server', e)
+    result = {status: 'failed', error: 'Unable to contact Server'}
+    return resultreturn
+  }
+}
 
-  const orderData = await orderRes.json()
-  console.log('Razorpay Order Data:', orderData)
-
-  // 2️⃣ Open Razorpay checkout
-  $('#place_order_btn').prop('disabled', true)
-
-  var options = {
-    key: RAZORPAY_KEY_ID_LIVE,
-    amount: orderData.amount,
+function get_orderParams(checkoutData) {
+  const params = {
+    key: checkoutData.paymentData.key,
+    amount: checkoutData.totals.grand_total, // Amount in paise
     currency: 'INR',
     name: 'ArtHQ',
     description: 'Order Payment',
-    order_id: orderData.order_id,
+    order_id: checkoutData.paymentData.order_id,
 
-    handler: async function (response) {
-      const orderData = {
-        razorpay_order_id: response.razorpay_order_id,
-        razorpay_payment_id: response.razorpay_payment_id,
-        razorpay_signature: response.razorpay_signature,
-
-        name: $('#name').val(),
-        phone: $('#phone').val(),
-        address: $('#address').val(),
-        city: $('#city').val(),
-        pincode: $('#pincode').val(),
-        email: $('#email').val(),
-
-        cart: cart,
-
-        delivery_charge: deliveryCharge,
-        items_total: itemsTotal,
-        grand_total: total,
-      }
-
-      const verifyRes = await fetch('/verify-payment/', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(orderData),
-      })
-
-      const result = await verifyRes.json()
-
-      if (result.status === 'success') {
-        console.log(`Payment ID : ${orderData.razorpay_payment_id} verified successfully`)
-
-        // ✅ Remove only purchased items
-        removePurchasedItems(cart)
-
-        // 👉 Redirect to success page
-        window.location.href = `/order-success/?order_id=${response.razorpay_order_id}`
-      } else {
-        alert(`Payment ID : ${orderData.razorpay_payment_id} verification failed`)
-      }
+    handler: function (response) {
+      order_callback(response, checkoutData)
     },
 
     prefill: {
@@ -252,16 +276,66 @@ async function startPayment() {
     },
     notes: {
       customer_name: $('#name').val(),
-      quantity: qty,
+      quantity: checkoutData.totals.quantity,
     },
     theme: {
       color: '#000',
     },
   }
-  console.log('Razorpay Options:', options)
 
-  var rzp = new Razorpay(options)
-  rzp.open()
+  return params
+}
+
+async function order_callback(response, checkoutData) {
+  if (!populatePaymentData(response, checkoutData)) {
+    const result = await verifyPayment(checkoutData)
+    showResult(result, checkoutData)
+  }
+}
+
+function populatePaymentData(response, checkoutData) {
+  if (response.razorpay_order_id !== checkoutData.paymentData.order_id) {
+    alert('Order ID mismatch. Please contact support.')
+    console.log('Order ID mismatch', response, checkoutData)
+    return false
+  }
+  checkoutData.paymentData.gateway = 'razorpay'
+  checkoutData.paymentData.transactionId = response.razorpay_payment_id
+  checkoutData.paymentData.verificationToken = response.razorpay_signature
+}
+
+async function verifyPayment(checkoutData) {
+  try {
+    const verifyRes = await fetch('/verify-payment/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(checkoutData),
+    })
+    const result = await verifyRes.json()
+    return result
+  } catch (e) {
+    console.log('Unable to verify payment', checkoutData)
+    alert('Unable to verify payment. In case funds have been deited, the same will be refunded in 4-6 business days')
+    return
+  }
+}
+
+function showResult(result, checkoutData) {
+  if (result.status === 'success') {
+    console.log(`Payment ID : ${checkoutData.paymentData.transactionId} verified successfully`)
+
+    // ✅ Remove only purchased items
+    removePurchasedItems(checkoutData.cart)
+
+    // 👉 Redirect to success page
+    window.location.href = `/order-success/?order_id=${checkoutData.paymentData.order_id}`
+  } else if (result.status === 'failed' && result.error === 'Failed to verify payment') {
+    alert(`Payment ID : ${checkoutData.paymentData.transactionId} verification failed`)
+  } else if (result.status === 'failed' && result.error === 'Failed to save order') {
+    alert(`An error occurred while saving the order. Payment will be refunded in 5-6 business days.`)
+  } else {
+    alert(`An unexpected error occurred. Please contact support.`)
+  }
 }
 
 /* INIT */

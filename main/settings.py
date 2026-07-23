@@ -12,10 +12,16 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+import dj_database_url
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_DIR = os.path.join(BASE_DIR, 'main')
+
+load_dotenv(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -39,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main',
 ]
 
 MIDDLEWARE = [
@@ -77,9 +84,13 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "arthq",
+        "USER": "arthq_user",
+        "PASSWORD": "postgre_arthq123",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 
@@ -133,13 +144,23 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 LOGGING = {
   "version": 1,
   "disable_existing_loggers": False,
+  
+  "formatters": {
+        "default": {
+            "format": "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+        },
+    },
+  
   "handlers": {
     "console": {
       "class": "logging.StreamHandler",
+      "formatter": "default"
     },
     "file": {
       "class": "logging.FileHandler",
-      "filename": "backend.log",
+      "formatter": "default",
+      "filename": "logs/application.log",
     },
   },
   "root": {
@@ -147,3 +168,23 @@ LOGGING = {
     "level": "INFO",
   },
 }
+
+PSQL_DB_URL="postgresql://arthq_user:postgre_arthq123@localhost:5432/arthq"
+GS_URL= "https://script.google.com/macros/s/AKfycbx7XwBXljynHLRc3PtAkItuW2WSDN0jwr1gQHw7k0tC2PP3GkR3XVll4gHbynQTs0p-/exec"
+
+
+_RAZORPAY_KEY_ID_TEST = 'rzp_test_Sh4tdflR7VHLCl'
+_RAZORPAY_SECRET_TEST = 'xSwba14fAdI9j1a9I96wZuzD'
+_RAZORPAY_KEY_ID_LIVE = 'rzp_live_Svwpu3AEgbK6V6'
+_RAZORPAY_SECRET_LIVE = 'HcvnBy1Z4vyuOZpmZ8pu6pcd'
+
+DATA_BACKEND = "GOOGLE"
+PAYMENT_SERVICE = "RAZORPAY"
+
+_LIVE_MODE = False
+if _LIVE_MODE:
+    RAZORPAY_KEY_ID = _RAZORPAY_KEY_ID_LIVE
+    RAZORPAY_SECRET = _RAZORPAY_SECRET_LIVE
+else:
+    RAZORPAY_KEY_ID = _RAZORPAY_KEY_ID_TEST
+    RAZORPAY_SECRET = _RAZORPAY_SECRET_TEST

@@ -1,0 +1,338 @@
+2026-07-22 02:29:50 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:30:14 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\manage.py changed, reloading.
+2026-07-22 02:31:08 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:31:11 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-22 02:31:14 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-22 02:34:09 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\settings.py changed, reloading.
+2026-07-22 02:34:10 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:34:14 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-22 02:34:17 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-22 02:35:53 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\views.py changed, reloading.
+2026-07-22 02:35:53 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:50:14 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\views.py changed, reloading.
+2026-07-22 02:50:15 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:50:23 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\views.py changed, reloading.
+2026-07-22 02:50:24 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:52:21 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\views.py changed, reloading.
+2026-07-22 02:52:22 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:52:27 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\views.py changed, reloading.
+2026-07-22 02:52:28 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:52:30 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\views.py changed, reloading.
+2026-07-22 02:52:31 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:52:41 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\urls.py changed, reloading.
+2026-07-22 02:52:42 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:53:31 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\settings.py changed, reloading.
+2026-07-22 02:53:31 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:55:06 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\BusinessLayer\orders.py changed, reloading.
+2026-07-22 02:55:07 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:55:28 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\settings.py changed, reloading.
+2026-07-22 02:55:29 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:55:47 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\settings.py changed, reloading.
+2026-07-22 02:55:48 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:57:50 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\settings.py changed, reloading.
+2026-07-22 02:57:51 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:58:12 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\BusinessLayer\orders.py changed, reloading.
+2026-07-22 02:58:13 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 02:58:23 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\views.py changed, reloading.
+2026-07-22 02:58:24 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:01:43 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\settings.py changed, reloading.
+2026-07-22 03:01:43 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:02:01 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\BusinessLayer\orders.py changed, reloading.
+2026-07-22 03:02:01 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:02:12 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\DataLayer\GoogleSheets.py changed, reloading.
+2026-07-22 03:02:12 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:02:51 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-22 03:02:55 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-22 03:07:27 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\BusinessLayer\orders.py changed, reloading.
+2026-07-22 03:07:28 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:07:56 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\views.py changed, reloading.
+2026-07-22 03:07:56 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:08:24 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\views.py changed, reloading.
+2026-07-22 03:08:24 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:09:00 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\BusinessLayer\orders.py changed, reloading.
+2026-07-22 03:09:01 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:10:08 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\DataLayer\framework.py changed, reloading.
+2026-07-22 03:10:09 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:10:11 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\DataLayer\GoogleSheets.py changed, reloading.
+2026-07-22 03:10:12 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:12:15 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\DataLayer\framework.py changed, reloading.
+2026-07-22 03:12:16 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:13:25 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\DataLayer\GoogleSheets.py changed, reloading.
+2026-07-22 03:13:25 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:13:39 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\DataLayer\GoogleSheets.py changed, reloading.
+2026-07-22 03:13:40 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:14:36 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\BusinessLayer\orders.py changed, reloading.
+2026-07-22 03:14:36 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:16:26 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\DataLayer\GoogleSheets.py changed, reloading.
+2026-07-22 03:16:26 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:16:31 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\BusinessLayer\orders.py changed, reloading.
+2026-07-22 03:16:32 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:17:43 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\BusinessLayer\orders.py changed, reloading.
+2026-07-22 03:17:43 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:20:40 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\BusinessLayer\orders.py changed, reloading.
+2026-07-22 03:20:41 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 03:20:47 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\DataLayer\GoogleSheets.py changed, reloading.
+2026-07-22 03:20:48 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 11:35:09 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 11:35:14 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-22 11:35:17 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-22 11:35:22 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-22 11:35:26 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-22 11:35:34 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-22 11:35:37 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-22 11:36:07 | WARNING  | django.security.csrf | Forbidden (CSRF cookie not set.): /create-order/
+2026-07-22 11:47:18 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\BusinessLayer\orders.py changed, reloading.
+2026-07-22 11:47:18 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 11:47:23 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\views.py changed, reloading.
+2026-07-22 11:47:23 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 11:47:42 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-22 11:47:48 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-22 11:47:51 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-22 11:47:51 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-22 11:47:54 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-22 11:47:56 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-22 11:48:01 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-22 11:48:22 | INFO     | asyncio | Create order request received: b'{"amount":498,"receipt":1784701102036}'
+2026-07-22 11:48:22 | INFO     | asyncio | Razorpay client initialized successfully.
+2026-07-22 11:48:22 | INFO     | asyncio | Razorpay order created successfully.
+2026-07-23 15:44:30 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-23 15:44:38 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\settings.py changed, reloading.
+2026-07-23 15:44:39 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-23 15:44:43 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-23 15:44:47 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-23 15:45:05 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:45:09 | INFO     | asyncio | Create order request received: b'{"amount":398,"receipt":1784801709026}'
+2026-07-23 15:45:09 | INFO     | asyncio | Razorpay client initialized successfully.
+2026-07-23 15:45:09 | INFO     | asyncio | Razorpay order created successfully.
+2026-07-23 15:49:48 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-23 15:49:52 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-23 15:49:58 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:50:01 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:51:01 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-23 15:51:04 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-23 15:51:06 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-23 15:51:33 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-23 15:51:36 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-23 15:51:39 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:51:46 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:51:50 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:54:53 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:55:12 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-23 15:55:14 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-23 15:55:15 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:55:17 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:55:18 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:56:22 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-23 15:56:25 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-23 15:56:27 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:56:30 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:56:33 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:57:48 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-23 15:57:50 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:57:51 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-23 15:57:53 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:57:54 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:58:37 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-23 15:58:39 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:58:41 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-23 15:58:48 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 15:58:50 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:05:40 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:05:51 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-23 16:05:54 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:05:55 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-23 16:05:58 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:06:01 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:06:52 | INFO     | asyncio | Create order request received: b'{"amount":49800,"receipt":1784803012440}'
+2026-07-23 16:06:52 | INFO     | asyncio | Razorpay order created successfully.
+2026-07-23 16:08:26 | INFO     | asyncio | Create order request received: b'{"amount":49800,"receipt":1784803106474}'
+2026-07-23 16:08:26 | INFO     | asyncio | Razorpay order created successfully.
+2026-07-23 16:08:57 | INFO     | asyncio | Create order request received: b'{"amount":49800,"receipt":1784803137921}'
+2026-07-23 16:08:57 | INFO     | asyncio | Razorpay order created successfully.
+2026-07-23 16:10:26 | INFO     | asyncio | Create order request received: b'{"amount":49800,"receipt":1784803226909}'
+2026-07-23 16:10:27 | INFO     | asyncio | Razorpay order created successfully.
+2026-07-23 16:10:30 | INFO     | asyncio | Create order request received: b'{"amount":49800,"receipt":1784803230163}'
+2026-07-23 16:10:30 | INFO     | asyncio | Razorpay order created successfully.
+2026-07-23 16:10:37 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-23 16:10:39 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:10:40 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-23 16:10:42 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:10:44 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:10:56 | INFO     | asyncio | Create order request received: b'{"amount":49800,"receipt":1784803256670}'
+2026-07-23 16:10:56 | INFO     | asyncio | Razorpay order created successfully.
+2026-07-23 16:11:27 | INFO     | asyncio | Verify payment request received: b'{"cart":[{"Name":"JER10003PiC","Price":399,"Title":"Handcrafted Pink Petal Arc Earrings with Clear Accents \xe2\x80\x93 Floral Artistic Jewelry for Women","Description":"Softly romantic yet playfully modern, these handcrafted earrings feature delicate pink petals encased in a half-moon design. The dual-layered arcs blend translucent tones with vivid pink, creating an elegant balance of lightness and color. Tiny embedded details add depth, while the sculptural U-shaped dangles move gracefully, catching subtle reflections with every turn. Perfect for both festive and everyday wear.","Product_ID":"JER10003PiC","Sub_Category":"Earrings","Base_Color":"Pink","Highlight":"Nil","Design":10003,"Bar Code":"","Sub-Cat Code":"ER","qty":1}],"totals":{"itemsTotal":39900,"deliveryCharge":9900,"grandTotal":49800,"quantity":1},"customer":{"name":"Name_Chinmay","phone":"8800156300","address":"Addressssssssss","city":"City","pincode":"201034","email":"chinmaykmawar@gmail.com"},"paymentData":{"order_id":"order_TGulRtAMUk3Zbs","key":"rzp_test_Sh4tdflR7VHLCl","gateway":"razorpay","transactionId":"pay_TGulinOBUqy1M2","verificationToken":"1fd0354eb184ab115e2eae6bb77303c32b1cf92808522d7ae6601b1e41a11c6d"}}'
+2026-07-23 16:11:27 | INFO     | asyncio | Payment verified successfully for order order_TGulRtAMUk3Zbs
+2026-07-23 16:11:27 | INFO     | main.DataLayer.GoogleSheets | Saving order data to Google Sheets: {'cart': [{'Name': 'JER10003PiC', 'Price': 399, 'Title': 'Handcrafted Pink Petal Arc Earrings with Clear Accents – Floral Artistic Jewelry for Women', 'Description': 'Softly romantic yet playfully modern, these handcrafted earrings feature delicate pink petals encased in a half-moon design. The dual-layered arcs blend translucent tones with vivid pink, creating an elegant balance of lightness and color. Tiny embedded details add depth, while the sculptural U-shaped dangles move gracefully, catching subtle reflections with every turn. Perfect for both festive and everyday wear.', 'Product_ID': 'JER10003PiC', 'Sub_Category': 'Earrings', 'Base_Color': 'Pink', 'Highlight': 'Nil', 'Design': 10003, 'Bar Code': '', 'Sub-Cat Code': 'ER', 'qty': 1}], 'totals': {'itemsTotal': 39900, 'deliveryCharge': 9900, 'grandTotal': 49800, 'quantity': 1}, 'customer': {'name': 'Name_Chinmay', 'phone': '8800156300', 'address': 'Addressssssssss', 'city': 'City', 'pincode': '201034', 'email': 'chinmaykmawar@gmail.com'}, 'paymentData': {'order_id': 'order_TGulRtAMUk3Zbs', 'key': 'rzp_test_Sh4tdflR7VHLCl', 'gateway': 'razorpay', 'transactionId': 'pay_TGulinOBUqy1M2', 'verificationToken': '1fd0354eb184ab115e2eae6bb77303c32b1cf92808522d7ae6601b1e41a11c6d'}}
+
+
+2026-07-23 16:11:27 | ERROR    | django.request | Internal Server Error: /verify-payment/
+Traceback (most recent call last):
+  File "C:\Data\artHQ\Website_django\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\.venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\views.py", line 64, in verify_payment
+    return OrderService.verify_payment(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\BusinessLayer\OrderService.py", line 28, in verify_payment
+    result = save_order(checkoutData)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\BusinessLayer\OrderService.py", line 41, in save_order
+    return om.save_order(data)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\DataLayer\GoogleSheets.py", line 146, in save_order
+    "item_amount": data["totals"].get("items_total")/100,
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+TypeError: unsupported operand type(s) for /: 'NoneType' and 'int'
+2026-07-23 16:13:07 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:13:39 | INFO     | asyncio | Create order request received: b'{"amount":49800,"receipt":1784803419039}'
+2026-07-23 16:13:39 | INFO     | asyncio | Razorpay order created successfully.
+2026-07-23 16:14:00 | INFO     | asyncio | Verify payment request received: b'{"cart":[{"Name":"JER10003PiC","Price":399,"Title":"Handcrafted Pink Petal Arc Earrings with Clear Accents \xe2\x80\x93 Floral Artistic Jewelry for Women","Description":"Softly romantic yet playfully modern, these handcrafted earrings feature delicate pink petals encased in a half-moon design. The dual-layered arcs blend translucent tones with vivid pink, creating an elegant balance of lightness and color. Tiny embedded details add depth, while the sculptural U-shaped dangles move gracefully, catching subtle reflections with every turn. Perfect for both festive and everyday wear.","Product_ID":"JER10003PiC","Sub_Category":"Earrings","Base_Color":"Pink","Highlight":"Nil","Design":10003,"Bar Code":"","Sub-Cat Code":"ER","qty":1}],"totals":{"itemsTotal":39900,"deliveryCharge":9900,"grandTotal":49800,"quantity":1},"customer":{"name":"Chinmay","phone":"8800156300","address":"Addressssssssss","city":"City","pincode":"201304","email":"chinmaykmawar@gmail.com"},"paymentData":{"order_id":"order_TGuoJ48zRkjVuT","key":"rzp_test_Sh4tdflR7VHLCl","gateway":"razorpay","transactionId":"pay_TGuoPq5gSAGqzy","verificationToken":"389dea53a98da31a19103bfe38f8bcb2d485d73a297459968f6cc3b1a20746c0"}}'
+2026-07-23 16:14:00 | INFO     | asyncio | Payment verified successfully for order order_TGuoJ48zRkjVuT
+2026-07-23 16:14:00 | INFO     | main.DataLayer.GoogleSheets | Saving order data to Google Sheets: {'cart': [{'Name': 'JER10003PiC', 'Price': 399, 'Title': 'Handcrafted Pink Petal Arc Earrings with Clear Accents – Floral Artistic Jewelry for Women', 'Description': 'Softly romantic yet playfully modern, these handcrafted earrings feature delicate pink petals encased in a half-moon design. The dual-layered arcs blend translucent tones with vivid pink, creating an elegant balance of lightness and color. Tiny embedded details add depth, while the sculptural U-shaped dangles move gracefully, catching subtle reflections with every turn. Perfect for both festive and everyday wear.', 'Product_ID': 'JER10003PiC', 'Sub_Category': 'Earrings', 'Base_Color': 'Pink', 'Highlight': 'Nil', 'Design': 10003, 'Bar Code': '', 'Sub-Cat Code': 'ER', 'qty': 1}], 'totals': {'itemsTotal': 39900, 'deliveryCharge': 9900, 'grandTotal': 49800, 'quantity': 1}, 'customer': {'name': 'Chinmay', 'phone': '8800156300', 'address': 'Addressssssssss', 'city': 'City', 'pincode': '201304', 'email': 'chinmaykmawar@gmail.com'}, 'paymentData': {'order_id': 'order_TGuoJ48zRkjVuT', 'key': 'rzp_test_Sh4tdflR7VHLCl', 'gateway': 'razorpay', 'transactionId': 'pay_TGuoPq5gSAGqzy', 'verificationToken': '389dea53a98da31a19103bfe38f8bcb2d485d73a297459968f6cc3b1a20746c0'}}
+
+
+2026-07-23 16:14:00 | ERROR    | django.request | Internal Server Error: /verify-payment/
+Traceback (most recent call last):
+  File "C:\Data\artHQ\Website_django\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\.venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\views.py", line 64, in verify_payment
+    return OrderService.verify_payment(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\BusinessLayer\OrderService.py", line 28, in verify_payment
+    result = save_order(checkoutData)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\BusinessLayer\OrderService.py", line 41, in save_order
+    return om.save_order(data)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\DataLayer\GoogleSheets.py", line 146, in save_order
+    "item_amount": data["totals"].get("items_total")/100,
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+TypeError: unsupported operand type(s) for /: 'NoneType' and 'int'
+2026-07-23 16:15:31 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:15:44 | INFO     | asyncio | Create order request received: b'{"amount":49800,"receipt":1784803544937}'
+2026-07-23 16:15:45 | INFO     | asyncio | Razorpay order created successfully.
+2026-07-23 16:16:03 | INFO     | asyncio | Verify payment request received: b'{"cart":[{"Name":"JER10003PiC","Price":399,"Title":"Handcrafted Pink Petal Arc Earrings with Clear Accents \xe2\x80\x93 Floral Artistic Jewelry for Women","Description":"Softly romantic yet playfully modern, these handcrafted earrings feature delicate pink petals encased in a half-moon design. The dual-layered arcs blend translucent tones with vivid pink, creating an elegant balance of lightness and color. Tiny embedded details add depth, while the sculptural U-shaped dangles move gracefully, catching subtle reflections with every turn. Perfect for both festive and everyday wear.","Product_ID":"JER10003PiC","Sub_Category":"Earrings","Base_Color":"Pink","Highlight":"Nil","Design":10003,"Bar Code":"","Sub-Cat Code":"ER","qty":1}],"totals":{"itemsTotal":39900,"deliveryCharge":9900,"grandTotal":49800,"quantity":1},"customer":{"name":"Name_Chinmay","phone":"8800156300","address":"Addressssssssss","city":"City","pincode":"201034","email":"chinmaykmawar@gmail.com"},"paymentData":{"order_id":"order_TGuqWVVHjSPsP3","key":"rzp_test_Sh4tdflR7VHLCl","gateway":"razorpay","transactionId":"pay_TGuqZW8bCWEyzy","verificationToken":"abaa6ff913bd6c4556f6622b39d1ef83f17ba21e3356933b52f1393a5c402944"}}'
+2026-07-23 16:16:03 | INFO     | asyncio | Payment verified successfully for order order_TGuqWVVHjSPsP3
+2026-07-23 16:16:03 | INFO     | main.DataLayer.GoogleSheets | Saving order data to Google Sheets: {'cart': [{'Name': 'JER10003PiC', 'Price': 399, 'Title': 'Handcrafted Pink Petal Arc Earrings with Clear Accents – Floral Artistic Jewelry for Women', 'Description': 'Softly romantic yet playfully modern, these handcrafted earrings feature delicate pink petals encased in a half-moon design. The dual-layered arcs blend translucent tones with vivid pink, creating an elegant balance of lightness and color. Tiny embedded details add depth, while the sculptural U-shaped dangles move gracefully, catching subtle reflections with every turn. Perfect for both festive and everyday wear.', 'Product_ID': 'JER10003PiC', 'Sub_Category': 'Earrings', 'Base_Color': 'Pink', 'Highlight': 'Nil', 'Design': 10003, 'Bar Code': '', 'Sub-Cat Code': 'ER', 'qty': 1}], 'totals': {'itemsTotal': 39900, 'deliveryCharge': 9900, 'grandTotal': 49800, 'quantity': 1}, 'customer': {'name': 'Name_Chinmay', 'phone': '8800156300', 'address': 'Addressssssssss', 'city': 'City', 'pincode': '201034', 'email': 'chinmaykmawar@gmail.com'}, 'paymentData': {'order_id': 'order_TGuqWVVHjSPsP3', 'key': 'rzp_test_Sh4tdflR7VHLCl', 'gateway': 'razorpay', 'transactionId': 'pay_TGuqZW8bCWEyzy', 'verificationToken': 'abaa6ff913bd6c4556f6622b39d1ef83f17ba21e3356933b52f1393a5c402944'}}
+
+
+2026-07-23 16:16:03 | ERROR    | django.request | Internal Server Error: /verify-payment/
+Traceback (most recent call last):
+  File "C:\Data\artHQ\Website_django\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\.venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\views.py", line 64, in verify_payment
+    return OrderService.verify_payment(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\BusinessLayer\OrderService.py", line 28, in verify_payment
+    result = save_order(checkoutData)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\BusinessLayer\OrderService.py", line 41, in save_order
+    return om.save_order(data)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\DataLayer\GoogleSheets.py", line 146, in save_order
+    "item_amount": data["totals"].get("items_total")/100,
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+TypeError: unsupported operand type(s) for /: 'NoneType' and 'int'
+2026-07-23 16:17:01 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:17:18 | INFO     | asyncio | Create order request received: b'{"amount":49800,"receipt":1784803638092}'
+2026-07-23 16:17:18 | INFO     | asyncio | Razorpay order created successfully.
+2026-07-23 16:17:44 | INFO     | asyncio | Verify payment request received: b'{"cart":[{"Name":"JER10003PiC","Price":399,"Title":"Handcrafted Pink Petal Arc Earrings with Clear Accents \xe2\x80\x93 Floral Artistic Jewelry for Women","Description":"Softly romantic yet playfully modern, these handcrafted earrings feature delicate pink petals encased in a half-moon design. The dual-layered arcs blend translucent tones with vivid pink, creating an elegant balance of lightness and color. Tiny embedded details add depth, while the sculptural U-shaped dangles move gracefully, catching subtle reflections with every turn. Perfect for both festive and everyday wear.","Product_ID":"JER10003PiC","Sub_Category":"Earrings","Base_Color":"Pink","Highlight":"Nil","Design":10003,"Bar Code":"","Sub-Cat Code":"ER","qty":1}],"totals":{"itemsTotal":39900,"deliveryCharge":9900,"grandTotal":49800,"quantity":1},"customer":{"name":"Name_Chinmay","phone":"8800156300","address":"Addressssssssss","city":"City","pincode":"201304","email":"chinmaykmawar@gmail.com"},"paymentData":{"order_id":"order_TGusAAZSe7wf8e","key":"rzp_test_Sh4tdflR7VHLCl","gateway":"razorpay","transactionId":"pay_TGusG6jL6FFWhQ","verificationToken":"8a1b6596fe72cba847a880d74e27d703d576690f037ae8f26e08222ede8d703e"}}'
+2026-07-23 16:17:44 | INFO     | asyncio | Payment verified successfully for order order_TGusAAZSe7wf8e
+2026-07-23 16:17:44 | INFO     | main.DataLayer.GoogleSheets | Saving order data to Google Sheets: {'cart': [{'Name': 'JER10003PiC', 'Price': 399, 'Title': 'Handcrafted Pink Petal Arc Earrings with Clear Accents – Floral Artistic Jewelry for Women', 'Description': 'Softly romantic yet playfully modern, these handcrafted earrings feature delicate pink petals encased in a half-moon design. The dual-layered arcs blend translucent tones with vivid pink, creating an elegant balance of lightness and color. Tiny embedded details add depth, while the sculptural U-shaped dangles move gracefully, catching subtle reflections with every turn. Perfect for both festive and everyday wear.', 'Product_ID': 'JER10003PiC', 'Sub_Category': 'Earrings', 'Base_Color': 'Pink', 'Highlight': 'Nil', 'Design': 10003, 'Bar Code': '', 'Sub-Cat Code': 'ER', 'qty': 1}], 'totals': {'itemsTotal': 39900, 'deliveryCharge': 9900, 'grandTotal': 49800, 'quantity': 1}, 'customer': {'name': 'Name_Chinmay', 'phone': '8800156300', 'address': 'Addressssssssss', 'city': 'City', 'pincode': '201304', 'email': 'chinmaykmawar@gmail.com'}, 'paymentData': {'order_id': 'order_TGusAAZSe7wf8e', 'key': 'rzp_test_Sh4tdflR7VHLCl', 'gateway': 'razorpay', 'transactionId': 'pay_TGusG6jL6FFWhQ', 'verificationToken': '8a1b6596fe72cba847a880d74e27d703d576690f037ae8f26e08222ede8d703e'}}
+
+
+2026-07-23 16:17:44 | ERROR    | django.request | Internal Server Error: /verify-payment/
+Traceback (most recent call last):
+  File "C:\Data\artHQ\Website_django\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\.venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\views.py", line 64, in verify_payment
+    return OrderService.verify_payment(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\BusinessLayer\OrderService.py", line 28, in verify_payment
+    result = save_order(checkoutData)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\BusinessLayer\OrderService.py", line 41, in save_order
+    return om.save_order(data)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\artHQ\Website_django\main\DataLayer\GoogleSheets.py", line 146, in save_order
+    "item_amount": data["totals"].get("items_total")/100,
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+TypeError: unsupported operand type(s) for /: 'NoneType' and 'int'
+2026-07-23 16:25:34 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:25:52 | INFO     | asyncio | Create order request received: b'{"amount":49800,"receipt":1784804152758}'
+2026-07-23 16:25:52 | INFO     | asyncio | Razorpay order created successfully.
+2026-07-23 16:26:14 | INFO     | asyncio | Verify payment request received: b'{"cart":[{"Name":"JER10003PiC","Price":399,"Title":"Handcrafted Pink Petal Arc Earrings with Clear Accents \xe2\x80\x93 Floral Artistic Jewelry for Women","Description":"Softly romantic yet playfully modern, these handcrafted earrings feature delicate pink petals encased in a half-moon design. The dual-layered arcs blend translucent tones with vivid pink, creating an elegant balance of lightness and color. Tiny embedded details add depth, while the sculptural U-shaped dangles move gracefully, catching subtle reflections with every turn. Perfect for both festive and everyday wear.","Product_ID":"JER10003PiC","Sub_Category":"Earrings","Base_Color":"Pink","Highlight":"Nil","Design":10003,"Bar Code":"","Sub-Cat Code":"ER","qty":1}],"totals":{"items_total":39900,"delivery_charge":9900,"grand_total":49800,"quantity":1},"customer":{"name":"Name_Chinmay","phone":"8800156300","address":"Addressssssssss","city":"City","pincode":"201304","email":"chinmaykmawar@gmail.com"},"paymentData":{"order_id":"order_TGv1DxDTvjzZBQ","key":"rzp_test_Sh4tdflR7VHLCl","gateway":"razorpay","transactionId":"pay_TGv1I8b5nGOIxq","verificationToken":"cd6281f6b0b805e2c10eb8c6a448be4aed37609aa7884fcd351157cc4a2b7f20"}}'
+2026-07-23 16:26:14 | INFO     | asyncio | Payment verified successfully for order order_TGv1DxDTvjzZBQ
+2026-07-23 16:26:14 | INFO     | main.DataLayer.GoogleSheets | Saving order data to Google Sheets: {'cart': [{'Name': 'JER10003PiC', 'Price': 399, 'Title': 'Handcrafted Pink Petal Arc Earrings with Clear Accents – Floral Artistic Jewelry for Women', 'Description': 'Softly romantic yet playfully modern, these handcrafted earrings feature delicate pink petals encased in a half-moon design. The dual-layered arcs blend translucent tones with vivid pink, creating an elegant balance of lightness and color. Tiny embedded details add depth, while the sculptural U-shaped dangles move gracefully, catching subtle reflections with every turn. Perfect for both festive and everyday wear.', 'Product_ID': 'JER10003PiC', 'Sub_Category': 'Earrings', 'Base_Color': 'Pink', 'Highlight': 'Nil', 'Design': 10003, 'Bar Code': '', 'Sub-Cat Code': 'ER', 'qty': 1}], 'totals': {'items_total': 39900, 'delivery_charge': 9900, 'grand_total': 49800, 'quantity': 1}, 'customer': {'name': 'Name_Chinmay', 'phone': '8800156300', 'address': 'Addressssssssss', 'city': 'City', 'pincode': '201304', 'email': 'chinmaykmawar@gmail.com'}, 'paymentData': {'order_id': 'order_TGv1DxDTvjzZBQ', 'key': 'rzp_test_Sh4tdflR7VHLCl', 'gateway': 'razorpay', 'transactionId': 'pay_TGv1I8b5nGOIxq', 'verificationToken': 'cd6281f6b0b805e2c10eb8c6a448be4aed37609aa7884fcd351157cc4a2b7f20'}}
+
+
+2026-07-23 16:26:14 | INFO     | main.DataLayer.GoogleSheets | Payload: {'order_id': None, 'payment_id': None, 'name': 'Name_Chinmay', 'phone': '8800156300', 'email': 'chinmaykmawar@gmail.com', 'address': 'Addressssssssss', 'city': 'City', 'pincode': '201304', 'item_amount': 399.0, 'delivery_charge': 99.0, 'total_amount': 498.0, 'cart': 'JER10003PiC x 1'}
+
+
+2026-07-23 16:26:14 | ERROR    | main.DataLayer.GoogleSheets | Error saving data to Google Sheets: module 'main.settings' has no attribute 'GS_POST_URL'
+2026-07-23 16:26:14 | ERROR    | asyncio | Payment verified but failed to save order: order_TGv1DxDTvjzZBQ
+2026-07-23 16:27:08 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\DataLayer\GoogleSheets.py changed, reloading.
+2026-07-23 16:27:09 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-23 16:27:33 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:27:50 | INFO     | asyncio | Create order request received: b'{"amount":49800,"receipt":1784804270450}'
+2026-07-23 16:27:50 | INFO     | asyncio | Razorpay client initialized successfully.
+2026-07-23 16:27:50 | INFO     | asyncio | Razorpay order created successfully.
+2026-07-23 16:28:10 | INFO     | asyncio | Verify payment request received: b'{"cart":[{"Name":"JER10003PiC","Price":399,"Title":"Handcrafted Pink Petal Arc Earrings with Clear Accents \xe2\x80\x93 Floral Artistic Jewelry for Women","Description":"Softly romantic yet playfully modern, these handcrafted earrings feature delicate pink petals encased in a half-moon design. The dual-layered arcs blend translucent tones with vivid pink, creating an elegant balance of lightness and color. Tiny embedded details add depth, while the sculptural U-shaped dangles move gracefully, catching subtle reflections with every turn. Perfect for both festive and everyday wear.","Product_ID":"JER10003PiC","Sub_Category":"Earrings","Base_Color":"Pink","Highlight":"Nil","Design":10003,"Bar Code":"","Sub-Cat Code":"ER","qty":1}],"totals":{"items_total":39900,"delivery_charge":9900,"grand_total":49800,"quantity":1},"customer":{"name":"Name_Chinmay","phone":"8800156300","address":"Addressssssssss","city":"City","pincode":"111111","email":"chinmaykmawar@gmail.com"},"paymentData":{"order_id":"order_TGv3IiKRypQtRq","key":"rzp_test_Sh4tdflR7VHLCl","gateway":"razorpay","transactionId":"pay_TGv3NdW7G9oSfQ","verificationToken":"afa980eeac6bd3bbeb36658c8190477854ec2c49f5a338d5ad0a7e5714f12937"}}'
+2026-07-23 16:28:10 | INFO     | asyncio | Payment verified successfully for order order_TGv3IiKRypQtRq
+2026-07-23 16:28:10 | INFO     | main.DataLayer.GoogleSheets | Saving order data to Google Sheets: {'cart': [{'Name': 'JER10003PiC', 'Price': 399, 'Title': 'Handcrafted Pink Petal Arc Earrings with Clear Accents – Floral Artistic Jewelry for Women', 'Description': 'Softly romantic yet playfully modern, these handcrafted earrings feature delicate pink petals encased in a half-moon design. The dual-layered arcs blend translucent tones with vivid pink, creating an elegant balance of lightness and color. Tiny embedded details add depth, while the sculptural U-shaped dangles move gracefully, catching subtle reflections with every turn. Perfect for both festive and everyday wear.', 'Product_ID': 'JER10003PiC', 'Sub_Category': 'Earrings', 'Base_Color': 'Pink', 'Highlight': 'Nil', 'Design': 10003, 'Bar Code': '', 'Sub-Cat Code': 'ER', 'qty': 1}], 'totals': {'items_total': 39900, 'delivery_charge': 9900, 'grand_total': 49800, 'quantity': 1}, 'customer': {'name': 'Name_Chinmay', 'phone': '8800156300', 'address': 'Addressssssssss', 'city': 'City', 'pincode': '111111', 'email': 'chinmaykmawar@gmail.com'}, 'paymentData': {'order_id': 'order_TGv3IiKRypQtRq', 'key': 'rzp_test_Sh4tdflR7VHLCl', 'gateway': 'razorpay', 'transactionId': 'pay_TGv3NdW7G9oSfQ', 'verificationToken': 'afa980eeac6bd3bbeb36658c8190477854ec2c49f5a338d5ad0a7e5714f12937'}}
+
+
+2026-07-23 16:28:10 | INFO     | main.DataLayer.GoogleSheets | Payload: {'order_id': None, 'payment_id': None, 'name': 'Name_Chinmay', 'phone': '8800156300', 'email': 'chinmaykmawar@gmail.com', 'address': 'Addressssssssss', 'city': 'City', 'pincode': '111111', 'item_amount': 399.0, 'delivery_charge': 99.0, 'total_amount': 498.0, 'cart': 'JER10003PiC x 1'}
+
+
+2026-07-23 16:28:14 | INFO     | main.DataLayer.GoogleSheets | Google Sheets response: 200 - {"status":"success"}
+2026-07-23 16:28:14 | INFO     | asyncio | Payment verified and saved for order: order_TGv3IiKRypQtRq
+2026-07-23 16:28:15 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:31:05 | INFO     | django.utils.autoreload | C:\Data\artHQ\Website_django\main\DataLayer\GoogleSheets.py changed, reloading.
+2026-07-23 16:31:06 | INFO     | django.utils.autoreload | Watching for file changes with StatReloader
+2026-07-23 16:31:11 | WARNING  | django.request | Not Found: /favicon.ico
+2026-07-23 16:31:14 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:31:14 | INFO     | main.DataLayer.GoogleSheets | Fetching all products from Google Sheets. Status code: 200
+2026-07-23 16:31:16 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:31:18 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-07-23 16:31:31 | INFO     | asyncio | Create order request received: b'{"amount":39800,"receipt":1784804491969}'
+2026-07-23 16:31:31 | INFO     | asyncio | Razorpay client initialized successfully.
+2026-07-23 16:31:32 | INFO     | asyncio | Razorpay order created successfully.
+2026-07-23 16:31:50 | INFO     | asyncio | Verify payment request received: b'{"cart":[{"Name":"JBR30014GrY","Price":299,"Title":"Green Multicolor Seed Bead Infinity Bracelet for Women & Girls","Description":"Bring a fresh, nature-inspired touch to your accessory collection with this ArtHQ Handmade Green Multicolor Seed Bead Infinity Bracelet. Carefully handcrafted using premium green, olive, amber, and transparent seed beads, this bracelet features an elegant infinity loop design that symbolizes endless love, hope, and positivity. Its lightweight construction and secure lobster clasp with extension chain ensure a comfortable and adjustable fit for most wrist sizes. The vibrant earthy tones pair beautifully with ethnic, casual, and western outfits, making it an ideal everyday accessory or thoughtful gift.","Product_ID":"JBR30014GrY","Sub_Category":"Bracelet","Base_Color":"Green","Highlight":"Yellow","Design":30014,"Bar Code":"","Sub-Cat Code":"BR","qty":1}],"totals":{"items_total":29900,"delivery_charge":9900,"grand_total":39800,"quantity":1},"customer":{"name":"Name_Chinmay","phone":"8800156300","address":"Addressssssssss","city":"City","pincode":"111111","email":"chinmaykmawar@gmail.com"},"paymentData":{"order_id":"order_TGv7CVzM5ylsJL","key":"rzp_test_Sh4tdflR7VHLCl","gateway":"razorpay","transactionId":"pay_TGv7FnGpWaYOfn","verificationToken":"0483265256bcb373e8ce20f300be064f432ebb30d8805dec06098b5999cf7531"}}'
+2026-07-23 16:31:50 | INFO     | asyncio | Payment verified successfully for order order_TGv7CVzM5ylsJL
+2026-07-23 16:31:50 | INFO     | main.DataLayer.GoogleSheets | Saving order data to Google Sheets: {'cart': [{'Name': 'JBR30014GrY', 'Price': 299, 'Title': 'Green Multicolor Seed Bead Infinity Bracelet for Women & Girls', 'Description': 'Bring a fresh, nature-inspired touch to your accessory collection with this ArtHQ Handmade Green Multicolor Seed Bead Infinity Bracelet. Carefully handcrafted using premium green, olive, amber, and transparent seed beads, this bracelet features an elegant infinity loop design that symbolizes endless love, hope, and positivity. Its lightweight construction and secure lobster clasp with extension chain ensure a comfortable and adjustable fit for most wrist sizes. The vibrant earthy tones pair beautifully with ethnic, casual, and western outfits, making it an ideal everyday accessory or thoughtful gift.', 'Product_ID': 'JBR30014GrY', 'Sub_Category': 'Bracelet', 'Base_Color': 'Green', 'Highlight': 'Yellow', 'Design': 30014, 'Bar Code': '', 'Sub-Cat Code': 'BR', 'qty': 1}], 'totals': {'items_total': 29900, 'delivery_charge': 9900, 'grand_total': 39800, 'quantity': 1}, 'customer': {'name': 'Name_Chinmay', 'phone': '8800156300', 'address': 'Addressssssssss', 'city': 'City', 'pincode': '111111', 'email': 'chinmaykmawar@gmail.com'}, 'paymentData': {'order_id': 'order_TGv7CVzM5ylsJL', 'key': 'rzp_test_Sh4tdflR7VHLCl', 'gateway': 'razorpay', 'transactionId': 'pay_TGv7FnGpWaYOfn', 'verificationToken': '0483265256bcb373e8ce20f300be064f432ebb30d8805dec06098b5999cf7531'}}
+
+
+2026-07-23 16:31:50 | INFO     | main.DataLayer.GoogleSheets | Payload: {'order_id': 'order_TGv7CVzM5ylsJL', 'payment_id': 'pay_TGv7FnGpWaYOfn', 'name': 'Name_Chinmay', 'phone': '8800156300', 'email': 'chinmaykmawar@gmail.com', 'address': 'Addressssssssss', 'city': 'City', 'pincode': '111111', 'item_amount': 299.0, 'delivery_charge': 99.0, 'total_amount': 398.0, 'cart': 'JBR30014GrY x 1'}
+
+
+2026-07-23 16:31:53 | INFO     | main.DataLayer.GoogleSheets | Google Sheets response: 200 - {"status":"success"}
+2026-07-23 16:31:53 | INFO     | asyncio | Payment verified and saved for order: order_TGv7CVzM5ylsJL
+2026-07-23 16:31:53 | WARNING  | django.request | Not Found: /.well-known/appspecific/com.chrome.devtools.json
