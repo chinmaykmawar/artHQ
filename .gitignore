@@ -36,3 +36,14 @@ static/assets/Product_Images_Optimized/
 
 # Local environment backups
 .env.*-backup
+
+# Local test/output files
+test_output.txt
+
+# Local helper/test scripts
+main/helpers/Flipkart_test.py
+main/helpers/test_cloudinary.py
+static/js/test.js
+
+# Local archives
+*.zip
