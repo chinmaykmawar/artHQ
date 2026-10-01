@@ -1,15 +1,15 @@
 from asyncio.log import logger
 import json
-from django.http import JsonResponse
 from main.helpers.factory import DataFactory, PaymentFactory
+from main.helpers.custom import CustomJsonResponse
 
 def create_order(request):
     logger.info(f"Create order request received: {request.body}")
     data = json.loads(request.body)
     amount = float(data.get('amount', 0))
     if amount <= 0:
-        return JsonResponse({"error": "Invalid amount"}, status=400)
-    
+        return CustomJsonResponse(None, status="failed", error="Invalid amount")
+
     ps = PaymentFactory.get_payment_service()
     return ps.create_order(amount, data)
 
@@ -28,13 +28,13 @@ def verify_payment(request):
         result = save_order(checkoutData)
         if result:
             logger.info(f"Payment verified and saved for order: {order_id}")
-            return JsonResponse({"status": "success"})
+            return CustomJsonResponse(None)
         else:
             logger.error(f"Payment verified but failed to save order: {order_id}")
-            return JsonResponse({"status": "failed", "error": "Failed to save order"})
+            return CustomJsonResponse(None, status="failed", error="Failed to save order")
     else:
         logger.warning(f"Payment verification failed for order: {order_id}")
-        return JsonResponse({"status": "failed", "error": "Failed to verify payment"})
+        return CustomJsonResponse(None, status="failed", error="Failed to verify payment")
 
 def save_order(data):
     om = DataFactory.get_order_manager()

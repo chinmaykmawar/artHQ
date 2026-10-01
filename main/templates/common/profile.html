@@ -1,0 +1,39 @@
+<!-- prettier-ignore -->
+{% extends 'base.html' %}
+
+<!-- prettier-ignore -->
+{% block title %}My Profile | ArtHQ{% endblock %}
+
+<!-- prettier-ignore -->
+{% block styles %}
+<link rel="stylesheet" href="/static/css/profile.css" />
+<!-- prettier-ignore -->
+{% endblock %}
+
+<!-- prettier-ignore -->
+{% block content %}
+<div id="profile_container">
+  <div class="page_title">My Profile</div>
+
+  <div id="profile_form">
+    <input id="username" type="text" placeholder="Username" disabled />
+    <input id="first_name" type="text" placeholder="First Name" />
+    <input id="last_name" type="text" placeholder="Last Name" />
+    <input id="email" type="email" placeholder="Email" />
+    <input id="phone" type="text" placeholder="Phone" />
+    <textarea id="address" placeholder="Address" rows="3"></textarea>
+    <input id="city" type="text" placeholder="City" />
+    <input id="state" type="text" placeholder="State" />
+    <input id="pincode" type="text" placeholder="Pincode" />
+    <button id="save_profile_btn">Save Changes</button>
+  </div>
+</div>
+
+<!-- prettier-ignore -->
+{% endblock %}
+
+<!-- prettier-ignore -->
+{% block scripts %}
+<script src="/static/js/profile.js"></script>
+<!-- prettier-ignore -->
+{% endblock %}

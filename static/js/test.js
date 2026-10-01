@@ -1,444 +1,161 @@
-//const allProductsURL = 'https://script.google.com/macros/s/AKfycbw30Y_it1AKRYAZeuXPsFkoVw0Ku_sBLgvd-odIfU1wBy2eCoY75hPuMHTnYLsB3OxErw/exec'
-const allProductsURL = 'https://script.google.com/macros/s/AKfycbx7XwBXljynHLRc3PtAkItuW2WSDN0jwr1gQHw7k0tC2PP3GkR3XVll4gHbynQTs0p-/exec'
-const searchURL = 'https://script.google.com/macros/s/AKfycbwdWCAIweIvAWYJdS3O68gFFRXEYdMUhdPGjGxBMhRgl6bmWh40PhIyl6dwxGwHvA-yGQ/exec' + '?searchText='
+/* ============================================================
+   ArtHQ Integration Tests
+   ============================================================ */
 
-var startLoad
-var allProducts
-var filteredProducts
-
-var Category_dict = {}
-var filterAttributes = {
-  Sub_Category: [],
-  search: '',
+const TEST_PRODUCT = {
+  Product_ID: 'HCo01BlS',
+  Title: 'Coasters',
+  Description: 'Coasters',
+  Price: 499,
+  qty: 1,
 }
 
-var sortingAttributes
-
-port = '8000'
-currURL = window.location.href
-baseURL = currURL.split(port + '/')[0] + port + '/'
-products_gridURL = baseURL + '/products'
-
-$(window).on('load', onLoadFunction)
-
-///////////////////////////////////////////////////////////////////
-/////////////////////////On Load Functions/////////////////////////
-///////////////////////////////////////////////////////////////////
-
-async function onLoadFunction() {
-  startLoad = new Date().getTime()
-  console.log(startLoad + '/product_grid : entering onLoad Function')
-
-  $('#product_grid').html('Loading......')
-  allProducts = await getAllProducts()
-  updateFilterAttributes([], '')
-  filteredProducts = getFilteredProducts(allProducts, filterAttributes)
-  setFilterPopupOptions(allProducts, filterAttributes)
-  renderCategoryButtons(filteredProducts)
-  displayProducts(filteredProducts)
-
-  endLoad = new Date().getTime()
-  console.log(endLoad + '/product_grid : exiting onLoad Function')
-  console.log('Time taken to load product grid : ' + (endLoad - startLoad) / 1000 + ' seconds')
-  setEventHandlers()
+const TEST_CUSTOMER = {
+  name: 'Integration Test',
+  phone: '9999999999',
+  email: 'integration@test.com',
+  address: 'ArtHQ Test Address',
+  city: 'Delhi',
+  pincode: '110001',
 }
 
-async function getAllProducts() {
-  let productsJson
+let createdOrderId = null
 
-  const stored = sessionStorage.getItem('ALL_PRODUCTS')
+/* ============================================================
+   Products API
+   ============================================================ */
 
-  if (stored) {
-    shuffled_productsJson = JSON.parse(stored)
-    console.log('⚡ Loaded products from sessionStorage')
-  } else {
-    productsJson = await $.ajax(allProductsURL)
-    shuffled_productsJson = shuffleArray(productsJson) // Shuffle products to ensure different order on each load, showcasing more products on the top
+async function testGetProducts() {
+  console.log('Testing get_all_products...')
+  const response = await fetch('/get-all-products/')
+  console.assert(response.ok, 'Products API failed')
+  const products = await response.json().data
+  console.assert(Array.isArray(products), 'Products should be array')
+  console.assert(products.length > 0, 'No products returned')
 
-    sessionStorage.setItem('ALL_PRODUCTS', JSON.stringify(shuffled_productsJson))
-    console.log('🌐 Fetched products from API')
-  }
-  return shuffled_productsJson
+  const p = products[0]
+  ;['Product_ID', 'Title', 'Price', 'Description', 'Sub_Category', 'Base_Color', 'Highlight', 'Design'].forEach((key) => {
+    console.assert(key in p, `Missing ${key}`)
+  })
+  console.log('✓ get_all_products passed')
+  console.table(products.slice(0, 5))
+  return products
 }
 
-function getFilteredProducts(filteredProducts, filterAttributes) {
-  if (filterAttributes.search !== '') {
-    const words = filterAttributes.search
-      .toLowerCase()
-      .replace(/[^a-z0-9\s]/g, '')
-      .split(/\s+/)
-      .filter(Boolean)
+/* ============================================================
+   Create Razorpay Order
+   ============================================================ */
 
-    filteredProducts = filteredProducts.filter((product) => {
-      const text = Object.values(product).join(' ').toLowerCase()
-      return words.some((word) => text.includes(word))
+async function testCreateOrder() {
+  console.log('Testing create_order...')
+  const amount = TEST_PRODUCT.Price * 100 + 9900
+  const response = await fetch('/create-order/', {
+    method: 'POST',
+    body: JSON.stringify({
+      amount: amount,
+      receipt: Date.now(),
+    }),
+  })
+
+  console.assert(response.ok, 'Create order failed')
+
+  const result = await response.json()
+  console.assert(result.status === 'success', 'Order creation failed')
+
+  createdOrderId = result.data.order_id
+  console.log('✓ create_order passed')
+  console.log(result)
+  return result
+}
+
+/* ============================================================
+   Get Orders
+   ============================================================ */
+
+async function testGetOrders(phone = TEST_CUSTOMER.phone) {
+  console.log('Testing get_orders...')
+  const response = await fetch('/get-orders/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      action: 'get_orders',
+      order_ids: '',
+      phone: phone,
+    }),
+  })
+  console.assert(response.ok)
+
+  const orders = await response.json().data
+  console.log(orders)
+  console.assert(Array.isArray(orders), 'Orders should be array')
+  console.log('✓ get_orders passed')
+  return orders
+}
+
+async function testGetOrders_withflow(phone = TEST_CUSTOMER.phone) {
+  console.log('Testing get_orders...')
+  sessionStorage.setItem('phone_number', phone)
+  window.location.href = 'track-order/'
+}
+
+/* ============================================================
+   Manual Checkout Test
+   ============================================================ */
+
+async function runCheckoutTest() {
+  console.clear()
+  console.log('Preparing checkout test...')
+
+  // Clear any previous data
+  sessionStorage.removeItem('CHECKOUT')
+  sessionStorage.removeItem('CART')
+
+  // Put one product in cart
+  sessionStorage.setItem(
+    'CART',
+    JSON.stringify([
+      {
+        Product_ID: 'JBR30002GrP',
+        Title: 'Bracelet',
+        Description: 'Bracelet',
+        Price: 499,
+        qty: 1,
+      },
+    ])
+  )
+  address = 'ArtHQ Test Address' + String(new Date().getTime())
+
+  sessionStorage.setItem(
+    'CUSTOMER_DETAILS',
+    JSON.stringify({
+      name: 'Integration Test',
+      phone: '9999999999',
+      email: 'integration@test.com',
+      address: address,
+      city: 'Delhi',
+      pincode: '110001',
     })
-  }
+  )
 
-  if (filterAttributes.Sub_Category.length > 0) {
-    filteredProducts = filteredProducts.filter((product) => filterAttributes['Sub_Category'].includes(product.Sub_Category))
-  }
+  console.log('Cart populated.')
 
-  console.log(`✅ Returning ${filteredProducts.length} products`)
+  console.log('Opening checkout page...')
 
-  return filteredProducts
+  // Open checkout page in same tab
+  window.location.href = '/checkout/'
 }
 
-function setFilterPopupOptions(allProducts, filterAttributes) {
-  var lookup = []
-  $.each(allProducts, function () {
-    if ($.inArray(this.Sub_Category, lookup) < 0) {
-      lookup.push(this.Sub_Category)
-    }
-  })
-  filter_options_html = ''
+/* ============================================================
+   Automated Tests
+   ============================================================ */
 
-  $.each(lookup, function () {
-    filter_options_html += '<div class="dropdown-item">\n'
-    filter_options_html += '  <input class="" type="checkbox" id="filter_checkbox_' + this + '" />\n'
-    filter_options_html += '  <label class="" for="filter_checkbox_' + this + '" id="filter_label_' + this + '">' + this + '</label>\n'
-    filter_options_html += '</div>'
-  })
-  $('#filter_options_div').html(filter_options_html)
-
-  if (filterAttributes.Sub_Category.length > 0) {
-    filterAttributes.Sub_Category.forEach(function (subCategory) {
-      $('#filter_checkbox_' + subCategory).prop('checked', true)
-    })
-  }
-  $('#search_textbox').val(filterAttributes.search)
-}
-
-function displayProducts(products) {
-  var currTime = new Date().getTime() - startLoad
-  console.log(currTime + ': entering displayProducts. no of products:' + products.length)
-  var currURL = window.location.href
-  var baseURL = currURL.replace('/products', '')
-  $('#product_grid').html('')
-
-  ignored_products = ['HCo01BlG', 'JER10002PiG', 'JER30001Pin', 'JNK20001Pin']
-
-  $.each(products, function (i) {
-    if (ignored_products.includes(products[i].Product_ID)) {
-      return true // Skip this iteration
-    }
-    var id = products[i].Product_ID
-    var category = getCategory(products[i].Sub_Category)
-    var title = products[i].Title
-    var price = products[i].Price
-
-    var openingDiv = '<div id="' + id + '_div"'
-
-    var class_html = 'class="Product ' + category + ' ' + products[i].Sub_Category + ' ' + products[i].Material + ' ' + products[i].Base_Color + '_Base ' + products[i].Highlight + '_Highlight"'
-    var style_html = ' style="flex-direction: column;">'
-    var a_html = '<a href="' + baseURL + '/product/' + id + '">'
-    var img_html = '<img id="' + id + '" src="/static/assets/Product_Images/' + id + '/' + id + '_1.jpg" alt="Product Image"></a>'
-    var title_html = '<div class="Product_title">' + title + '</div>'
-    var price_html = '<div class="price row">&#8377;' + price + '</div></div></div>'
-    var html = openingDiv + ' ' + class_html + ' ' + style_html + a_html + img_html + title_html + price_html
-    $('#product_grid').append(html)
-  })
-  $('#image_size-medium').click()
-  //var currTime = new Date().getTime() - startLoad;
-  //console.log(currTime + ":  Exiting CreateDiv");
-}
-
-///////////////////////////////////////////////////////////////////
-/////////////////////////Filter Functions//////////////////////////
-///////////////////////////////////////////////////////////////////
-
-function filterFormSubmit() {
-  var currTime = new Date().getTime() - startLoad
-  console.log(currTime + ': entering filterFormSubmit')
-
-  hideFilterPopup()
-  selected_Categories = []
-
-  $('#filter_form input').each(function () {
-    if (this.checked) {
-      selected_Categories.push(this.id.split('_')[2])
-    }
-  })
-
-  $('#product_grid').html('Loading...')
-  updateFilterAttributes(selected_Categories, filterAttributes.search)
-  filteredProducts = getFilteredProducts(allProducts, filterAttributes)
-  setFilterPopupOptions(allProducts, filterAttributes)
-  displayProducts(filteredProducts)
-}
-
-function updateFilterAttributes(Sub_Categories, searchText) {
-  var savedFilterAttributes = sessionStorage.getItem('filterAttributes')
-
-  if (savedFilterAttributes !== null) {
-    filterAttributes = JSON.parse(savedFilterAttributes)
-  } else {
-    filterAttributes = {
-      Sub_Category: [],
-      search: '',
-    }
-  }
-
-  if (Array.isArray(Sub_Categories)) {
-    filterAttributes.Sub_Category = Sub_Categories
-  }
-
-  if (typeof searchText === 'string') {
-    filterAttributes.search = searchText
-  }
-
-  sessionStorage.setItem('filterAttributes', JSON.stringify(filterAttributes))
-}
-
-function showFilterPopup() {
-  var currTime = new Date().getTime() - startLoad
-  console.log(currTime + ': entering showFilterPopup')
-  $('#filter_popup').addClass('show')
-  $('#filter_popup_button').addClass('button_disabled')
-  $('#filter_popup_button').css('pointer-events', 'none')
-  $('#sort_popup_button').addClass('button_disabled')
-  $('#sort_popup_button').css('pointer-events', 'none')
-}
-
-function hideFilterPopup() {
-  var currTime = new Date().getTime() - startLoad
-  console.log(currTime + ': entering hideFilterPopup')
-  $('#filter_popup').removeClass('show')
-  $('#filter_popup_button').removeClass('button_disabled')
-  $('#filter_popup_button').css('pointer-events', 'auto')
-  $('#sort_popup_button').removeClass('button_disabled')
-  $('#sort_popup_button').css('pointer-events', 'auto')
-}
-
-function clearFilter() {
-  var currTime = new Date().getTime() - startLoad
-  console.log(currTime + ': entering clearFilter')
-
-  $('#filter_form input').each(function () {
-    this.checked = false
-  })
-  updateFilterAttributes([], filterAttributes.search)
-  filteredProducts = getFilteredProducts(allProducts, filterAttributes)
-  setFilterPopupOptions(allProducts, filterAttributes)
-  displayProducts(filteredProducts)
-}
-
-function clickOutsideFilterPopup(event) {
-  event.preventDefault()
-  $('#filter_form input').each(function () {
-    this.checked = false
-  })
-
-  if (filterAttributes.Sub_Category.length > 0) {
-    filterAttributes.Sub_Category.forEach(function (subCategory) {
-      $('#filter_checkbox_' + subCategory).prop('checked', true)
-    })
-  }
-
-  hideFilterPopup()
-
-  console.log('filter Popup shown and click outside')
-}
-
-///////////////////////////////////////////////////////////////////
-/////////////////////////Sorting Functions/////////////////////////
-///////////////////////////////////////////////////////////////////
-
-function showSortPopup() {
-  var currTime = new Date().getTime() - startLoad
-  console.log(currTime + ': entering showSortPopup')
-  $('#sort_popup').addClass('show')
-  $('#filter_popup_button').addClass('button_disabled')
-  $('#filter_popup_button').css('pointer-events', 'none')
-  $('#sort_popup_button').addClass('button_disabled')
-  $('#sort_popup_button').css('pointer-events', 'none')
-}
-
-function hideSortPopup() {
-  var currTime = new Date().getTime() - startLoad
-  console.log(currTime + ': entering hideSortPopup')
-  $('#sort_popup').removeClass('show')
-  $('#filter_popup_button').removeClass('button_disabled')
-  $('#filter_popup_button').css('pointer-events', 'auto')
-  $('#sort_popup_button').removeClass('button_disabled')
-  $('#sort_popup_button').css('pointer-events', 'auto')
-}
-
-function sortFormSubmit() {
-  var currTime = new Date().getTime() - startLoad
-  console.log(currTime + ': entering sortFormSubmit')
-
-  hideSortPopup()
-
-  var selector = $("input[name='sort_radio_button']:checked").val()
-  var params = selector.match(/.{1,5}/g)
-
-  //currTime = new Date().getTime() - startSort
-  //console.log(currTime + ': params : ' + params)
-
-  switch (params[0]) {
-    case 'alpha':
-      filteredProducts.sort(sortByProduct_ID)
-      break
-    case 'color':
-      filteredProducts.sort(sortByColor)
-      break
-  }
-  if (params[1] != 'asc') {
-    filteredProducts = filteredProducts.reverse()
-  }
-
-  //currTime = new Date().getTime() - startSort;
-  //console.log(currTime + ": exiting sortProducts. no of products:" + filteredProducts.length);
-
-  displayProducts(filteredProducts)
-}
-
-function clickOutsideSortPopup(event) {
-  event.preventDefault()
-  hideSortPopup()
-  console.log('sort Popup shown and click outside')
-}
-
-function sortByProduct_ID(a, b) {
-  return a.Product_ID < b.Product_ID ? -1 : a.Product_ID > b.Product_ID ? 1 : 0
-}
-
-function sortByColor(a, b) {
-  return a.Base_Color < b.Base_Color ? -1 : a.Base_Color > b.Base_Color ? 1 : 0
-}
-
-///////////////////////////////////////////////////////////////////
-/////////////////////////Helper and UI Functions///////////////////
-///////////////////////////////////////////////////////////////////
-
-function getCategory(sc) {
-  //var currTime = new Date().getTime() - startLoad
-  //console.log(currTime + ': entering getCategory')
-
-  if (sc == 'Coasters' || sc == 'Candle Holders' || sc == 'Tray') {
-    return 'Home_Decor'
-  } else {
-    return 'Jewellery'
-  }
-}
-
-function getSubCategories(cat, allProducts) {
-  subCategories = []
-  allProducts.forEach((p) => {
-    if (getCategory(p.Sub_Category) == cat && !subCategories.includes(p.Sub_Category)) {
-      subCategories.push(p.Sub_Category)
-    }
-  })
-  return subCategories
-}
-
-function resizeImages(width, height) {
-  var currTime = new Date().getTime() - startLoad
-  console.log(currTime + ':entering resizeImages for width -' + width)
-
-  $('#product_grid').css('grid-template-columns', 'repeat(auto-fill, ' + width + 'px)')
-  $('#product_grid img').each(function () {
-    $(this).css('width', width)
-    $(this).css('height', height)
-  })
-}
-
-function renderCategoryButtons(products) {
-  var currTime = new Date().getTime() - startLoad
-  console.log(currTime + ': entering renderCategoryButtons')
-
-  products.forEach((p) => {
-    const cat = getCategory(p.Sub_Category)
-    if (!Category_dict[cat]) {
-      Category_dict[cat] = []
-    }
-    Category_dict[cat].push(p.Sub_Category)
-  })
-
-  $('#category_buttons').html('')
-
-  $('#category_buttons').append(`<div class="category_btn active" data-cat="ALL">All</div>`)
-
-  Object.keys(Category_dict).forEach((cat) => {
-    $('#category_buttons').append(`<div class="category_btn" data-cat="${cat}">${cat.replace('_', ' ').toUpperCase()}</div>`)
-  })
-
-  $('.category_btn').on('click', function () {
-    $('.category_btn').removeClass('active')
-    $(this).addClass('active')
-    var selected_Sub_Categories
-    var selected_Category = [$(this).data('cat')]
-    if (selected_Category[0] == 'ALL') {
-      selected_Sub_Categories = []
-    } else {
-      selected_Sub_Categories = Category_dict[selected_Category[0]]
-    }
-
-    updateFilterAttributes(selected_Sub_Categories, filterAttributes.search)
-    filteredProducts = getFilteredProducts(allProducts, filterAttributes)
-    setFilterPopupOptions(allProducts, filterAttributes)
-    displayProducts(filteredProducts)
-  })
-}
-
-function shuffleArray(array) {
-  newarray = []
-  l = array.length
-  for (let i = 0; i < l; i++) {
-    idx = Math.floor(Math.random() * array.length)
-    newarray.push(array[idx])
-    array.splice(idx, 1)
-  }
-  return newarray
-}
-
-///////////////////////////////////////////////////////////////////
-/////////////////////////Event Handlers///////////////////////////
-///////////////////////////////////////////////////////////////////
-
-function setEventHandlers() {
-  var currTime = new Date().getTime() - startLoad
-  console.log(currTime + ': entering setEventHandlers')
-
-  $(document).on('click', function (event) {
-    if ($('#filter_popup').hasClass('show') && $(event.target)[0].id.split('_')[0] != 'filter') {
-      clickOutsideFilterPopup(event)
-    } else if ($('#sort_popup').hasClass('show') && $(event.target)[0].id.split('_')[0] != 'sort') {
-      clickOutsideSortPopup(event)
-    }
-  })
-
-  content_width = $('#main_content').width()
-  if (content_width < 450) {
-    $('#image_size-medium').on('click', function () {
-      var width = ($('#product_grid').width() - parseInt($('#product_grid').css('column-gap').replace('px', ''))) / 2
-      var height = ($(window).innerHeight() - $('#navbar_section').innerHeight() - $('#title_section').innerHeight() - $('#nav_section').innerHeight() - parseInt($('#product_grid').css('row-gap').replace('px', ''))) / 2
-      resizeImages(width, height)
-    })
-    $('#image_size-large').on('click', function () {
-      var width = $('#product_grid').width()
-      var height = $(window).innerHeight() - $('#navbar_section').innerHeight() - $('#title_section').innerHeight() - $('#nav_section').innerHeight()
-      resizeImages(width, height)
-    })
-  } else {
-    $('#image_size-large').on('click', function () {
-      resizeImages(210, (210 * 4) / 3)
-    })
-    $('#image_size-medium').on('click', function () {
-      resizeImages(150, (150 * 4) / 3)
-    })
-    $('#image_size-small').removeClass('hidden')
-    $('#image_size-small').on('click', function () {
-      resizeImages(90, (90 * 4) / 3)
-    })
-  }
-
-  $('#filter_popup_button').on('click', showFilterPopup)
-  $('#filter_button').on('click', filterFormSubmit)
-  $('#clear_filter_button').on('click', clearFilter)
-  $('#sort_popup_button').on('click', showSortPopup)
-  $('#sort_button').on('click', sortFormSubmit)
-
-  $('#image_size-medium').click()
+async function runApiTests() {
+  console.clear()
+  console.log('========== API TESTS ==========')
+  await testGetProducts()
+  await testCreateOrder()
+  await testGetOrders()
+  console.log('✓ API tests completed')
 }

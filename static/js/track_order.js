@@ -2,7 +2,6 @@ $('#track_order_btn').on('click', fetchOrders)
 
 async function fetchOrders() {
   const orderIds = $('#order_ids').val().trim()
-
   const phone = $('#phone').val().trim()
 
   const response = await fetch('/get-orders/', {
@@ -18,8 +17,12 @@ async function fetchOrders() {
   })
 
   const orders = await response.json()
-
-  renderOrders(orders)
+  console.log(orders)
+  if (orders.status === 'success') {
+    renderOrders(orders.data)
+  } else {
+    $('#track_results').html('Unable to fetch orders. Please try again later.')
+  }
 }
 
 function renderOrders(orders) {
@@ -28,35 +31,58 @@ function renderOrders(orders) {
     return
   }
 
-  let html = ''
+  let html = `
+    <div class="table_container">
+    <table class="track_table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Created</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Products</th>
+                <th>Amount</th>
+                <th>Tracking</th>
+            </tr>
+        </thead>
+        <tbody>`
 
   orders.forEach((order) => {
     html += `
-      <div class="order_card">
-
-        <div class="order_card_row">
-          <div class="order_card_label">Order ID</div>
-          <div>${order.order_id}</div>
-        </div>
-
-        <div class="order_card_row">
-          <div class="order_card_label">Products</div>
-          <div>${order.order_summary}</div>
-        </div>
-
-        <div class="order_card_row">
-          <div class="order_card_label">Amount</div>
-          <div>₹${order.total_amount}</div>
-        </div>
-
-        <div class="order_card_row">
-          <div class="order_card_label">Tracking</div>
-          <div>${order.tracking_id}</div>
-        </div>
-
-      </div>
-    `
+        <tr>
+            <td>${order.order_id}</td>
+            <td>${order.created_at || '-'}</td>
+            <td>${order.customer_name}</td>
+            <td>${order.phone}</td>
+            <td>${order.address}</td>
+            <td>${order.order_summary}</td>
+            <td>₹${order.total_amount}</td>
+            <td>${order.tracking_id || '-'}</td>
+        </tr>`
   })
+
+  html += `
+        </tbody>
+    </table>
+    </div>`
 
   $('#track_results').html(html)
 }
+
+function populateData() {
+  const orderIds = JSON.parse(sessionStorage.getItem('order_IDs') || 'null')
+  const phone = JSON.parse(sessionStorage.getItem('phone_number') || 'null')
+
+  if (orderIds) {
+    $('#order_ids').val(orderIds)
+  } else if (phone) {
+    $('#phone').val(phone)
+  } else {
+    return
+  }
+}
+
+$(document).ready(function () {
+  populateData()
+})

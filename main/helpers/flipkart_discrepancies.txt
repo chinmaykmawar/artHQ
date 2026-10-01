@@ -1,0 +1,3 @@
+  Product ID Field  DB (Expected)  Flipkart (Current)
+JBR30009PiGr Price          199.0               248.0
+ JNK20001Pin Price          100.0               230.0

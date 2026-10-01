@@ -7,7 +7,7 @@ from django.db import transaction
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "main.settings")
 django.setup()
 
-from main.models import Category, SubCategory, Design, Color, Product
+from main.core.models import Category, SubCategory, Design, Color, Product, Marketplace, ProductMarketplace, Order
 
 
 # --------------------------------------------------------------------
@@ -68,6 +68,8 @@ with transaction.atomic():
 
     print("Deleting existing data...")
 
+    Order.objects.all().delete()
+    ProductMarketplace.objects.all().delete()
     Product.objects.all().delete()
     Design.objects.all().delete()
     Color.objects.all().delete()
@@ -105,8 +107,8 @@ with transaction.atomic():
             legacy_design_code=ldc,
         )
     print(f"  {len(Design.objects.all())} Designs imported")
+    
     print("Importing Colors...")
- 
     for _, row in colors_df.iterrows():
 
         color = Color.objects.create(
@@ -115,9 +117,12 @@ with transaction.atomic():
             code=clean(row["Code"]),
         )
     print(f"  {len(Color.objects.all())} Colors imported")
+    
+    website = Marketplace.objects.get(code="WEBSITE")
+    flipkart = Marketplace.objects.get(code="FLIPKART")
+    amazon = Marketplace.objects.get(code="AMAZON")
+    
     print("Importing Products...")
-
-
     for _, row in products_df.iterrows():
         p_id=clean(row["Product_ID"])
         sc=clean(row["Sub_Category"])
@@ -133,16 +138,25 @@ with transaction.atomic():
         else:
             design=Design.objects.get(design_code=clean(f"{int(des_code):05d}"), subcategory_id=sc_obj.id)
 
-        Product.objects.create(
-            design =design,
-            color=Color.objects.get(code=clean(row["Color Code"])),
-            product_id=p_id,
-            legacy_product_id=lp_id,
-            title=clean(row["Title"]),
-            description=clean(row["Description"]),
-            price=row["Price"],
-            is_active=True,
-        )
+        product = Product.objects.create(
+            design=design, 
+            color=Color.objects.get(code=clean(row["Color Code"])), 
+            product_id=p_id, 
+            legacy_product_id=lp_id, 
+            title=clean(row["Title"]), 
+            description=clean(row["Description"]), 
+            inventory=0, 
+            is_active=True
+            )
+        
+        for marketplace in (website, flipkart, amazon):
+            ProductMarketplace.objects.create(
+                product=product, 
+                marketplace=marketplace, 
+                price=row["Price"], 
+                commission=0, 
+                inventory=0, 
+                is_active=True)
        
     print(f"  {len(Product.objects.all())} Products imported")
 

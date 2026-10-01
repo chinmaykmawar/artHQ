@@ -1,0 +1,13 @@
+{
+  "homepage": {
+    "title": "artHQ",
+
+    "navbar": ["Home", "Products", "Our Story", "Contact Us"]
+  },
+
+  "products_page": {
+    "products_per_page": 24,
+
+    "default_sort": "Newest"
+  }
+}

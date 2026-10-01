@@ -26,6 +26,7 @@ $(document).ready(function () {
 $(window).on('load', function (event) {
   startLoad = new Date().getTime()
   console.log(startLoad + ':page loading')
+  content_width = $('#product_grid').width()
   url = window.location.href.split('/')
   product_id = url[url.length - 1]
   getProductData(product_id)
@@ -56,35 +57,36 @@ async function getProductData(product_id) {
 }
 
 async function getProductImages(product_id) {
-  const folder_path = baseURL + 'static/assets/Product_Images/' + product_id + '/'
-
-  const images = await $.ajax(`/get-images/${product_id}/`)
-
-  const content_width = $('#product_grid').width()
+  const res = await $.ajax(`/get-images/${product_id}/`)
+  const images = res.data
 
   $('#product_images').empty()
   $('#carousel_butttons').empty()
+  var img_common_html = '<img src="https://res.cloudinary.com/guixlbdm/image/upload/'
 
+  let imageTsfs = {
+    width: Math.floor(content_width),
+    height: Math.floor((content_width * 4) / 3),
+  }
+  no_of_images = images.length
   images.forEach((file, index) => {
-    const img_html =
-      '<img src="/static/assets/Product_Images/' +
-      product_id +
-      '/' +
-      product_id +
-      '_' +
-      (index + 1) +
-      '.jpg" alt="Product Image">'
-    const slide_html = `<div class="slide">${img_html}</div>`
+    var img_main_format_html = 'c_auto,h_' + imageTsfs.height + ',w_' + imageTsfs.width
+    var img_btn_format_html = 'c_auto,h_' + 66 + ',w_' + 50
+    var img_specific_html = '/' + images[index] + '"></a>'
+    var img_main_html = img_common_html + img_main_format_html + img_specific_html
+    var img_btn_html = img_common_html + img_btn_format_html + img_specific_html
+    const slide_html = '<div class="slide">' + img_main_html + '</div>'
 
     $('#product_images').append(slide_html)
     $('#product_images>div').css('max-width', content_width)
 
-    const btn_html = `<button id="carousel_buttton_${index + 1}"></button>`
+    // const btn_html = '<button id="carousel_buttton_${index + 1}">' + img_btn_html + '</button>'
+    const btn_html = `<button id="carousel_buttton_${index + 1}">` + img_btn_html + `</button>`
     $('#carousel_butttons').append(btn_html)
 
     $(`#carousel_buttton_${index + 1}`).on('click', function (event) {
       event.stopPropagation()
-      productImageButton_click(event.target.id.split('_')[2])
+      productImageButton_click(event.target.parentNode.id.split('_')[2])
     })
   })
 
@@ -190,15 +192,7 @@ function pointerDown(index) {
     $('.slides_flexbox').addClass('grabbing')
     //event.target.setPointerCapture(ptrId)
     currTime = new Date().getTime() - startLoad
-    console.log(
-      currTime +
-        '/pointerDown=> Mouse Start Pos :' +
-        mouseStartPos +
-        ', pointerType:' +
-        event.pointerType +
-        ', timestamp:' +
-        tmstp
-    )
+    console.log(currTime + '/pointerDown=> Mouse Start Pos :' + mouseStartPos + ', pointerType:' + event.pointerType + ', timestamp:' + tmstp)
   }
 }
 
@@ -232,17 +226,7 @@ function pointerUp(event) {
 
   currTime = new Date().getTime() - startLoad
   console.group('🧪 Product Debug')
-  console.log(
-    currTime +
-      '/pointerUp : movedBy :' +
-      movedBy +
-      ', content_width:' +
-      content_width +
-      ', currentIndex:' +
-      currentIndex +
-      ', prevIndex:' +
-      prevIndex
-  )
+  console.log(currTime + '/pointerUp : movedBy :' + movedBy + ', content_width:' + content_width + ', currentIndex:' + currentIndex + ', prevIndex:' + prevIndex)
   console.groupEnd()
 
   setFlexBoxPositionFromIndex()
@@ -274,19 +258,10 @@ function productImageButton_click(index) {
 
 function nextImage() {
   console.log('nextImage Entering')
-  var curr_img,
-    testMouseStartPos,
-    testMouseEndPos,
-    testMouseCurrPos,
-    down_event,
-    up_event,
-    move_event,
-    leave_event
+  var curr_img, testMouseStartPos, testMouseEndPos, testMouseCurrPos, down_event, up_event, move_event, leave_event
   var increment, intervalID, curr_index
 
-  curr_index = -Math.round(
-    parseInt($('.slides_flexbox').css('transform').split(',')[4]) / content_width
-  )
+  curr_index = -Math.round(parseInt($('.slides_flexbox').css('transform').split(',')[4]) / content_width)
 
   if (isNaN(curr_index)) {
     curr_index = 0
@@ -316,20 +291,11 @@ function nextImage() {
 
 function prevImage() {
   console.log('working.......')
-  var curr_img,
-    testMouseStartPos,
-    testMouseEndPos,
-    testMouseCurrPos,
-    down_event,
-    up_event,
-    move_event,
-    leave_event
+  var curr_img, testMouseStartPos, testMouseEndPos, testMouseCurrPos, down_event, up_event, move_event, leave_event
 
   var increment, intervalID, curr_index
 
-  curr_index = -Math.round(
-    parseInt($('.slides_flexbox').css('transform').split(',')[4]) / content_width
-  )
+  curr_index = -Math.round(parseInt($('.slides_flexbox').css('transform').split(',')[4]) / content_width)
 
   if (isNaN(curr_index)) {
     curr_index = 0
@@ -369,18 +335,12 @@ $('#product_details_nav').on('click', 'a', function (event) {
 
     case 'product_details_nav_cat':
       Category_dict = JSON.parse(sessionStorage.getItem('Category_dict'))
-      sessionStorage.setItem(
-        'filterAttributes',
-        JSON.stringify({Sub_Category: Category_dict[this.innerHTML], search: ''})
-      )
+      sessionStorage.setItem('filterAttributes', JSON.stringify({Sub_Category: Category_dict[this.innerHTML], search: ''}))
       window.location.href = products_gridURL
       break
 
     case 'product_details_nav_subCat':
-      sessionStorage.setItem(
-        'filterAttributes',
-        JSON.stringify({Sub_Category: [this.innerHTML], search: ''})
-      )
+      sessionStorage.setItem('filterAttributes', JSON.stringify({Sub_Category: [this.innerHTML], search: ''}))
       window.location.href = '/products'
       break
   }

@@ -1,0 +1,23 @@
+<!--prettier-ignore-->
+{% extends "admin/change_form.html" %}
+<!--prettier-ignore-->
+{% block object-tools-items %}
+<!--prettier-ignore-->
+{% if original %}
+<li>
+  <a href="{{ upload_image_url }}">Upload Product Image</a>
+</li>
+<!--prettier-ignore-->
+{% endif %}
+<!--prettier-ignore-->
+{{ block.super }}
+<!--prettier-ignore-->
+{% endblock %}
+
+<!--prettier-ignore-->
+{% block submit_buttons_bottom %}
+<div class="submit-row">
+  <input type="submit" value="Save Changes" class="default" name="_save" />
+</div>
+<!--prettier-ignore-->
+{% endblock %}

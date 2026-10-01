@@ -1,0 +1,20 @@
+<div class="product-images-container">
+  {{ inline_admin_formset.formset.management_form }} {% for inline_admin_form in inline_admin_formset %}
+  <div class="product-image-card">
+    <div class="product-image-preview">
+      <img src="{{ inline_admin_form.original.secure_url }}" class="product-image" />
+    </div>
+
+    <div class="product-image-order">{{ inline_admin_form.form.display_order }}</div>
+
+    <div class="product-image-marketplaces">{{ inline_admin_form.form.marketplaces }}</div>
+
+    <div class="product-image-delete">
+      {{ inline_admin_form.form.DELETE }}
+      <label for="{{ inline_admin_form.form.DELETE.id_for_label }}">Delete</label>
+    </div>
+
+    {{ inline_admin_form.form.id }}
+  </div>
+  {% endfor %}
+</div>

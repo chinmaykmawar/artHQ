@@ -144,3 +144,43 @@ class OrderManager(ABC):
     @abstractmethod
     def delete_order(self, order_id):
         pass
+
+class UserManager(ABC):
+
+    @abstractmethod
+    def create_user(self,username,password,first_name,last_name,email,):
+        pass
+
+    @abstractmethod
+    def get_user(self, username):
+        pass
+
+    @abstractmethod
+    def get_user_by_id(self, user_id):
+        pass
+
+    @abstractmethod
+    def get_profile(self, user):
+        pass
+
+    @abstractmethod
+    def update_profile(self, user, profile_data):
+        pass
+
+    @abstractmethod
+    def delete_user(self, user):
+        pass
+    
+class ImageDataManager(ABC):
+    @abstractmethod
+    def create_ImageData(self, product,result,display_order, request):
+        pass
+    
+    @abstractmethod
+    def get_ImageID(self, product_id, display_order):
+        pass
+    
+    @abstractmethod
+    def get_all_Images(self, p_id):
+        pass
+    

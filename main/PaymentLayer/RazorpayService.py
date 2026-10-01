@@ -1,11 +1,11 @@
 from asyncio.log import logger
 import json
-from django.http import JsonResponse, HttpResponse
 import razorpay
 import hashlib
 import hmac
 import requests
-from main import settings
+from main.core import settings
+from main.helpers.custom import CustomJsonResponse
 from razorpay.errors import SignatureVerificationError
 
 class RazorpayService:
@@ -27,22 +27,16 @@ class RazorpayService:
         
             logger.info("Razorpay order created successfully.")
 
-            return JsonResponse({
-                'status': 'success',
+            return CustomJsonResponse({
                 'order_id': order['id'],
                 'amount': order['amount'],
-                'key': settings.RAZORPAY_KEY_ID,
-                'error': None
-            })
+                'key': settings.RAZORPAY_KEY_ID
+                },
+            )
 
         except Exception as e:
             logger.error(f"Error creating Razorpay order: {str(e)}")
-            return JsonResponse({
-                'status': 'failed',
-                'order_id': None,
-                'amount': None,
-                'key': None,
-                'error': str(e)})
+            return CustomJsonResponse(None, status="failed", error=str(e))
 
     def verify_payment(self, razorpay_order_id, razorpay_payment_id, razorpay_signature):
         try:

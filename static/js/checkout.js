@@ -24,8 +24,9 @@ function renderCheckout() {
 
     const html = `
       <div class="checkout_item">
-        <img src="/static/assets/Product_Images/${item.Product_ID}/${item.Product_ID}_1.jpg">
-
+      <div class="checkout_item_image_div">
+        <img src="https://res.cloudinary.com/guixlbdm/image/upload/c_auto,h_94,w_70/${item.images[0]}" alt="${item.Title}" />
+      </div>
         <div class="checkout_item_details">
           <div>${item.Title}</div>
           <div>₹${item.Price} x ${item.qty}</div>
@@ -60,6 +61,21 @@ function renderCheckout() {
   $('#delivery_charge').text(deliveryCharge === 0 ? 'FREE' : '₹' + deliveryCharge)
 
   $('#total_price').text('₹' + grandTotal)
+}
+
+function populateCustomerDetails() {
+  const customer = JSON.parse(sessionStorage.getItem('CUSTOMER_DETAILS') || 'null')
+
+  if (!customer) {
+    return
+  }
+
+  $('#name').val(customer.name || '')
+  $('#phone').val(customer.phone || '')
+  $('#email').val(customer.email || '')
+  $('#address').val(customer.address || '')
+  $('#city').val(customer.city || '')
+  $('#pincode').val(customer.pincode || '')
 }
 
 function validateForm() {
@@ -240,14 +256,12 @@ async function createOrder(checkoutData) {
   try {
     const orderRes = await fetch('/create-order/', order)
     console.log('Razorpay Order creation response:', orderRes)
-
-    if (orderRes.ok) {
-      const result = await orderRes.json()
+    const result = await orderRes.json()
+    if (result.status === 'success') {
       console.log('Razorpay Order Data:', result)
-      return result
+      return result.data
     } else {
-      result = {status: 'failed', error: 'Create Order response invalid'}
-      return result
+      return {status: 'failed', error: 'Create Order response invalid : ' + str(result.error)}
     }
   } catch (e) {
     alert(`Unable to contact Server`)
@@ -287,10 +301,12 @@ function get_orderParams(checkoutData) {
 }
 
 async function order_callback(response, checkoutData) {
-  if (!populatePaymentData(response, checkoutData)) {
-    const result = await verifyPayment(checkoutData)
-    showResult(result, checkoutData)
+  const ok = populatePaymentData(response, checkoutData)
+  if (!ok) {
+    return
   }
+  const result = await verifyPayment(checkoutData)
+  showResult(result, checkoutData)
 }
 
 function populatePaymentData(response, checkoutData) {
@@ -302,6 +318,8 @@ function populatePaymentData(response, checkoutData) {
   checkoutData.paymentData.gateway = 'razorpay'
   checkoutData.paymentData.transactionId = response.razorpay_payment_id
   checkoutData.paymentData.verificationToken = response.razorpay_signature
+
+  return true
 }
 
 async function verifyPayment(checkoutData) {
@@ -340,6 +358,7 @@ function showResult(result, checkoutData) {
 
 /* INIT */
 $(document).ready(function () {
+  populateCustomerDetails()
   renderCheckout()
 })
 

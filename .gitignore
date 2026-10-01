@@ -20,4 +20,13 @@ staticfiles/
 .vscode/
 
 #logs
-.log
+*.log
+
+test_output.txt
+.prettierrc
+main\helpers\test.py
+main\helpers\test.ipynb
+
+static/assets/Product_Images/
+static/assets/Product_Images_old/
+static/assets/Product_Images_Optimized/

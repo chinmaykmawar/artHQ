@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 import requests
 
 
-from main import settings
+from main.core import settings
 from .framework import (
     ProductManager,
     CategoryManager,
@@ -12,6 +12,7 @@ from .framework import (
     DesignManager,
     ColorManager,
     OrderManager,
+    UserManager,
 )
 
 import logging
@@ -185,4 +186,24 @@ class GSOrderManager(OrderManager):
         raise NotImplementedError
 
     def delete_order(self, order_id):
+        raise NotImplementedError
+
+class GSUserManager(UserManager):
+
+    def create_user(self,username,password,first_name,last_name,email,):
+        raise NotImplementedError
+
+    def get_user(self, username):
+        raise NotImplementedError
+    
+    def get_user_by_id(self, user_id):
+        raise NotImplementedError   
+    
+    def get_profile(self, user):
+        raise NotImplementedError
+    
+    def update_profile(self, user, profile_data):
+        raise NotImplementedError
+    
+    def delete_user(self, user):
         raise NotImplementedError

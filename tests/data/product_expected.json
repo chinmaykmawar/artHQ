@@ -1,0 +1,47 @@
+{
+  "get_all_products": {
+    "cases": [
+      {
+        "name": "Successful Retrieval",
+        "expected_status": "success",
+        "expected_error": null,
+        "expected_product_count": 57,
+        "required_keys": ["Name", "Price", "Title", "Description", "Product_ID", "Sub_Category", "Base_Color", "Highlight", "Design", "Bar Code", "Sub-Cat Code"],
+        "mandatory_fields": ["Name", "Price", "Title", "Product_ID", "Sub_Category"]
+      },
+      {
+        "name": "Products Not Retrieved",
+        "expected_status": "failed",
+        "expected_data": null,
+        "expected_error": "ANY"
+      }
+    ]
+  },
+
+  "get_product_images": {
+    "cases": [
+      {
+        "name": "Valid Product",
+        "product_id": "JBR30003WhG",
+        "expected_status": "success",
+        "expected_error": null,
+        "expected_images": ["JBR30003WhG_1.jpg", "JBR30003WhG_2.jpg", "JBR30003WhG_3.jpg"]
+      },
+      {
+        "name": "Invalid Product",
+        "product_id": "INVALID_PRODUCT",
+        "expected_status": "failed",
+        "expected_data": null,
+        "expected_error": "Product images not found for product_id: INVALID_PRODUCT"
+      },
+
+      {
+        "name": "Unable To Fetch Images",
+        "product_id": "FORCE_EXCEPTION",
+        "expected_status": "failed",
+        "expected_data": null,
+        "expected_error": "ANY"
+      }
+    ]
+  }
+}

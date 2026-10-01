@@ -47,10 +47,7 @@ function reduceSearchTextBox() {
 
 function searchTextUpdated(searchText) {
   filterAttributes = JSON.parse(sessionStorage.getItem('filterAttributes'))
-  sessionStorage.setItem(
-    'filterAttributes',
-    JSON.stringify({Sub_Category: filterAttributes.Sub_Category, search: searchText})
-  )
+  sessionStorage.setItem('filterAttributes', JSON.stringify({Sub_Category: filterAttributes.Sub_Category, search: searchText}))
   if (searchText === '') {
     reduceSearchTextBox()
   }
@@ -120,4 +117,28 @@ function setNavBarEventHandlers() {
   $('#logo').on('click', function () {
     window.location.href = '/'
   })
+}
+
+async function logout() {
+  if (!confirm('Are you sure you want to logout?')) {
+    return
+  }
+  try {
+    const response = await fetch('/user/logout/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+    })
+
+    const result = await response.json()
+    if (result.status === 'success') {
+      sessionStorage.removeItem('CUSTOMER')
+      sessionStorage.removeItem('CHECKOUT')
+      window.location.href = '/'
+    } else {
+      alert(result.error)
+    }
+  } catch (e) {
+    console.error(e)
+    alert('Unable to contact server.')
+  }
 }

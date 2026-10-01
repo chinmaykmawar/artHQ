@@ -56,17 +56,18 @@
   display: flex;
   width: 100%;
   gap: 20px;
-  height: 30px;
+  /* height: 30px; */
   align-items: flex-end;
   justify-content: center;
+  margin-top: 10px;
 }
 
 #carousel_butttons button.active {
   border: solid hsl(0, 0%, 30%) 1px;
 }
 #carousel_butttons button {
-  height: 11px;
-  width: 11px;
+  /* height: 11px;
+  width: 11px; */
   background-color: hsl(0, 0%, 100%);
   border-radius: 10px;
   border: solid hsl(0, 0%, 70%) 1px;

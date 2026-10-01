@@ -1,25 +1,26 @@
 import os
 from django.conf import settings
-from django.http import JsonResponse, HttpResponse
+from main.helpers.custom import CustomJsonResponse
 from main.helpers.factory import DataFactory
 
-def get_all_products(request):
+def get_all_products(request, all_images):
     pm = DataFactory.get_product_manager()
-    products = pm.get_all_products()
-    return JsonResponse(products, safe=False)
+    try:
+        if all_images=='y':
+            products = pm.get_all_products(True)
+        else:
+            products=pm.get_all_products(False)
+        return CustomJsonResponse(products)
+    except Exception as ex:
+        return CustomJsonResponse(None, status="failed", error=f"Failed to fetch products: {ex}")
 
-def get_product_images(product_id):
-    folder = os.path.join(
-        settings.BASE_DIR,
-        'static/assets/Product_Images',
-        product_id
-    )
-
-    images = []
-
-    if os.path.exists(folder):
-        for file in os.listdir(folder):
-            if file.endswith('.jpg'):
-                images.append(file)
-
-    return JsonResponse(images, safe=False)
+def get_product_images(product_id, marketplace_code="WEBSITE"):
+    pm = DataFactory.get_imageData_manager()
+    try:
+        images=pm.get_all_Images(product_id,marketplace_code)
+        if images:
+            return CustomJsonResponse(images)
+        else:
+            return CustomJsonResponse(None, status="failed", error=f"Product images not found for product_id: {product_id}")
+    except Exception as ex:
+        return CustomJsonResponse(None, status="failed", error=f"Failed to fetch product images: {ex}")

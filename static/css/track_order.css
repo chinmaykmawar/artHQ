@@ -1,6 +1,6 @@
 #track_order_container {
   padding: 20px;
-  max-width: 1200px;
+  max-width: 100%;
   margin: auto;
 }
 
@@ -31,54 +31,49 @@
 }
 
 #track_results {
-  margin-top: 20px;
-  overflow-x: auto;
+  margin-top: 25px;
 }
 
-#track_results table {
+.table_container {
   width: 100%;
+  overflow-x: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.track_table {
+  width: 100%;
+  min-width: 1200px;
   border-collapse: collapse;
-}
-
-#track_results th,
-#track_results td {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#track_results th {
-  background: #f5f5f5;
-}
-
-@media (min-width: 768px) {
-  #track_order_form {
-    flex-direction: row;
-  }
-
-  #track_order_form input {
-    flex: 1;
-  }
-}
-.order_card {
   background: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
-.order_card_row {
-  margin-bottom: 12px;
+.track_table th,
+.track_table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  vertical-align: top;
 }
 
-.order_card_label {
-  font-size: 0.85rem;
+.track_table th {
+  background: #f6f6f6;
   font-weight: 600;
-  color: #666;
-  margin-bottom: 4px;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
 }
 
-.order_card_row:last-child {
-  margin-bottom: 0;
+.track_table td {
+  white-space: nowrap;
+}
+
+.track_table td:nth-child(5),
+.track_table td:nth-child(6) {
+  white-space: normal;
+  min-width: 300px;
+}
+
+.track_table tr:hover {
+  background: #fafafa;
 }

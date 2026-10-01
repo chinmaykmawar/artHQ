@@ -1,0 +1,31 @@
+<!-- prettier-ignore -->
+{% extends "admin/base_site.html" %}
+<!-- prettier-ignore -->
+{% block content %}
+<h1>Upload Product Image</h1>
+
+<h2>{{ product.product_id }} - {{ product.title }}</h2>
+
+<form method="post" action="{% url 'admin:product_upload_image_save' product.id %}" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <div>
+    <label for="image"><strong>Image:</strong></label>
+    <input type="file" name="image" id="image" accept="image/*" required />
+  </div>
+  <br />
+  <div>
+    <strong>Marketplaces:</strong><br />
+    {% for marketplace in marketplaces %}
+    <label>
+      <input type="checkbox" name="marketplaces" value="{{ marketplace.id }}" />
+      {{ marketplace.name }} </label
+    ><br />
+    {% endfor %}
+  </div>
+  <br />
+  <button type="submit" class="default">Upload Product Image</button>
+  <a href="{% url 'admin:core_product_change' product.id %}">Cancel</a>
+</form>
+<!-- prettier-ignore -->
+{% endblock %}
