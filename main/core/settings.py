@@ -172,9 +172,6 @@ DATABASES = {
     }
 }
 
-GS_URL = os.environ["GS_URL"]
-#PSQL_DB_URL = os.environ["PSQL_DB_URL"]
-
 _RAZORPAY_KEY_ID_TEST = os.environ["RAZORPAY_KEY_ID_TEST"]
 _RAZORPAY_SECRET_TEST = os.environ["RAZORPAY_SECRET_TEST"]
 _RAZORPAY_KEY_ID_LIVE = os.environ["RAZORPAY_KEY_ID_LIVE"]
