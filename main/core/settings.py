@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -30,7 +29,7 @@ load_dotenv(PROJECT_DIR + "\.env")
 SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 #ALLOWED_HOSTS = ['192.168.1.13', 'localhost', '127.0.0.1']
 ALLOWED_HOSTS = ['*']
@@ -78,22 +77,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'main.core.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "arthq",
-        "USER": "arthq_user",
-        "PASSWORD": "postgre_arthq123",
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

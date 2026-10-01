@@ -70,8 +70,8 @@ async function getProductImages(product_id) {
   }
   no_of_images = images.length
   images.forEach((file, index) => {
-    var img_main_format_html = 'c_auto,h_' + imageTsfs.height + ',w_' + imageTsfs.width
-    var img_btn_format_html = 'c_auto,h_' + 66 + ',w_' + 50
+    var img_main_format_html = 'c_auto,h_' + imageTsfs.height + ',w_' + imageTsfs.width + '/f_auto/q_auto'
+    var img_btn_format_html = 'c_auto,h_' + 66 + ',w_' + 50 + '/f_auto/q_auto'
     var img_specific_html = '/' + images[index] + '"></a>'
     var img_main_html = img_common_html + img_main_format_html + img_specific_html
     var img_btn_html = img_common_html + img_btn_format_html + img_specific_html

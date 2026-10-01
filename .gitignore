@@ -24,9 +24,15 @@ staticfiles/
 
 test_output.txt
 .prettierrc
-main\helpers\test.py
-main\helpers\test.ipynb
+main/helpers/test.py
+main/helpers/test.ipynb
 
 static/assets/Product_Images/
 static/assets/Product_Images_old/
 static/assets/Product_Images_Optimized/
+
+# Local database dumps
+*.dump
+
+# Local environment backups
+.env.*-backup

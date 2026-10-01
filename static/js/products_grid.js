@@ -18,7 +18,7 @@ let filterAttributes = {
 const port = '8000'
 const currURL = window.location.href
 const baseURL = currURL.replace('/products', '')
-const products_gridURL = baseURL + '/products'
+const products_gridURL = baseURL + 'products'
 
 let startLoad
 
@@ -104,7 +104,7 @@ function displayProducts() {
     var style_html = ' style="flex-direction: column;">'
 
     var a_html = '<a href="' + baseURL + '/product/' + id + '">'
-    var img_format_html = 'c_auto,h_' + imageTsfs.height + ',w_' + imageTsfs.width
+    var img_format_html = 'c_auto,h_' + imageTsfs.height + ',w_' + imageTsfs.width + '/f_auto/q_auto'
     var img_specific_html = '/' + filteredProducts[i].images[0] + '"></a>'
     var img_html = img_common_html + img_format_html + img_specific_html
     var title_html = '<div class="Product_title">' + title + '</div>'

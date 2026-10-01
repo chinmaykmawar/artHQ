@@ -51,7 +51,7 @@ function renderCart() {
     const html = `
       <div class="cart_item">
         <div class="cart_item_image_div">
-          <img src="https://res.cloudinary.com/guixlbdm/image/upload/c_auto,h_94,w_70/${item.images[0]}" alt="${item.Title}" />
+          <img src="https://res.cloudinary.com/guixlbdm/image/upload/c_auto,h_94,w_70/f_auto/q_auto/${item.images[0]}" alt="${item.Title}" />
         </div>
         <div class="cart_item_details">
           <div>${item.Title}</div>
