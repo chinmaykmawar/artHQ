@@ -24,8 +24,8 @@ staticfiles/
 
 test_output.txt
 .prettierrc
-main/helpers/test.py
-main/helpers/test.ipynb
+Website/helpers/test.py
+Website/helpers/test.ipynb
 
 static/assets/Product_Images/
 static/assets/Product_Images_old/
@@ -41,8 +41,8 @@ static/assets/Product_Images_Optimized/
 test_output.txt
 
 # Local helper/test scripts
-main/helpers/Flipkart_test.py
-main/helpers/test_cloudinary.py
+Website/helpers/Flipkart_test.py
+Website/helpers/test_cloudinary.py
 static/js/test.js
 
 # Local archives

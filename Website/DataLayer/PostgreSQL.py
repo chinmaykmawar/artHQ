@@ -10,8 +10,8 @@ from django.db.models import Prefetch
 
 
 from django.contrib.auth.models import User
-from main.core.models import CustomerProfile
-from main.helpers.custom import CustomJsonResponse
+from Website.core.models import CustomerProfile
+from Website.helpers.custom import CustomJsonResponse
 from .framework import UserManager
 
 import logging

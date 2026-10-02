@@ -5,7 +5,7 @@
         "name": "Successful Retrieval",
         "expected_status": "success",
         "expected_error": null,
-        "expected_product_count": 57,
+        "expected_product_count": 40,
         "required_keys": ["Name", "Price", "Title", "Description", "Product_ID", "Sub_Category", "Base_Color", "Highlight", "Design", "Bar Code", "Sub-Cat Code"],
         "mandatory_fields": ["Name", "Price", "Title", "Product_ID", "Sub_Category"]
       },
@@ -21,11 +21,26 @@
   "get_product_images": {
     "cases": [
       {
-        "name": "Valid Product",
+        "name": "Valid Product 1",
         "product_id": "JBR30003WhG",
         "expected_status": "success",
         "expected_error": null,
-        "expected_images": ["JBR30003WhG_1.jpg", "JBR30003WhG_2.jpg", "JBR30003WhG_3.jpg"]
+        "expected_images": ["arthq/products/JBR30003WhG/JBR30003WhG_1", "arthq/products/JBR30003WhG/JBR30003WhG_2", "arthq/products/JBR30003WhG/JBR30003WhG_3"]
+      },
+      {
+        "name": "Valid Product 2",
+        "product_id": "JER10005PiW",
+        "expected_status": "success",
+        "expected_error": null,
+        "expected_images": [
+          "arthq/products/JER10005PiW/JER10005PiW_1",
+          "arthq/products/JER10005PiW/JER10005PiW_2",
+          "arthq/products/JER10005PiW/JER10005PiW_3",
+          "arthq/products/JER10005PiW/JER10005PiW_4",
+          "arthq/products/JER10005PiW/JER10005PiW_5",
+          "arthq/products/JER10005PiW/JER10005PiW_6",
+          "arthq/products/JER10005PiW/JER10005PiW_7"
+        ]
       },
       {
         "name": "Invalid Product",

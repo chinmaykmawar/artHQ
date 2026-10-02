@@ -4,10 +4,10 @@ import django
 import pandas as pd
 from django.db import transaction
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "main.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Website.core.settings")
 django.setup()
 
-from main.core.models import Category, SubCategory, Design, Color, Product, Marketplace, ProductMarketplace, Order
+from Website.core.models import Category, SubCategory, Design, Color, Product, Marketplace, ProductMarketplace, Order
 
 
 # --------------------------------------------------------------------

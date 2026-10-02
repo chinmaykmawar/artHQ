@@ -4,8 +4,8 @@ from asyncio.log import logger
 from django.http import JsonResponse, HttpResponse
 from django.conf import settings
 from django.shortcuts import redirect, render
-from main.helpers.factory import DataFactory
-from main.BusinessLayer import OrderService, ProductService, UserService
+from Website.helpers.factory import DataFactory
+from Website.BusinessLayer import OrderService, ProductService, UserService
 from django.views.decorators.csrf import csrf_exempt
 
 def index(request):

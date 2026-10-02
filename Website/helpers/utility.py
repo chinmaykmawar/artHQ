@@ -9,11 +9,11 @@ sys.path.insert(0, str(BASE_DIR))
 print(BASE_DIR)
 
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE","main.core.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE","Website.core.settings")
 import django
 django.setup()
 
-from main.core.models import ImageData
+from Website.core.models import ImageData
 
 def fix_display_order():
     updated = 0

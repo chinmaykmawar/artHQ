@@ -1,7 +1,7 @@
 import os
 from django.conf import settings
-from main.helpers.custom import CustomJsonResponse
-from main.helpers.factory import DataFactory
+from Website.helpers.custom import CustomJsonResponse
+from Website.helpers.factory import DataFactory
 
 def get_all_products(request, all_images):
     pm = DataFactory.get_product_manager()

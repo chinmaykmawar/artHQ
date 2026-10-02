@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-PROJECT_DIR = os.path.join(BASE_DIR, 'main')
+PROJECT_DIR = os.path.join(BASE_DIR, 'Website')
 LOG_DIR = BASE_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 
@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main.core',
+    'Website.core',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
-ROOT_URLCONF = 'main.core.urls'
+ROOT_URLCONF = 'Website.core.urls'
 
 TEMPLATES = [
     {
@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'main.core.wsgi.application'
+WSGI_APPLICATION = 'Website.core.wsgi.application'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -161,14 +161,41 @@ LOGGING = {
   },
 }
 
+DATABASE_TYPE = "POSTGRESQL"
+DATABASE_DICT = {
+    'local': {
+        'NAME': os.environ['DB_NAME_local'],
+        'USER': os.environ['DB_USER_local'],
+        'PASSWORD': os.environ['DB_PASSWORD_local'],
+        'HOST': os.environ['DB_HOST_local'],
+        'PORT': os.environ['DB_PORT_local']
+    },
+    'dev': {
+        'NAME': os.environ['DB_NAME_dev'],
+        'USER': os.environ['DB_USER_dev'],
+        'PASSWORD': os.environ['DB_PASSWORD_dev'],
+        'HOST': os.environ['DB_HOST_dev'],
+        'PORT': os.environ['DB_PORT_dev']
+    },
+    'prod': {
+        'NAME': os.environ['DB_NAME_prod'],
+        'USER': os.environ['DB_USER_prod'],
+        'PASSWORD': os.environ['DB_PASSWORD_prod'],
+        'HOST': os.environ['DB_HOST_prod'],
+        'PORT': os.environ['DB_PORT_prod']
+    }
+}
+CURRENT_DATABASE = DATABASE_DICT['local']
+PAYMENT_SERVICE = "RAZORPAY"
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ["DB_NAME"],
-        "USER": os.environ["DB_USER"],
-        "PASSWORD": os.environ["DB_PASSWORD"],
-        "HOST": os.environ["DB_HOST"],
-        "PORT": os.environ["DB_PORT"],
+        "NAME": CURRENT_DATABASE["NAME"],
+        "USER": CURRENT_DATABASE["USER"],
+        "PASSWORD": CURRENT_DATABASE["PASSWORD"],
+        "HOST": CURRENT_DATABASE["HOST"],
+        "PORT": CURRENT_DATABASE["PORT"],
     }
 }
 
@@ -176,14 +203,11 @@ _RAZORPAY_KEY_ID_TEST = os.environ["RAZORPAY_KEY_ID_TEST"]
 _RAZORPAY_SECRET_TEST = os.environ["RAZORPAY_SECRET_TEST"]
 _RAZORPAY_KEY_ID_LIVE = os.environ["RAZORPAY_KEY_ID_LIVE"]
 _RAZORPAY_SECRET_LIVE = os.environ["RAZORPAY_SECRET_LIVE"]
-CLOUDINARY_CLOUD_NAME = os.environ["CLOUDINARY_CLOUD_NAME"]
-CLOUDINARY_API_KEY = os.environ["CLOUDINARY_API_KEY"]
-CLOUDINARY_API_SECRET = os.environ["CLOUDINARY_API_SECRET"]
+_CLOUDINARY_CLOUD_NAME = os.environ["CLOUDINARY_CLOUD_NAME"]
+_CLOUDINARY_API_KEY = os.environ["CLOUDINARY_API_KEY"]
+_CLOUDINARY_API_SECRET = os.environ["CLOUDINARY_API_SECRET"]
 
-DATA_BACKEND = "POSTGRESQL"
-PAYMENT_SERVICE = "RAZORPAY"
-
-_LIVE_MODE = False
+_LIVE_MODE = os.environ.get("RAZORPAY_LIVE_MODE", "False")
 if _LIVE_MODE:
     RAZORPAY_KEY_ID = _RAZORPAY_KEY_ID_LIVE
     RAZORPAY_SECRET = _RAZORPAY_SECRET_LIVE

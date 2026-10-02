@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 import requests
 
 
-from main.core import settings
+from Website.core import settings
 from .framework import (
     ProductManager,
     CategoryManager,

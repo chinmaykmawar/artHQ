@@ -1,7 +1,7 @@
 from django.conf import settings
-from main.DataLayer.Cloudinary import CloudinaryImageManager
-from main.PaymentLayer.RazorpayService import RazorpayService
-from main.DataLayer.GoogleSheets import (
+from Website.DataLayer.Cloudinary import CloudinaryImageManager
+from Website.PaymentLayer.RazorpayService import RazorpayService
+from Website.DataLayer.GoogleSheets import (
     GSProductManager,
     GSCategoryManager,
     GSSubCategoryManager,
@@ -11,7 +11,7 @@ from main.DataLayer.GoogleSheets import (
     GSUserManager,
 )
 
-from main.DataLayer.PostgreSQL import (
+from Website.DataLayer.PostgreSQL import (
     PSQLImageDataManager,
     PSQLProductManager,
     PSQLCategoryManager,
@@ -30,7 +30,7 @@ class DataFactory:
         if cls._initialized:
             return
 
-        if settings.DATA_BACKEND == "GOOGLE":
+        if settings.DATABASE_TYPE == "GOOGLE":
             cls._product_manager = GSProductManager()
             cls._category_manager = GSCategoryManager()
             cls._subcategory_manager = GSSubCategoryManager()
@@ -40,7 +40,7 @@ class DataFactory:
             cls._user_manager = GSUserManager()
             cls._imageData_manager = None
         
-        elif settings.DATA_BACKEND == "POSTGRESQL":
+        elif settings.DATABASE_TYPE == "POSTGRESQL":
             cls._product_manager = PSQLProductManager()
             cls._category_manager = PSQLCategoryManager()
             cls._subcategory_manager = PSQLSubCategoryManager()

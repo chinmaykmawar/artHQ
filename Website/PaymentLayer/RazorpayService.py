@@ -4,8 +4,8 @@ import razorpay
 import hashlib
 import hmac
 import requests
-from main.core import settings
-from main.helpers.custom import CustomJsonResponse
+from Website.core import settings
+from Website.helpers.custom import CustomJsonResponse
 from razorpay.errors import SignatureVerificationError
 
 class RazorpayService:

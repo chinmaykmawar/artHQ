@@ -3,10 +3,10 @@ from pathlib import Path
 import pytest
 from unittest.mock import patch
 from django.db import DatabaseError
-from main.BusinessLayer.ProductService import (get_all_products,get_product_images,)
+from Website.BusinessLayer.ProductService import (get_all_products,get_product_images,)
 
 
-DATA_FILE = (Path(__file__).parent.parent/ "data"/ "product_expected.json")
+DATA_FILE = (Path(__file__).parent/ "TestData"/ "product_expected.json")
 
 with open(DATA_FILE, encoding="utf-8") as fp:
     EXPECTED = json.load(fp)
@@ -17,11 +17,11 @@ class TestProductService:
     def test_get_all_products(self,case,rf):
         request = rf.get("/products/")
         if case["name"] == "Products Not Retrieved":
-            with patch("main.DataLayer.PostgreSQL.PSQLProductManager.get_all_products") as mock_get_all_products:
+            with patch("Website.DataLayer.PostgreSQL.PSQLProductManager.get_all_products") as mock_get_all_products:
                 mock_get_all_products.side_effect = DatabaseError("Unable to connect to PostgreSQL")
-                response = get_all_products(request)
+                response = get_all_products(request,False)
         else:
-            response = get_all_products(request)
+            response = get_all_products(request,False)
         
         body = json.loads(response.content)
         product_ids = []
@@ -53,7 +53,7 @@ class TestProductService:
     def test_get_product_images(self,case,rf):
         request = rf.get(f"/products/{case['product_id']}/images/")
         if case["name"] == "Unable To Fetch Images":
-            with patch("main.BusinessLayer.ProductService.get_product_images") as mock_get_product_images:
+            with patch("Website.BusinessLayer.ProductService.get_product_images") as mock_get_product_images:
                 mock_get_product_images.side_effect = DatabaseError("Unable to connect to PostgreSQL")
                 response = get_product_images(case["product_id"])
         else:
@@ -70,8 +70,6 @@ class TestProductService:
                 assert body["error"] is not None
         else:
             assert body["data"] == case["expected_images"]
-            expected = [f'{case["product_id"]}_{i}.jpg'for i in range(1,len(body["data"]) + 1,)]
-            assert body["data"] == expected
         
             
             

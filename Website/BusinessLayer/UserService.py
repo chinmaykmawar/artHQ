@@ -2,8 +2,8 @@ import json
 import logging
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
-from main.helpers.custom import CustomJsonResponse
-from main.helpers.factory import DataFactory
+from Website.helpers.custom import CustomJsonResponse
+from Website.helpers.factory import DataFactory
 
 logger = logging.getLogger(__name__)
 
