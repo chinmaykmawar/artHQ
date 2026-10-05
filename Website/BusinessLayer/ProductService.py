@@ -17,7 +17,7 @@ def get_all_products(request, all_images):
 def get_product_images(product_id, marketplace_code="WEBSITE"):
     pm = DataFactory.get_imageData_manager()
     try:
-        images=pm.get_all_Images(product_id,marketplace_code)
+        images=pm.get_ImageData(product_id,marketplace_code)
         if images:
             return CustomJsonResponse(images)
         else:

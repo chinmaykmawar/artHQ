@@ -346,24 +346,20 @@ class PSQLUserManager(UserManager):
         user.delete()
         
 class PSQLImageDataManager(ImageDataManager):
-    def create_ImageData(self, product,result,display_order, request):
+    def create_ImageData(self, product,result,display_order, marketplaces=None):
         try:
             product_image = ImageData.objects.create(product=product,public_id=result["public_id"],secure_url=result["secure_url"],display_order=display_order)
-            product_image.marketplaces.set(request.POST.getlist("marketplaces"))
+            if marketplaces is not None:
+                product_image.marketplaces.set(marketplaces)
+            else:
+                marketplaces = Marketplace.objects.all()
+                product_image.marketplaces.set(marketplaces)
             return True
         except Exception as e:
             logger.exception("Error creating ImageData")
             return False
     
-    def get_ImageID(self, p_id, display_order):
-        try:
-            id=Product.objects.get(product_id=p_id).id
-            return ImageData.objects.get(product_id=id,display_order=display_order).secure_url
-        except Exception as e:
-            logger.exception(f"Error retreiving public_id for {p_id}, {e}")
-            return False
-        
-    def get_all_Images(self, p_id, marketplace_code="WEBSITE"):
+    def get_ImageData(self, p_id, marketplace_code="WEBSITE"):
             try:
                 if not ProductMarketplace.objects.filter(product__product_id=p_id,marketplace__code=marketplace_code,is_active=True).exists():
                     logger.warning('Product, Marketplace combination is not active')

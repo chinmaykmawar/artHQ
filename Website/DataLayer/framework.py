@@ -181,6 +181,6 @@ class ImageDataManager(ABC):
         pass
     
     @abstractmethod
-    def get_all_Images(self, p_id):
+    def get_ImageData(self, p_id):
         pass
     

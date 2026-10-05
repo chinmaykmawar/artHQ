@@ -6,7 +6,7 @@
 
 <h2>{{ product.product_id }} - {{ product.title }}</h2>
 
-<form method="post" action="{% url 'admin:product_upload_image_save' product.id %}" enctype="multipart/form-data">
+<form method="post" action="{% url 'admin:update_ImageData' product.id %}" enctype="multipart/form-data">
   {% csrf_token %}
 
   <div>

@@ -160,42 +160,18 @@ LOGGING = {
     "level": "DEBUG",
   },
 }
-
-DATABASE_TYPE = "POSTGRESQL"
-DATABASE_DICT = {
-    'local': {
-        'NAME': os.environ['DB_NAME_local'],
-        'USER': os.environ['DB_USER_local'],
-        'PASSWORD': os.environ['DB_PASSWORD_local'],
-        'HOST': os.environ['DB_HOST_local'],
-        'PORT': os.environ['DB_PORT_local']
-    },
-    'dev': {
-        'NAME': os.environ['DB_NAME_dev'],
-        'USER': os.environ['DB_USER_dev'],
-        'PASSWORD': os.environ['DB_PASSWORD_dev'],
-        'HOST': os.environ['DB_HOST_dev'],
-        'PORT': os.environ['DB_PORT_dev']
-    },
-    'prod': {
-        'NAME': os.environ['DB_NAME_prod'],
-        'USER': os.environ['DB_USER_prod'],
-        'PASSWORD': os.environ['DB_PASSWORD_prod'],
-        'HOST': os.environ['DB_HOST_prod'],
-        'PORT': os.environ['DB_PORT_prod']
-    }
-}
-CURRENT_DATABASE = DATABASE_DICT['local']
 PAYMENT_SERVICE = "RAZORPAY"
-
+DATABASE_TYPE = "POSTGRESQL"
+Available_DBs = ["local", "dev", "prod"]
+Current_DB=Available_DBs[0] 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": CURRENT_DATABASE["NAME"],
-        "USER": CURRENT_DATABASE["USER"],
-        "PASSWORD": CURRENT_DATABASE["PASSWORD"],
-        "HOST": CURRENT_DATABASE["HOST"],
-        "PORT": CURRENT_DATABASE["PORT"],
+        "NAME": os.environ[f'DB_NAME_{Current_DB}'],
+        "USER": os.environ[f'DB_USER_{Current_DB}'],
+        "PASSWORD": os.environ[f'DB_PASSWORD_{Current_DB}'],
+        "HOST": os.environ[f'DB_HOST_{Current_DB}'],
+        "PORT": os.environ[f'DB_PORT_{Current_DB}'],
     }
 }
 
