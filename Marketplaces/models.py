@@ -99,6 +99,8 @@ class MarketplaceSubcategoryField(models.Model):
     marketplace_subcategory = models.ForeignKey(MarketplaceSubcategory,on_delete=models.CASCADE,related_name="fields",)
     marketplace_field = models.ForeignKey(MarketplaceField,on_delete=models.PROTECT,related_name="subcategory_configurations",)
     column_order = models.PositiveIntegerField()
+    attribute_path = models.CharField(max_length=500, null=True, blank=True)
+    column_label = models.CharField(max_length=255, null=True, blank=True)
     data_type = models.CharField(max_length=20,choices=DataType.choices,)
     cardinality = models.CharField(max_length=10,choices=Cardinality.choices,default=Cardinality.SINGLE,)
     requirement_type = models.CharField(max_length=20,choices=RequirementType.choices,default=RequirementType.OPTIONAL,)
@@ -112,13 +114,6 @@ class MarketplaceSubcategoryField(models.Model):
     class Meta:
         db_table = "marketplace_subcategory_field"
         constraints = [
-            models.UniqueConstraint(
-                fields=[
-                    "marketplace_subcategory",
-                    "marketplace_field",
-                ],
-                name="unique_marketplace_subcategory_field",
-            ),
             models.UniqueConstraint(
                 fields=[
                     "marketplace_subcategory",
