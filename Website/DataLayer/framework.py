@@ -176,9 +176,9 @@ class ImageDataManager(ABC):
     def create_ImageData(self, product,result,display_order, request):
         pass
     
-    @abstractmethod
-    def get_ImageID(self, product_id, display_order):
-        pass
+    # @abstractmethod
+    # def get_ImageID(self, product_id, display_order):
+    #     pass
     
     @abstractmethod
     def get_ImageData(self, p_id):

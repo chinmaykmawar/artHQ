@@ -9,11 +9,13 @@ from django.urls import path,reverse
 from Website.core.models import Category,SubCategory,Design,Color,Product,Marketplace,ProductMarketplace,ImageData
 from Website.core.views import product
 from Website.helpers.factory import DataFactory,ImageFactory
-from AI.Client import ollamaManager
+
 from .images import ProductImageInline
+from Website.helpers.image_utils import encode_image_to_base64
 import logging
 
 logger=logging.getLogger(__name__)
+testing=False
 
 class MultipleFileField(forms.FileField):
     def clean(self, data, initial=None):
@@ -51,7 +53,6 @@ class InsertProductForm(forms.ModelForm):
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-        self.testing=True
         self.fields["title"].required = False
         self.fields["description"].required = False
         if self.instance and self.instance.pk:
@@ -121,7 +122,7 @@ class InsertProductForm(forms.ModelForm):
 
     def get_next_design_code(self,subcategory):
         if subcategory.category.code=="J":
-            prefixes={"Earrings":"1","Necklace":"2","Bracelets":"3","Jewellery Sets":"4"}
+            prefixes={"Earrings":"1","Necklace":"2","Bracelet":"3","Jewellery Sets":"4"}
             prefix=prefixes.get(subcategory.name)
             if not prefix:
                 raise forms.ValidationError(f"No Design Code rule defined for {subcategory.name}.")
@@ -181,7 +182,7 @@ class InsertProductForm(forms.ModelForm):
     def upload_image(self, image):
         im=ImageFactory.get_image_manager()
         idm=DataFactory.get_imageData_manager()
-        result=im.upload_image(image,self.instance.product_id, test=self.testing)
+        result=im.upload_image(image,self.instance.product_id, test=testing)
         product=self.instance
         next_order=(product.images.order_by("-display_order").values_list("display_order",flat=True).first() or 0)+1
         res=idm.create_ImageData(product,result,next_order,marketplaces=None)
@@ -218,26 +219,71 @@ class InsertProductForm(forms.ModelForm):
             self.instance.design=design
             self.instance.color=color
             self.instance.product_id=self.cleaned_data["_product_id"]
-            if self.testing:
+            if testing:
                 self.instance.product_id = self.instance.product_id+"temp"
 
             self.instance.title = "Generating Title......"
             self.instance.description = "Generating Description......"
+            from AI.Client import ollamaManager
             om = ollamaManager()
-            if om.check_ollama():
-                if self.testing:
+            running, error=om.check_ollama()
+            if running:
+                if testing:
                     self.instance.title = "Test Title"
                     self.instance.description = "Test Description"  
                 else:
-                    generated_data = om.generate_product_content(
-                        details=f"Category: {self.cleaned_data['category'].name}, Subcategory: {subcategory.name}, Design Code: {design_code}, Primary Color: {primary}, Secondary Color: {secondary}, Multicolor: {self.cleaned_data['multicolor']}",
-                        images=self.cleaned_data["product_images"]
-                        )
-                    data = json.loads(generated_data)
-                    self.instance.title = data.get("title", "")
-                    self.instance.description = data.get("description", "")
+                    product_details={'Category': self.cleaned_data['category'].name,
+                                     'Subcategory': subcategory.name, 
+                                     'Design': design_code, 
+                                     'base_color': primary, 
+                                     'highlight_color': secondary, 
+                                     'multicolor': self.cleaned_data['multicolor']}
+                    fields=[{"column_order" : 1,
+                             "data_type": 'TEXT',
+                             "cardinality":'SINGLE',
+                             "requirement_type":'REQUIRED',
+                             "value_type":'AI',
+                             "value":'',
+                             "transformation":'',
+                             "name":'Title',
+                             "description":'A concise, search-friendly product title suitable for an Indian ecommerce marketplace.(3-10 words)',
+                             "valid_values":''},
+                            {"column_order" : 2,
+                             "data_type": 'TEXT',
+                             "cardinality":'SINGLE',
+                             "requirement_type":'REQUIRED',
+                             "value_type":'AI',
+                             "value":'',
+                             "transformation":'',
+                             "name":'Description',
+                             "description":'A detailed product description',
+                             "valid_values":''},
+                            {"column_order" : 3,
+                             "data_type": 'TEXT',
+                             "cardinality":'SINGLE',
+                             "requirement_type":'REQUIRED',
+                             "value_type":'AI',
+                             "value":'',
+                             "transformation":'',
+                             "name":'1 word keywords',
+                             "description":'A list of relevant 1-word search terms, separated by commas, and suitable for an Indian ecommerce marketplace. Minimum 5, Maximum 10',
+                             "valid_values":''},
+                            {"column_order" : 4,
+                             "data_type": 'TEXT',
+                             "cardinality":'SINGLE',
+                             "requirement_type":'REQUIRED',
+                             "value_type":'AI',
+                             "value":'',
+                             "transformation":'',
+                             "name":'2 word keywords',
+                             "description":'A list of relevant 2-word search phrases, separated by commas, and suitable for an Indian ecommerce marketplace. Minimum 2, Maximum 3',
+                             "valid_values":''}]
+                    images = [encode_image_to_base64(image) for image in self.cleaned_data["product_images"]]
+                    generated_data=om.generate_field_values(product_details=product_details, fields=fields, images=images)
+                    self.instance.title = generated_data.get(str([f for f in fields if f['name']=='Title'][0]['column_order']),'')
+                    self.instance.description = generated_data.get(str([f for f in fields if f['name']=='Description'][0]['column_order']),'')
             else:
-                raise forms.ValidationError("Ollama is not available. Please ensure Ollama is installed and running.")
+                raise forms.ValidationError(f"Could not connect to model with error : {error}")
             
             logger.debug(f"Product instance prepared: {self.instance}")
             
@@ -265,10 +311,10 @@ class ProductAdmin(admin.ModelAdmin):
     inlines=[ProductImageInline,ProductMarketplaceInline]
 
     @staticmethod
-    def upload_image(image, product, marketplaces=None):
+    def upload_image(image, product, marketplaces=None, test=False):
         im=ImageFactory.get_image_manager()
         idm=DataFactory.get_imageData_manager()
-        result=im.upload_image(image,product.product_id)
+        result=im.upload_image(image,product.product_id, test=test)
         next_order=(product.images.order_by("-display_order").values_list("display_order",flat=True).first() or 0)+1
         res=idm.create_ImageData(product,result,next_order,marketplaces)
         if not res:
@@ -286,11 +332,18 @@ class ProductAdmin(admin.ModelAdmin):
         return form
     
     def save_related(self, request, form, formsets, change):
-        super().save_related(request, form, formsets, change)
-        for image in form.cleaned_data.get("product_images", []):
-            res=self.upload_image(image)
-            if not res:
-                raise ValueError("could not upload images")
+        try:
+            super().save_related(request, form, formsets, change)
+            product = form.instance
+            for image in form.cleaned_data.get("product_images", []):
+                res=self.upload_image(image, product, test=testing)
+                if not res:
+                    raise ValueError("could not upload images")
+        except Exception:
+            im=ImageFactory.get_image_manager()
+            im.delete_all_product_images(product_id=product.product_id)
+            raise 
+            
     
 ##################  Edit Product  ######################
     

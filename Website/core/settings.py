@@ -164,7 +164,9 @@ LOGGING = {
 PAYMENT_SERVICE = "RAZORPAY"
 DATABASE_TYPE = "POSTGRESQL"
 Available_DBs = ["local", "dev", "prod"]
-Current_DB=Available_DBs[0] 
+Current_DB = os.environ.get("CURRENT_DB", "local")
+if Current_DB not in Available_DBs:
+    raise ValueError(f"Invalid CURRENT_DB: {Current_DB}")
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -184,7 +186,7 @@ _CLOUDINARY_CLOUD_NAME = os.environ["CLOUDINARY_CLOUD_NAME"]
 _CLOUDINARY_API_KEY = os.environ["CLOUDINARY_API_KEY"]
 _CLOUDINARY_API_SECRET = os.environ["CLOUDINARY_API_SECRET"]
 
-_LIVE_MODE = os.environ.get("RAZORPAY_LIVE_MODE", "False")
+_LIVE_MODE = os.environ.get("RAZORPAY_LIVE_MODE", "False").lower() == "true"
 if _LIVE_MODE:
     RAZORPAY_KEY_ID = _RAZORPAY_KEY_ID_LIVE
     RAZORPAY_SECRET = _RAZORPAY_SECRET_LIVE

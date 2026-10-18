@@ -137,7 +137,6 @@ class ImageData(models.Model):
         ordering = ["display_order","id"]
 
 class Order(models.Model):
-
     # Current fields (Mandatory)
     order_date = models.DateTimeField()
     order_id = models.CharField(max_length=50,unique=True,db_index=True,)
