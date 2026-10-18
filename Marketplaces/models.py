@@ -193,21 +193,18 @@ class MarketplaceFieldMapping(models.Model):
     The source can be an ArtHQ Product field, marketplace listing data,
     a constant, calculated value, generated value, etc.
     """
-    class SourceType(models.TextChoices):
-        PRODUCT = "PRODUCT", "Product"
-        PRODUCT_VARIANT = "PRODUCT_VARIANT", "Product Variant"
-        MARKETPLACE_LISTING = "MARKETPLACE_LISTING", "Marketplace Listing"
+    class ValueType(models.TextChoices):
         CONSTANT = "CONSTANT", "Constant"
+        DATABASE = "DATABASE", "Database table, column"
+        IMAGE = "IMAGE", "Image (Cloudinary)"
+        AI = "AI", "AI-generated (Ollama)"
         CALCULATED = "CALCULATED", "Calculated"
-        GENERATED = "GENERATED", "Generated"
-        USER_INPUT = "USER_INPUT", "User Input"
-        SYSTEM = "SYSTEM", "System"
+        BLANK = "BLANK", "Blank"
 
     marketplace_subcategory_field = models.OneToOneField(MarketplaceSubcategoryField,on_delete=models.CASCADE,related_name="mapping",)
-    source_type = models.CharField(max_length=30,choices=SourceType.choices,)
-    source_field = models.CharField(max_length=255,blank=True,)
-    transformation = models.CharField(max_length=100,blank=True,)
-    transformation_config = models.JSONField(default=dict,blank=True,)
+    value_type = models.CharField(max_length=30,choices=ValueType.choices,)
+    value = models.CharField(max_length=255,blank=True,null=True)
+    transformation = models.JSONField(default=dict,blank=True,)
     is_active = models.BooleanField(default=True,)
     created_at = models.DateTimeField(auto_now_add=True,)
     updated_at = models.DateTimeField(auto_now=True,)
@@ -216,10 +213,7 @@ class MarketplaceFieldMapping(models.Model):
         verbose_name = "Marketplace Field Mapping"
         verbose_name_plural = "Marketplace Field Mappings"
     def __str__(self):
-        return (
-            f"{self.marketplace_subcategory_field} -> "
-            f"{self.source_type}:{self.source_field}"
-        )
+        return (f"{self.marketplace_subcategory_field} -> {self.value_type}:{self.value}")
 
 class MarketplaceFieldRule(models.Model):
     """

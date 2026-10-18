@@ -1,0 +1,401 @@
+Excel Row,Amazon Field #,code,Field,Value Type,Value
+2,1,contribution_sku#1.value,SKU,DATABASE,product.product_id
+3,2,product_type#1.value,Product Type,DATABASE,product.product_subcategory
+4,3,::record_action,Listing Action,CONSTANT,Create or Replace (Full Update)
+5,4,parentage_level[marketplace_id=A21TJRUUN4KGV]#1.value,Parentage Level,BLANK,
+6,5,child_parent_sku_relationship[marketplace_id=A21TJRUUN4KGV]#1.parent_sku,Parent SKU,BLANK,
+7,6,variation_theme#1.name,Variation Theme Name,BLANK,
+8,7,item_name[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Item Name,DATABASE,product.title
+9,8,title_differentiation[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Item Highlight,AI,
+10,9,brand[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Brand Name,CONSTANT,ArtHQ
+11,10,amzn1.volt.ca.product_id_type,Product Id Type,CONSTANT,GTIN Exempt
+12,11,amzn1.volt.ca.product_id_value,Product Id,BLANK,
+13,12,recommended_browse_nodes[marketplace_id=A21TJRUUN4KGV]#1.value,Recommended Browse Node #1,CONSTANT,Jewellery > Men > Bracelets & Kadas > Bracelets (15752579031)
+14,13,recommended_browse_nodes[marketplace_id=A21TJRUUN4KGV]#1.value,Recommended Browse Node #2,CONSTANT,Jewellery > Women > Bangles & Bracelets > Bangles (15752575031)
+15,14,recommended_browse_nodes[marketplace_id=A21TJRUUN4KGV]#1.value,Recommended Browse Node #3,CONSTANT,Jewellery > Women > Bangles & Bracelets > Bracelets (15752576031)
+16,15,recommended_browse_nodes[marketplace_id=A21TJRUUN4KGV]#1.value,Recommended Browse Node #4,BLANK,
+17,16,recommended_browse_nodes[marketplace_id=A21TJRUUN4KGV]#1.value,Recommended Browse Node #5,AI,
+18,17,target_audience_keyword[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Target Audience Keyword #1,AI,
+19,18,target_audience_keyword[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Target Audience Keyword #2,AI,
+20,19,target_audience_keyword[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Target Audience Keyword #3,AI,
+21,20,target_audience_keyword[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Target Audience Keyword #4,AI,
+22,21,target_audience_keyword[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Target Audience Keyword #5,AI,
+23,22,target_audience[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Target Audience #1,AI,
+24,23,target_audience[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Target Audience #2,AI,
+25,24,target_audience[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Target Audience #3,AI,
+26,25,target_audience[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Target Audience #4,AI,
+27,26,target_audience[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Target Audience #5,BLANK,
+28,27,manufacturer[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Manufacturer,CONSTANT,ArtHQ
+29,28,model_year[marketplace_id=A21TJRUUN4KGV]#1.value,Model Year,CALCULATED,2026
+30,29,main_product_image_locator[marketplace_id=A21TJRUUN4KGV]#1.media_location,Main Image URL,IMAGE,Cloudinary
+31,30,other_product_image_locator_1[marketplace_id=A21TJRUUN4KGV]#1.media_location,Other Image URL #1,IMAGE,Cloudinary
+32,31,other_product_image_locator_2[marketplace_id=A21TJRUUN4KGV]#1.media_location,Other Image URL #2,IMAGE,Cloudinary
+33,32,other_product_image_locator_3[marketplace_id=A21TJRUUN4KGV]#1.media_location,Other Image URL #3,IMAGE,Cloudinary
+34,33,other_product_image_locator_4[marketplace_id=A21TJRUUN4KGV]#1.media_location,Other Image URL #4,IMAGE,Cloudinary
+35,34,other_product_image_locator_5[marketplace_id=A21TJRUUN4KGV]#1.media_location,Other Image URL #5,IMAGE,Cloudinary
+36,35,other_product_image_locator_6[marketplace_id=A21TJRUUN4KGV]#1.media_location,Other Image URL #6,IMAGE,Cloudinary
+37,36,other_product_image_locator_7[marketplace_id=A21TJRUUN4KGV]#1.media_location,Other Image URL #7,IMAGE,Cloudinary
+38,37,other_product_image_locator_8[marketplace_id=A21TJRUUN4KGV]#1.media_location,Other Image URL #8,BLANK,
+39,38,swatch_product_image_locator[marketplace_id=A21TJRUUN4KGV]#1.media_location,Swatch Image URL,BLANK,
+40,39,product_description[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Product Description,DATABASE,product.description
+41,40,bullet_point[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Bullet Point #1,AI,
+42,41,bullet_point[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Bullet Point #2,AI,
+43,42,bullet_point[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Bullet Point #3,AI,
+44,43,bullet_point[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Bullet Point #4,AI,
+45,44,bullet_point[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Bullet Point #5,AI,
+46,45,generic_keyword[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Generic Keyword,AI,
+47,46,style[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Style,CONSTANT,Bohemian
+48,47,department[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Department Name,CONSTANT,Womens
+49,48,target_gender[marketplace_id=A21TJRUUN4KGV]#1.value,Target Gender,CONSTANT,Female
+50,49,age_range_description[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Age Range Description,CONSTANT,Adult
+51,50,jewelry_material_categorization[marketplace_id=A21TJRUUN4KGV]#1.value,Jewelry Material Categorization,CONSTANT,Fashion
+52,51,material[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Material #1,AI,
+53,52,material[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Material #2,AI,
+54,53,material[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Material #3,AI,
+55,54,fabric_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Fabric Type #1,BLANK,
+56,55,fabric_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Fabric Type #2,BLANK,
+57,56,fabric_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Fabric Type #3,BLANK,
+58,57,fabric_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Fabric Type #4,BLANK,
+59,58,fabric_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Fabric Type #5,BLANK,
+60,59,number_of_items[marketplace_id=A21TJRUUN4KGV]#1.value,Number of Items,CONSTANT,1
+61,60,item_type_name[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Item Type Name,AI,
+62,61,water_resistance_level[marketplace_id=A21TJRUUN4KGV]#1.value,Water Resistance Level,CONSTANT,Waterproof
+63,62,color[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Color,DATABASE,product.base_color
+64,63,size[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Size,CONSTANT,One Size
+65,64,item_diameter[marketplace_id=A21TJRUUN4KGV]#1.decimal_value,Item Diameter Decimal Value,BLANK,
+66,65,item_diameter[marketplace_id=A21TJRUUN4KGV]#1.unit,Item Diameter Unit,BLANK,
+67,66,pendant_description[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Pendant Description,BLANK,
+68,67,metal_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Field 67,BLANK,
+69,68,metal_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Field 68,BLANK,
+70,69,metal_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Field 69,BLANK,
+71,70,metal_stamp[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Field 70,BLANK,
+72,71,metals[marketplace_id=A21TJRUUN4KGV]#1.id,Field 71,BLANK,
+73,72,metals[marketplace_id=A21TJRUUN4KGV]#1.metal_type[language_tag=en_IN].value,Field 72,BLANK,
+74,73,metals[marketplace_id=A21TJRUUN4KGV]#1.metal_stamp[language_tag=en_IN].value,Field 73,BLANK,
+75,74,metals[marketplace_id=A21TJRUUN4KGV]#1.metal_weight.value,Field 74,BLANK,
+76,75,metals[marketplace_id=A21TJRUUN4KGV]#1.metal_weight.unit,Field 75,BLANK,
+77,76,metals[marketplace_id=A21TJRUUN4KGV]#1.id,Field 76,BLANK,
+78,77,metals[marketplace_id=A21TJRUUN4KGV]#1.metal_type[language_tag=en_IN].value,Field 77,BLANK,
+79,78,metals[marketplace_id=A21TJRUUN4KGV]#1.metal_stamp[language_tag=en_IN].value,Field 78,BLANK,
+80,79,metals[marketplace_id=A21TJRUUN4KGV]#1.metal_weight.value,Field 79,BLANK,
+81,80,metals[marketplace_id=A21TJRUUN4KGV]#1.metal_weight.unit,Field 80,BLANK,
+82,81,metals[marketplace_id=A21TJRUUN4KGV]#1.id,Field 81,BLANK,
+83,82,metals[marketplace_id=A21TJRUUN4KGV]#1.metal_type[language_tag=en_IN].value,Field 82,BLANK,
+84,83,metals[marketplace_id=A21TJRUUN4KGV]#1.metal_stamp[language_tag=en_IN].value,Field 83,BLANK,
+85,84,metals[marketplace_id=A21TJRUUN4KGV]#1.metal_weight.value,Field 84,BLANK,
+86,85,metals[marketplace_id=A21TJRUUN4KGV]#1.metal_weight.unit,Field 85,BLANK,
+87,86,gem_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Field 86,BLANK,
+88,87,gem_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Field 87,BLANK,
+89,88,gem_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Field 88,BLANK,
+90,89,setting_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Field 89,BLANK,
+91,90,stones[marketplace_id=A21TJRUUN4KGV]#1.id,Field 90,BLANK,
+92,91,stones[marketplace_id=A21TJRUUN4KGV]#1.type[language_tag=en_IN].value,Field 91,BLANK,
+93,92,stones[marketplace_id=A21TJRUUN4KGV]#1.number_of_stones,Field 92,CONSTANT,0
+94,93,stones[marketplace_id=A21TJRUUN4KGV]#1.creation_method[language_tag=en_IN].value,Field 93,BLANK,
+95,94,stones[marketplace_id=A21TJRUUN4KGV]#1.treatment_method[language_tag=en_IN].value,Field 94,BLANK,
+96,95,stones[marketplace_id=A21TJRUUN4KGV]#1.clarity[language_tag=en_IN].value,Field 95,BLANK,
+97,96,stones[marketplace_id=A21TJRUUN4KGV]#1.color[language_tag=en_IN].value,Field 96,BLANK,
+98,97,stones[marketplace_id=A21TJRUUN4KGV]#1.cut[language_tag=en_IN].value,Field 97,BLANK,
+99,98,stones[marketplace_id=A21TJRUUN4KGV]#1.shape[language_tag=en_IN].value,Field 98,BLANK,
+100,99,stones[marketplace_id=A21TJRUUN4KGV]#1.id,Field 99,BLANK,
+101,100,stones[marketplace_id=A21TJRUUN4KGV]#1.type[language_tag=en_IN].value,Field 100,BLANK,
+102,101,stones[marketplace_id=A21TJRUUN4KGV]#1.number_of_stones,Field 101,CONSTANT,0
+103,102,stones[marketplace_id=A21TJRUUN4KGV]#1.creation_method[language_tag=en_IN].value,Field 102,BLANK,
+104,103,stones[marketplace_id=A21TJRUUN4KGV]#1.treatment_method[language_tag=en_IN].value,Field 103,BLANK,
+105,104,stones[marketplace_id=A21TJRUUN4KGV]#1.clarity[language_tag=en_IN].value,Field 104,BLANK,
+106,105,stones[marketplace_id=A21TJRUUN4KGV]#1.color[language_tag=en_IN].value,Field 105,BLANK,
+107,106,stones[marketplace_id=A21TJRUUN4KGV]#1.cut[language_tag=en_IN].value,Field 106,BLANK,
+108,107,stones[marketplace_id=A21TJRUUN4KGV]#1.shape[language_tag=en_IN].value,Field 107,BLANK,
+109,108,stones[marketplace_id=A21TJRUUN4KGV]#1.id,Field 108,BLANK,
+110,109,stones[marketplace_id=A21TJRUUN4KGV]#1.type[language_tag=en_IN].value,Field 109,BLANK,
+111,110,stones[marketplace_id=A21TJRUUN4KGV]#1.number_of_stones,Field 110,CONSTANT,0
+112,111,stones[marketplace_id=A21TJRUUN4KGV]#1.creation_method[language_tag=en_IN].value,Field 111,BLANK,
+113,112,stones[marketplace_id=A21TJRUUN4KGV]#1.treatment_method[language_tag=en_IN].value,Field 112,BLANK,
+114,113,stones[marketplace_id=A21TJRUUN4KGV]#1.clarity[language_tag=en_IN].value,Field 113,BLANK,
+115,114,stones[marketplace_id=A21TJRUUN4KGV]#1.color[language_tag=en_IN].value,Field 114,BLANK,
+116,115,stones[marketplace_id=A21TJRUUN4KGV]#1.cut[language_tag=en_IN].value,Field 115,BLANK,
+117,116,stones[marketplace_id=A21TJRUUN4KGV]#1.shape[language_tag=en_IN].value,Field 116,BLANK,
+118,117,stone[marketplace_id=A21TJRUUN4KGV]#1.clarity[language_tag=en_IN]#1.value,Field 117,BLANK,
+119,118,stone[marketplace_id=A21TJRUUN4KGV]#1.clarity[language_tag=en_IN]#1.value,Field 118,BLANK,
+120,119,stone[marketplace_id=A21TJRUUN4KGV]#1.clarity[language_tag=en_IN]#1.value,Field 119,BLANK,
+121,120,stone[marketplace_id=A21TJRUUN4KGV]#1.color[language_tag=en_IN]#1.value,Field 120,BLANK,
+122,121,stone[marketplace_id=A21TJRUUN4KGV]#1.color[language_tag=en_IN]#1.value,Field 121,BLANK,
+123,122,stone[marketplace_id=A21TJRUUN4KGV]#1.color[language_tag=en_IN]#1.value,Field 122,BLANK,
+124,123,stone[marketplace_id=A21TJRUUN4KGV]#1.color[language_tag=en_IN]#1.value,Field 123,BLANK,
+125,124,stone[marketplace_id=A21TJRUUN4KGV]#1.color[language_tag=en_IN]#1.value,Field 124,BLANK,
+126,125,stone[marketplace_id=A21TJRUUN4KGV]#1.creation_method[marketplace_id=A21TJRUUN4KGV]#1.value,Field 125,BLANK,
+127,126,stone[marketplace_id=A21TJRUUN4KGV]#1.creation_method[marketplace_id=A21TJRUUN4KGV]#1.value,Field 126,BLANK,
+128,127,stone[marketplace_id=A21TJRUUN4KGV]#1.creation_method[marketplace_id=A21TJRUUN4KGV]#1.value,Field 127,BLANK,
+129,128,stone[marketplace_id=A21TJRUUN4KGV]#1.creation_method[marketplace_id=A21TJRUUN4KGV]#1.value,Field 128,BLANK,
+130,129,stone[marketplace_id=A21TJRUUN4KGV]#1.creation_method[marketplace_id=A21TJRUUN4KGV]#1.value,Field 129,BLANK,
+131,130,stone[marketplace_id=A21TJRUUN4KGV]#1.cut[language_tag=en_IN]#1.value,Field 130,BLANK,
+132,131,stone[marketplace_id=A21TJRUUN4KGV]#1.cut[language_tag=en_IN]#1.value,Field 131,BLANK,
+133,132,stone[marketplace_id=A21TJRUUN4KGV]#1.cut[language_tag=en_IN]#1.value,Field 132,BLANK,
+134,133,stone[marketplace_id=A21TJRUUN4KGV]#1.shape[language_tag=en_IN]#1.value,Field 133,BLANK,
+135,134,stone[marketplace_id=A21TJRUUN4KGV]#1.shape[language_tag=en_IN]#1.value,Field 134,BLANK,
+136,135,stone[marketplace_id=A21TJRUUN4KGV]#1.shape[language_tag=en_IN]#1.value,Field 135,BLANK,
+137,136,stone[marketplace_id=A21TJRUUN4KGV]#1.shape[language_tag=en_IN]#1.value,Field 136,BLANK,
+138,137,stone[marketplace_id=A21TJRUUN4KGV]#1.shape[language_tag=en_IN]#1.value,Field 137,BLANK,
+139,138,stone[marketplace_id=A21TJRUUN4KGV]#1.weight#1.value,Field 138,BLANK,
+140,139,stone[marketplace_id=A21TJRUUN4KGV]#1.weight#1.unit,Field 139,BLANK,
+141,140,total_diamond_weight[marketplace_id=A21TJRUUN4KGV]#1.value,Field 140,BLANK,
+142,141,total_diamond_weight[marketplace_id=A21TJRUUN4KGV]#1.unit,Field 141,BLANK,
+143,142,pearl[marketplace_id=A21TJRUUN4KGV]#1.lustre[language_tag=en_IN]#1.value,Field 142,BLANK,
+144,143,pearl[marketplace_id=A21TJRUUN4KGV]#1.minimum_color[language_tag=en_IN]#1.value,Field 143,BLANK,
+145,144,pearl[marketplace_id=A21TJRUUN4KGV]#1.shape[language_tag=en_IN]#1.value,Field 144,BLANK,
+146,145,pearl[marketplace_id=A21TJRUUN4KGV]#1.stringing_method[language_tag=en_IN]#1.value,Field 145,BLANK,
+147,146,pearl[marketplace_id=A21TJRUUN4KGV]#1.surface_blemishes[language_tag=en_IN]#1.value,Field 146,BLANK,
+148,147,pearl[marketplace_id=A21TJRUUN4KGV]#1.type[language_tag=en_IN]#1.value,Field 147,BLANK,
+149,148,pearl[marketplace_id=A21TJRUUN4KGV]#1.uniformity[language_tag=en_IN]#1.value,Field 148,BLANK,
+150,149,number_of_pearls[marketplace_id=A21TJRUUN4KGV]#1.value,Number of Pearls,CONSTANT,0
+151,150,size_per_pearl[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Pearl Size,BLANK,
+152,151,occasion_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Occasion #1,CONSTANT,Happy Birthday
+153,152,occasion_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Occasion #2,CONSTANT,Mother's Day
+154,153,occasion_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Occasion #3,CONSTANT,Valentines Day
+155,154,occasion_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Occasion #4,CONSTANT,Wedding
+156,155,occasion_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Occasion #5,CONSTANT,Anniversary
+157,156,part_number[marketplace_id=A21TJRUUN4KGV]#1.value,Part Number,BLANK,
+158,157,collection[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Collection Name,CONSTANT,ArtHQ
+159,158,clasp_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Clasp Type,AI,
+160,159,item_shape[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Item Shape,AI,
+161,160,theme[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Theme #1,AI,
+162,161,theme[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Theme #2,AI,
+163,162,theme[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Theme #3,AI,
+164,163,theme[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Theme #4,AI,
+165,164,theme[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Theme #5,AI,
+166,165,initial_character[marketplace_id=A21TJRUUN4KGV]#1.value,Initial Character,BLANK,
+167,166,rtip_manufacturer_contact_information#1.value,Manufacturer Contact Information,CONSTANT,"ArtHQ, C704, ACH, Sec 76 Noida -201304, 8800156300"
+168,167,grade_rating[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Grade Rating,BLANK,
+169,168,orientation[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Orientation,CONSTANT,Forward Facing
+170,169,strands[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Strands,AI,
+171,170,chain_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Chain Type,AI,
+172,171,leather_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Leather Type #1,BLANK,
+173,172,leather_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Leather Type #2,BLANK,
+174,173,leather_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Leather Type #3,BLANK,
+175,174,leather_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Leather Type #4,BLANK,
+176,175,leather_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Leather Type #5,BLANK,
+177,176,unit_count[marketplace_id=A21TJRUUN4KGV]#1.value,Unit Count,BLANK,
+178,177,unit_count[marketplace_id=A21TJRUUN4KGV]#1.type[language_tag=en_IN].value,Unit Count Type,BLANK,
+179,178,product_site_launch_date[marketplace_id=A21TJRUUN4KGV]#1.value,Product Site Launch Date,CALCULATED,10/7/2026
+180,179,sport_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Sport Type #1,BLANK,
+181,180,sport_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Sport Type #2,BLANK,
+182,181,sport_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Sport Type #3,BLANK,
+183,182,sport_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Sport Type #4,BLANK,
+184,183,sport_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Sport Type #5,BLANK,
+185,184,league_name[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,League Name #1,BLANK,
+186,185,league_name[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,League Name #2,BLANK,
+187,186,league_name[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,League Name #3,BLANK,
+188,187,league_name[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,League Name #4,BLANK,
+189,188,league_name[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,League Name #5,BLANK,
+190,189,team_name[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Team Name #1,BLANK,
+191,190,team_name[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Team Name #2,BLANK,
+192,191,athlete[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Athlete,BLANK,
+193,192,hand_orientation[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Hand Orientation,CONSTANT,Ambidextrous
+194,193,chain_length[marketplace_id=A21TJRUUN4KGV]#1.decimal_value,Chain Length Decimal Value,CONSTANT,15
+195,194,chain_length[marketplace_id=A21TJRUUN4KGV]#1.unit,Chain Length Unit,CONSTANT,Centimeters
+196,195,band[marketplace_id=A21TJRUUN4KGV]#1.width#1.value,Band Width,BLANK,
+197,196,band[marketplace_id=A21TJRUUN4KGV]#1.width#1.unit,Band Width Unit,BLANK,
+198,197,external_product_information[marketplace_id=A21TJRUUN4KGV]#1.entity,External Product Information Entity,BLANK,
+199,198,external_product_information[marketplace_id=A21TJRUUN4KGV]#1.value,External Product Information,BLANK,
+200,199,inside[marketplace_id=A21TJRUUN4KGV]#1.diameter#1.decimal_value,Inside Diameter Decimal Value,BLANK,
+201,200,inside[marketplace_id=A21TJRUUN4KGV]#1.diameter#1.unit,Inside Diameter Unit,BLANK,
+202,201,number_of_links[marketplace_id=A21TJRUUN4KGV]#1.value,Number of Links #1,BLANK,
+203,202,number_of_links[marketplace_id=A21TJRUUN4KGV]#1.value,Number of Links #2,BLANK,
+204,203,number_of_links[marketplace_id=A21TJRUUN4KGV]#1.value,Number of Links #3,BLANK,
+205,204,number_of_links[marketplace_id=A21TJRUUN4KGV]#1.value,Number of Links #4,BLANK,
+206,205,number_of_links[marketplace_id=A21TJRUUN4KGV]#1.value,Number of Links #5,BLANK,
+207,206,state_string[marketplace_id=A21TJRUUN4KGV]#1.value,State #1,BLANK,
+208,207,state_string[marketplace_id=A21TJRUUN4KGV]#1.value,State #2,BLANK,
+209,208,state_string[marketplace_id=A21TJRUUN4KGV]#1.value,State #3,BLANK,
+210,209,state_string[marketplace_id=A21TJRUUN4KGV]#1.value,State #4,BLANK,
+211,210,state_string[marketplace_id=A21TJRUUN4KGV]#1.value,State #5,BLANK,
+212,211,item_thickness[marketplace_id=A21TJRUUN4KGV]#1.decimal_value,Item Thickness Decimal Value,CONSTANT,1
+213,212,item_thickness[marketplace_id=A21TJRUUN4KGV]#1.string_value,Item Thickness,CONSTANT,1
+214,213,item_thickness[marketplace_id=A21TJRUUN4KGV]#1.unit,Item Thickness Unit,CONSTANT,Centimetres
+215,214,total_gem_weight[marketplace_id=A21TJRUUN4KGV]#1.value,Total Gem Weight,BLANK,
+216,215,total_gem_weight[marketplace_id=A21TJRUUN4KGV]#1.unit,Total Gem Weight Unit,BLANK,
+217,216,importer_contact_information[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Importer Contact Information #1,BLANK,
+218,217,importer_contact_information[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Importer Contact Information #2,BLANK,
+219,218,importer_contact_information[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Importer Contact Information #3,BLANK,
+220,219,importer_contact_information[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Importer Contact Information #4,BLANK,
+221,220,importer_contact_information[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Importer Contact Information #5,BLANK,
+222,221,packer_contact_information[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Packer Contact Information #1,CONSTANT,"ArtHQ, C704, ACH, Sec 76 Noida -201304, 8800156300"
+223,222,packer_contact_information[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Packer Contact Information #2,CONSTANT,"ArtHQ, C704, ACH, Sec 76 Noida -201304, 8800156300"
+224,223,packer_contact_information[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Packer Contact Information #3,CONSTANT,"ArtHQ, C704, ACH, Sec 76 Noida -201304, 8800156300"
+225,224,packer_contact_information[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Packer Contact Information #4,CONSTANT,"ArtHQ, C704, ACH, Sec 76 Noida -201304, 8800156300"
+226,225,packer_contact_information[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Packer Contact Information #5,CONSTANT,"ArtHQ, C704, ACH, Sec 76 Noida -201304, 8800156300"
+227,226,bracelet_form[marketplace_id=A21TJRUUN4KGV]#1.value,Bracelet Form,AI,
+228,227,item_width[marketplace_id=A21TJRUUN4KGV]#1.value,Item Width,CONSTANT,1
+229,228,item_width[marketplace_id=A21TJRUUN4KGV]#1.unit,Width Unit,CONSTANT,Centimeters
+230,229,item_length[marketplace_id=A21TJRUUN4KGV]#1.value,Item Length End to End,CONSTANT,15
+231,230,item_length[marketplace_id=A21TJRUUN4KGV]#1.unit,Item Length Unit,CONSTANT,Centimeters
+232,231,metal_finish[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Metal Finish,BLANK,
+233,232,accent_color[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Accent Color,AI,
+234,233,packaging_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Packaging Type,CONSTANT,Box
+235,234,number_of_packs[marketplace_id=A21TJRUUN4KGV]#1.value,Number of Packs,CONSTANT,1
+236,235,charm_design[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Charm Design #1,AI,
+237,236,charm_design[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Charm Design #2,AI,
+238,237,charm_design[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Charm Design #3,AI,
+239,238,set_name[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Set Name,CONSTANT,ArtHQ
+240,239,letter_character[marketplace_id=A21TJRUUN4KGV]#1.value,Letter Character,BLANK,
+241,240,gem_birthstone_month[marketplace_id=A21TJRUUN4KGV]#1.value,Gem Birthstone Month,BLANK,
+242,241,hardware_color[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Hardware Color,CONSTANT,Gold
+243,242,birth_month_flower[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Birth Month Flower,BLANK,
+244,243,collection_item[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Collection Item,BLANK,
+245,244,holiday_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Holiday Type #1,CONSTANT,Valentine's Day
+246,245,holiday_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Holiday Type #2,CONSTANT,Mother's Day
+247,246,holiday_type[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Holiday Type #3,BLANK,
+248,247,life_event[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Life Event #1,CONSTANT,Anniversary
+249,248,life_event[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Life Event #2,CONSTANT,Birthday
+250,249,life_event[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Life Event #3,CONSTANT,Honeymoon
+251,250,item_weight[marketplace_id=A21TJRUUN4KGV]#1.value,Item Weight,CONSTANT,50
+252,251,item_weight[marketplace_id=A21TJRUUN4KGV]#1.unit,Item Weight Unit,CONSTANT,Grams
+253,252,skip_offer[marketplace_id=A21TJRUUN4KGV]#1.value,Skip Offer,CONSTANT,No
+254,253,condition_type[marketplace_id=A21TJRUUN4KGV]#1.value,Item Condition,CONSTANT,New
+255,254,condition_note[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Offer Condition Note,CONSTANT,New
+256,255,product_tax_code#1.value,Product Tax Code,CONSTANT,A_GEN_REDUCED
+257,256,merchant_release_date[marketplace_id=A21TJRUUN4KGV]#1.value,Merchant Release Date,BLANK,
+258,257,max_order_quantity[marketplace_id=A21TJRUUN4KGV]#1.value,Maximum Order Quantity,CONSTANT,5
+259,258,gift_options[marketplace_id=A21TJRUUN4KGV]#1.can_be_messaged,Offering Can Be Gift Messaged,CONSTANT,Yes
+260,259,gift_options[marketplace_id=A21TJRUUN4KGV]#1.can_be_wrapped,Is Gift Wrap Available,CONSTANT,Yes
+261,260,main_offer_image_locator[marketplace_id=A21TJRUUN4KGV]#1.media_location,Main Image Location,IMAGE,Cloudinary
+262,261,other_offer_image_locator_1[marketplace_id=A21TJRUUN4KGV]#1.media_location,Other Image Location #1,IMAGE,Cloudinary
+263,262,other_offer_image_locator_2[marketplace_id=A21TJRUUN4KGV]#1.media_location,Other Image Location #2,IMAGE,Cloudinary
+264,263,other_offer_image_locator_3[marketplace_id=A21TJRUUN4KGV]#1.media_location,Other Image Location #3,IMAGE,Cloudinary
+265,264,other_offer_image_locator_4[marketplace_id=A21TJRUUN4KGV]#1.media_location,Other Image Location #4,IMAGE,Cloudinary
+266,265,other_offer_image_locator_5[marketplace_id=A21TJRUUN4KGV]#1.media_location,Other Image Location #5,IMAGE,Cloudinary
+267,266,supplemental_condition_information[marketplace_id=A21TJRUUN4KGV]#1.accessories,Accessories,CONSTANT,Not Included
+268,267,supplemental_condition_information[marketplace_id=A21TJRUUN4KGV]#1.battery_life_percentage,Battery Life Percentage,CONSTANT,No Battery
+269,268,supplemental_condition_information[marketplace_id=A21TJRUUN4KGV]#1.cosmetic,Cosmetic,BLANK,
+270,269,supplemental_condition_information[marketplace_id=A21TJRUUN4KGV]#1.features#1,Features #1,BLANK,
+271,270,supplemental_condition_information[marketplace_id=A21TJRUUN4KGV]#1.features#1,Features #2,BLANK,
+272,271,supplemental_condition_information[marketplace_id=A21TJRUUN4KGV]#1.features#1,Features #3,BLANK,
+273,272,supplemental_condition_information[marketplace_id=A21TJRUUN4KGV]#1.features#1,Features #4,BLANK,
+274,273,supplemental_condition_information[marketplace_id=A21TJRUUN4KGV]#1.features#1,Features #5,BLANK,
+275,274,supplemental_condition_information[marketplace_id=A21TJRUUN4KGV]#1.functional_condition,Functional Condition,CONSTANT,Fully Functional
+276,275,supplemental_condition_information[marketplace_id=A21TJRUUN4KGV]#1.packaging,Packaging,BLANK,
+277,276,supplemental_condition_information[marketplace_id=A21TJRUUN4KGV]#1.renewed_grade,Renewed Grade,BLANK,
+278,277,supplemental_condition_information[marketplace_id=A21TJRUUN4KGV]#1.source_type,Source Type,BLANK,
+279,278,fulfillment_availability#1.fulfillment_channel_code,Fulfillment Channel Code (IN),CONSTANT,Fulfillment by Merchant (Default)
+280,279,fulfillment_availability#1.quantity,Quantity (IN),DATABASE,product.marketplace.inventory
+281,280,fulfillment_availability#1.lead_time_to_ship_max_days,Handling Time (IN),CONSTANT,2
+282,281,fulfillment_availability#1.restock_date,Restock Date (IN),BLANK,
+283,282,fulfillment_availability#1.is_inventory_available,Inventory Always Available,CONSTANT,Enabled
+284,283,AMZ_476670a20f80681c77be106ce7458f3234cb11d9,Your Price INR,DATABASE,product_marketplace.price
+285,284,AMZ_4649bf3e684884ec30b4ee977654bb280bfc3ed6,Maximum Retail Price,CONSTANT,1000
+286,285,AMZ_e41e76c9a1199ebf67ce3cc669382aff336f7c24,Pricing Rule,CONSTANT,Competitive Price Rule by Amazon
+287,286,AMZ_a716ca5fe30f3afc9842c6eda5a28fc4f1a6dba5,Minimum Seller Allowed Price,DATABASE,product_marketplace.price
+288,287,AMZ_be67a81780356460e93aa93bcc4fd2f697a9cf39,Maximum Seller Allowed Price,CONSTANT,1000
+289,288,AMZ_3213b231d34628f23da35d7eed93f1e45eb8f1a2,Sale Price INR,DATABASE,product_marketplace.price
+290,289,AMZ_4c8ba2dcab7f398be0de99d23992966d26547f53,Sale Start Date,BLANK,
+291,290,purchasable_offer[marketplace_id=A21TJRUUN4KGV][audience=ALL]#1.discounted_price#1.schedule#1.end_at,Sale End Date,BLANK,
+292,291,purchasable_offer[marketplace_id=A21TJRUUN4KGV][audience=ALL]#1.start_at.value,Offering Release Date,BLANK,
+293,292,purchasable_offer[marketplace_id=A21TJRUUN4KGV][audience=ALL]#1.end_at.value,Stop Selling Date,BLANK,
+294,293,merchant_shipping_group[marketplace_id=A21TJRUUN4KGV]#1.value,Shipping Template,CONSTANT,Migrated Template
+295,294,item_dimensions[marketplace_id=A21TJRUUN4KGV]#1.length.value,Item Length,CONSTANT,15
+296,295,item_dimensions[marketplace_id=A21TJRUUN4KGV]#1.length.unit,Item Length Unit,CONSTANT,Centimetres
+297,296,item_dimensions[marketplace_id=A21TJRUUN4KGV]#1.width.value,Item Width,CONSTANT,1
+298,297,item_dimensions[marketplace_id=A21TJRUUN4KGV]#1.width.unit,Item Width Unit,CONSTANT,Centimetres
+299,298,item_dimensions[marketplace_id=A21TJRUUN4KGV]#1.height.value,Item Height,CONSTANT,1
+300,299,item_dimensions[marketplace_id=A21TJRUUN4KGV]#1.height.unit,Item Height Unit,CONSTANT,Centimetres
+301,300,item_package_dimensions[marketplace_id=A21TJRUUN4KGV]#1.length.value,Item Package Length,CONSTANT,10
+302,301,item_package_dimensions[marketplace_id=A21TJRUUN4KGV]#1.length.unit,Package Length Unit,CONSTANT,Centimetres
+303,302,item_package_dimensions[marketplace_id=A21TJRUUN4KGV]#1.width.value,Item Package Width,CONSTANT,10
+304,303,item_package_dimensions[marketplace_id=A21TJRUUN4KGV]#1.width.unit,Package Width Unit,CONSTANT,Centimetres
+305,304,item_package_dimensions[marketplace_id=A21TJRUUN4KGV]#1.height.value,Item Package Height,CONSTANT,2
+306,305,item_package_dimensions[marketplace_id=A21TJRUUN4KGV]#1.height.unit,Package Height Unit,CONSTANT,Centimetres
+307,306,item_package_weight[marketplace_id=A21TJRUUN4KGV]#1.value,Package Weight,CONSTANT,250
+308,307,item_package_weight[marketplace_id=A21TJRUUN4KGV]#1.unit,Package Weight Unit,CONSTANT,Grams
+309,308,master_pack_layers_per_pallet_quantity[marketplace_id=A21TJRUUN4KGV]#1.value,Master Pack Layers per Pallet Quantity,CONSTANT,1
+310,309,master_packs_per_layer_quantity[marketplace_id=A21TJRUUN4KGV]#1.value,Master Packs Per Layer Quantity,CONSTANT,1
+311,310,country_of_origin[marketplace_id=A21TJRUUN4KGV]#1.value,Country of Origin,CONSTANT,India
+312,311,batteries_required[marketplace_id=A21TJRUUN4KGV]#1.value,Are batteries required?,CONSTANT,No
+313,312,batteries_included[marketplace_id=A21TJRUUN4KGV]#1.value,Are batteries included?,CONSTANT,No
+314,313,battery[marketplace_id=A21TJRUUN4KGV]#1.cell_composition#1.value,Battery Cell Composition,BLANK,
+315,314,AMZ_f193ae97a0ae922142142c61cdfd5583d8ae6485,Battery Cell Composition Other Than Listed,BLANK,
+316,315,battery[marketplace_id=A21TJRUUN4KGV]#1.iec_code#1.value,Battery IEC Code,BLANK,
+317,316,battery[marketplace_id=A21TJRUUN4KGV]#1.weight#1.value,Battery Weight,BLANK,
+318,317,battery[marketplace_id=A21TJRUUN4KGV]#1.weight#1.unit,Battery Weight Unit,BLANK,
+319,318,num_batteries[marketplace_id=A21TJRUUN4KGV]#1.quantity,Number of Batteries,BLANK,
+320,319,num_batteries[marketplace_id=A21TJRUUN4KGV]#1.type,Battery Type,BLANK,
+321,320,number_of_lithium_metal_cells[marketplace_id=A21TJRUUN4KGV]#1.value,Number of Lithium Metal Cells,BLANK,
+322,321,number_of_lithium_ion_cells[marketplace_id=A21TJRUUN4KGV]#1.value,Number of Lithium-ion Cells,BLANK,
+323,322,lithium_battery[marketplace_id=A21TJRUUN4KGV]#1.energy_content#1.value,Lithium Battery Energy Content,BLANK,
+324,323,lithium_battery[marketplace_id=A21TJRUUN4KGV]#1.energy_content#1.unit,Lithium Battery Energy Content Unit,BLANK,
+325,324,lithium_battery[marketplace_id=A21TJRUUN4KGV]#1.packaging#1.value,Lithium Battery Packaging,BLANK,
+326,325,lithium_battery[marketplace_id=A21TJRUUN4KGV]#1.weight#1.value,Lithium Battery Weight,BLANK,
+327,326,lithium_battery[marketplace_id=A21TJRUUN4KGV]#1.weight#1.unit,Lithium Battery Weight Unit,BLANK,
+328,327,supplier_declared_dg_hz_regulation[marketplace_id=A21TJRUUN4KGV]#1.value,Dangerous Goods Regulations #1,CONSTANT,Not Applicable
+329,328,supplier_declared_dg_hz_regulation[marketplace_id=A21TJRUUN4KGV]#1.value,Dangerous Goods Regulations #2,CONSTANT,Not Applicable
+330,329,supplier_declared_dg_hz_regulation[marketplace_id=A21TJRUUN4KGV]#1.value,Dangerous Goods Regulations #3,CONSTANT,Not Applicable
+331,330,supplier_declared_dg_hz_regulation[marketplace_id=A21TJRUUN4KGV]#1.value,Dangerous Goods Regulations #4,CONSTANT,Not Applicable
+332,331,supplier_declared_dg_hz_regulation[marketplace_id=A21TJRUUN4KGV]#1.value,Dangerous Goods Regulations #5,CONSTANT,Not Applicable
+333,332,ghs[marketplace_id=A21TJRUUN4KGV]#1.classification#1.class,GHS Class #1,BLANK,
+334,333,ghs[marketplace_id=A21TJRUUN4KGV]#1.classification#1.class,GHS Class #2,BLANK,
+335,334,ghs[marketplace_id=A21TJRUUN4KGV]#1.classification#1.class,GHS Class #3,BLANK,
+336,335,ghs[marketplace_id=A21TJRUUN4KGV]#1.classification#1.class,GHS Class #4,BLANK,
+337,336,ghs[marketplace_id=A21TJRUUN4KGV]#1.classification#1.class,GHS Class #5,BLANK,
+338,337,hazmat[marketplace_id=A21TJRUUN4KGV]#1.aspect,Hazmat Aspect,BLANK,
+339,338,hazmat[marketplace_id=A21TJRUUN4KGV]#1.value,Hazmat,BLANK,
+340,339,safety_data_sheet_url[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Safety Data Sheet (SDS or MSDS) URL,BLANK,
+341,340,is_this_product_subject_to_buyer_age_restrictions[marketplace_id=A21TJRUUN4KGV]#1.value,Is This Product Subject To Buyer Age Restrictions,CONSTANT,No
+342,341,regulatory_compliance_certification[marketplace_id=A21TJRUUN4KGV]#1.regulation_type,Compliance Regulation Type,BLANK,
+343,342,regulatory_compliance_certification[marketplace_id=A21TJRUUN4KGV]#1.value,Regulatory Identification,BLANK,
+344,343,regulatory_compliance_certification[marketplace_id=A21TJRUUN4KGV]#1.regulation_type,Compliance Regulation Type #2,BLANK,
+345,344,regulatory_compliance_certification[marketplace_id=A21TJRUUN4KGV]#1.value,Regulatory Identification #2,BLANK,
+346,345,regulatory_compliance_certification[marketplace_id=A21TJRUUN4KGV]#1.regulation_type,Compliance Regulation Type #3,BLANK,
+347,346,regulatory_compliance_certification[marketplace_id=A21TJRUUN4KGV]#1.value,Regulatory Identification #3,BLANK,
+348,347,regulatory_compliance_certification[marketplace_id=A21TJRUUN4KGV]#1.regulation_type,Compliance Regulation Type #4,BLANK,
+349,348,regulatory_compliance_certification[marketplace_id=A21TJRUUN4KGV]#1.value,Regulatory Identification #4,BLANK,
+350,349,regulatory_compliance_certification[marketplace_id=A21TJRUUN4KGV]#1.regulation_type,Compliance Regulation Type #5,BLANK,
+351,350,regulatory_compliance_certification[marketplace_id=A21TJRUUN4KGV]#1.value,Regulatory Identification #5,BLANK,
+352,351,dsa_responsible_party_address[marketplace_id=A21TJRUUN4KGV]#1.value,Responsible Person's Email or Electronic Address,CONSTANT,artheadquaters@gmail.com
+353,352,AMZ_6a1ac09ea62f90dab3185c33857fe935383c8229,Compliance Media Source Location #1,CONSTANT,ArtHQ website
+354,353,AMZ_74b5de363d2db9731a399743468a406dbfa1e8cb,Compliance Media Source Location #2,CONSTANT,ArtHQ website
+355,354,AMZ_bb3e043140b8e73ef6382f6e5823e49bc5f285ac,Compliance Media Source Location #3,CONSTANT,ArtHQ website
+356,355,AMZ_b053a265b2d4891a160cab8eafd6e2aafb6ff242,Compliance Media Source Location #4,CONSTANT,ArtHQ website
+357,356,AMZ_62f51ca7710060f02f29a5bc729541aec6a54a8c,Compliance Media Source Location #5,CONSTANT,ArtHQ website
+358,357,AMZ_07f7cd40ccf60b086020593cc8c67d05dee3f857,Compliance Media Source Location #6,CONSTANT,ArtHQ website
+359,358,AMZ_4e81820801aa47dd5b27511df1f245d6e302c129,Compliance Media Source Location #7,CONSTANT,ArtHQ website
+360,359,AMZ_82e0d62cdcf7e3d0aa87271b29b52e17cc3de57c,Compliance Media Source Location #8,CONSTANT,ArtHQ website
+361,360,AMZ_c300fbefface7bcabc63043633d840d40b140ec4,Compliance Media Source Location #9,CONSTANT,ArtHQ website
+362,361,AMZ_3a5c0b0f1f87229a8a44acb72569f70eff378881,Compliance Media Source Location #10,CONSTANT,ArtHQ website
+363,362,AMZ_8fd9483ebe9f521e8756986553939118adf5f408,Compliance Media Source Location #11,CONSTANT,ArtHQ website
+364,363,AMZ_424ca8be28791ed3b95626343bb0d589a3420d02,Compliance Media Source Location #12,CONSTANT,ArtHQ website
+365,364,AMZ_d1f25f7a5cad40a34caa86dd0181427bf709d8f6,Compliance Media Source Location #13,CONSTANT,ArtHQ website
+366,365,AMZ_af3f1a1570588f9dda75e3a5ca3c6761295a32d7,Compliance Media Source Location #14,CONSTANT,ArtHQ website
+367,366,AMZ_e7d09b79c2155eb109d9e0fad64320da8129e75b,Compliance Media Source Location #15,CONSTANT,ArtHQ website
+368,367,AMZ_bb11391e42cb739f1a2291b4eb17d7e5bf6fb7dc,Compliance Media Source Location #16,CONSTANT,ArtHQ website
+369,368,AMZ_e19bd14fbba6077e664170b3382628b53459e22b,Compliance Media Source Location #17,CONSTANT,ArtHQ website
+370,369,AMZ_02a255fea77c4370933585cce554baf5db14e1dd,Compliance Media Source Location #18,CONSTANT,ArtHQ website
+371,370,AMZ_2c669da24cae74c97a2f82492fd36878b1d6906b,Compliance Media Source Location #19,CONSTANT,ArtHQ website
+372,371,AMZ_7ae2913022bdb951491d3be582ed20821f2663fb,Compliance Media Source Location #20,CONSTANT,ArtHQ website
+373,372,AMZ_c2b71aae2a877a783099c3ebd1a9493941664e08,Compliance Media Source Location #21,CONSTANT,ArtHQ website
+374,373,AMZ_63ab0ecd7ea0ed993286a6da3100362e4a8f0c92,Compliance Media Source Location #22,CONSTANT,ArtHQ website
+375,374,AMZ_705c60535b9885169f069e739a1664f4c8564906,Compliance Media Source Location #23,CONSTANT,ArtHQ website
+376,375,AMZ_a31bda3d4c72211c0c53d4a14254c9da0b366553,Compliance Media Source Location #24,CONSTANT,ArtHQ website
+377,376,AMZ_4aeebc63cf6f6f5a63bc3b2f224c8a1ea515a40b,Compliance Media Source Location #25,CONSTANT,ArtHQ website
+378,377,gpsr_safety_attestation[marketplace_id=A21TJRUUN4KGV]#1.value,Safety Attestation,CONSTANT,No
+379,378,gpsr_manufacturer_reference[marketplace_id=A21TJRUUN4KGV]#1.gpsr_manufacturer_email_address,Manufacturer’s Email or Electronic Address,CONSTANT,artheadquaters@gmail.com
+380,379,has_multiple_battery_powered_components[marketplace_id=A21TJRUUN4KGV]#1.value,Has Multiple Battery Powered Components,CONSTANT,No
+381,380,ships_globally[marketplace_id=A21TJRUUN4KGV]#1.value,Ships Globally,CONSTANT,Yes
+382,381,contains_battery_or_cell[marketplace_id=A21TJRUUN4KGV]#1.value,Contains Battery or Cell,BLANK,
+383,382,battery_contains_free_unabsorbed_liquid[marketplace_id=A21TJRUUN4KGV]#1.value,Battery Contains free Unabsorbed Liquid,BLANK,
+384,383,is_battery_non_spillable[marketplace_id=A21TJRUUN4KGV]#1.value,Is Battery Non Spillable,BLANK,
+385,384,non_lithium_battery_packaging[marketplace_id=A21TJRUUN4KGV]#1.value,Non-Lithium Battery Packaging,BLANK,
+386,385,has_replaceable_battery[marketplace_id=A21TJRUUN4KGV]#1.value,Has Replaceable Battery,BLANK,
+387,386,non_lithium_battery_energy_content[marketplace_id=A21TJRUUN4KGV]#1.value,Non-Lithium Battery Energy Content,BLANK,
+388,387,non_lithium_battery_energy_content[marketplace_id=A21TJRUUN4KGV]#1.unit,Non-Lithium Battery Energy Content Unit,BLANK,
+389,388,has_less_than_30_percent_state_of_charge[marketplace_id=A21TJRUUN4KGV]#1.value,Has Less than 30 Percent State of Charge,BLANK,
+390,389,battery_installation_device_type[marketplace_id=A21TJRUUN4KGV]#1.value,Battery Installation Device Type,BLANK,
+391,390,is_oem_sourced_product[marketplace_id=A21TJRUUN4KGV]#1.value,Is OEM Sourced Product,CONSTANT,No
+392,391,ghs_chemical_h_code[marketplace_id=A21TJRUUN4KGV]#1.value,GHS Chemical H Code #1,BLANK,
+393,392,ghs_chemical_h_code[marketplace_id=A21TJRUUN4KGV]#1.value,GHS Chemical H Code #2,BLANK,
+394,393,ghs_chemical_h_code[marketplace_id=A21TJRUUN4KGV]#1.value,GHS Chemical H Code #3,BLANK,
+395,394,ghs_chemical_h_code[marketplace_id=A21TJRUUN4KGV]#1.value,GHS Chemical H Code #4,BLANK,
+396,395,ghs_chemical_h_code[marketplace_id=A21TJRUUN4KGV]#1.value,GHS Chemical H Code #5,BLANK,
+397,396,base_product_mfg_warranty_period[marketplace_id=A21TJRUUN4KGV]#1.value,Base Product Manufacturer Warranty Period,CONSTANT,0
+398,397,base_product_mfg_warranty_period[marketplace_id=A21TJRUUN4KGV]#1.unit,Base Product Warranty Manufacturer Period Unit,CONSTANT,Years
+399,398,base_product_mfg_warranty_tnc_description[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Base Product Manufacturer Warranty Terms and Conditions,BLANK,
+400,399,steps_to_avail_mfg_warranty_description[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Steps To Avail Warranty,BLANK,
+401,400,warranty_provider_contact_information[marketplace_id=A21TJRUUN4KGV][language_tag=en_IN]#1.value,Warranty Provider Contact Information,CONSTANT,artheadquaters@gmail.com
