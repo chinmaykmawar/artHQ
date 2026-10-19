@@ -78,7 +78,7 @@ class CSVGenerator:
             columns=self.fields.keys()
             )
         self.update_values()
-        self.export_csv('.\output_csv.csv')
+        self.export_csv(r'.\backups\output_csv.csv')
     
     def load_products(self, product_IDs):
             try:
@@ -197,8 +197,11 @@ class CSVGenerator:
         product_images = {}
 
         for product_pk, public_id in image_datas:
-            product_images.setdefault(product_pk, []).append(common_url + transform_url + public_id)
-
+            if public_id.split('_')=='1':
+                product_images.setdefault(product_pk, []).append(common_url + 'e_background_removal' +transform_url + public_id)    
+            else:
+                product_images.setdefault(product_pk, []).append(common_url + transform_url + public_id)
+ 
         self.data.loc[:, image_url_columns] = ""
         self.data.loc[:, image_location_columns] = ""
     
