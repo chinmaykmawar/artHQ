@@ -13,23 +13,13 @@ function createFooterCategoryLinks() {
 
   let html = ''
 
-  $.each(Category_dict, function (category, subCategories) {
-    html +=
-      '<div class="footer_link_group">' +
-      '<span class="footer_link_heading">' +
-      category +
-      ' :</span> '
+  $.each(Category_dict, function (category, subcats) {
+    html += '<div class="footer_link_group">' + '<span class="footer_link_heading">' + category + ' :</span> '
 
-    $.each(subCategories, function (index, subCategory) {
-      html +=
-        '<span class="footer_filter_link" ' +
-        'data-subcategory="' +
-        subCategory +
-        '">' +
-        subCategory +
-        '</span>'
+    $.each(subcats, function (index, subcat) {
+      html += '<span class="footer_filter_link" ' + 'data-subcat="' + subcat + '">' + subcat + '</span>'
 
-      if (index < subCategories.length - 1) {
+      if (index < subcats.length - 1) {
         html += ' | '
       }
     })

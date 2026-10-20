@@ -13,20 +13,20 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class SubCategory(models.Model):
-    category = models.ForeignKey(Category,on_delete=models.PROTECT,related_name="subcategories",)
+class SubCat(models.Model):
+    category = models.ForeignKey(Category,on_delete=models.PROTECT,related_name="subcats",)
 
     name = models.CharField(max_length=100)
     code = models.CharField(max_length=10, db_index=True)
 
     class Meta:
-        db_table = "subcategory"
+        db_table = "subcat"
         ordering = ["category", "name"]
 
         constraints = [
             models.UniqueConstraint(
                 fields=["category", "code"],
-                name="unique_subcategory_per_category",
+                name="unique_subcat_per_category",
             )
         ]
         verbose_name_plural = "Sub Categories"
@@ -35,7 +35,7 @@ class SubCategory(models.Model):
         return f"{self.category.name} - {self.name}"
 
 class Design(models.Model):
-    subcategory = models.ForeignKey(SubCategory,on_delete=models.PROTECT,related_name="designs",)
+    subcat = models.ForeignKey(SubCat,on_delete=models.PROTECT,related_name="designs",)
     search_criteria = models.CharField(max_length=255, blank=True)
     design_code = models.CharField(max_length=5, db_index=True)
     legacy_design_code = models.CharField(max_length=5,null=True,blank=True)
@@ -44,8 +44,8 @@ class Design(models.Model):
         db_table = "design"
         ordering = ["design_code"]
         constraints = [models.UniqueConstraint(
-            fields=["subcategory", "design_code"],
-            name="unique_design_per_subcategory",
+            fields=["subcat", "design_code"],
+            name="unique_design_per_subcat",
             )
         ]
         verbose_name_plural = "Designs"
@@ -76,7 +76,6 @@ class Product(models.Model):
     design = models.ForeignKey(Design,on_delete=models.PROTECT,related_name="products",)
     color = models.ForeignKey(Color,on_delete=models.PROTECT,related_name="products",)
     product_id = models.CharField(max_length=30,unique=True,db_index=True,)
-    legacy_product_id = models.CharField(max_length=30,unique=True,null=True,blank=True,)
     title = models.CharField(max_length=255)
     description = models.TextField()
     inventory = models.PositiveIntegerField(default=0)
@@ -92,23 +91,24 @@ class Product(models.Model):
     def __str__(self):
         return self.product_id
 
-class Marketplace(models.Model):
+class Mktp(models.Model):
     name = models.CharField(max_length=50,unique=True,)
     code = models.CharField(max_length=30,unique=True,)
     is_active = models.BooleanField(default=True,)
 
     class Meta:
-        db_table = "marketplace"
+        db_table = "mktp"
         ordering = ["name"]
 
     def __str__(self):
         return self.name
 
-class ProductMarketplace(models.Model):
-    product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name="marketplace_data",)
-    marketplace = models.ForeignKey(Marketplace,on_delete=models.PROTECT,related_name="product_listings",)
-    marketplace_product_id = models.CharField(max_length=100,blank=True,)
-    marketplace_sku = models.CharField(max_length=100,blank=True,)
+class ProductMktp(models.Model):
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name="mktp_data",)
+    mktp = models.ForeignKey(Mktp,on_delete=models.PROTECT,related_name="product_listings",)
+    mktp_product_id= models.CharField(max_length=100,blank=True,)
+    mktp_listing_id = models.CharField(max_length=100,blank=True,)
+    mktp_sku = models.CharField(max_length=100,blank=True,)
     price = models.DecimalField(max_digits=10,decimal_places=2,)
     commission = models.DecimalField(max_digits=10,decimal_places=2,default=0,)
     inventory = models.PositiveIntegerField(default=0,)
@@ -117,11 +117,11 @@ class ProductMarketplace(models.Model):
     updated_at = models.DateTimeField(auto_now=True,)
     
     class Meta:
-        db_table = "product_marketplace"
-        constraints = [models.UniqueConstraint(fields=["product", "marketplace"],name="unique_product_marketplace",)]
+        db_table = "product_mktp"
+        constraints = [models.UniqueConstraint(fields=["product", "mktp"],name="unique_product_mktp",)]
 
     def __str__(self):
-        return f"{self.product.product_id} - {self.marketplace.code}"
+        return f"{self.product.product_id} - {self.mktp.code}"
     
 class ImageData(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name="images")
@@ -130,7 +130,7 @@ class ImageData(models.Model):
     display_order = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    marketplaces = models.ManyToManyField(Marketplace,related_name="images",blank=True)
+    mktps = models.ManyToManyField(Mktp,related_name="images",blank=True)
 
     class Meta:
         db_table = "product_image"
@@ -151,13 +151,13 @@ class Order(models.Model):
     delivery_charge = models.DecimalField(max_digits=10,decimal_places=2,default=0,)
     total = models.DecimalField(max_digits=10,decimal_places=2,)
     tracking_id = models.CharField(max_length=100,blank=True,)
-    marketplace = models.ForeignKey(Marketplace,on_delete=models.PROTECT,null=True,blank=True,related_name="orders",)
+    mktp = models.ForeignKey(Mktp,on_delete=models.PROTECT,null=True,blank=True,related_name="orders",)
     order_status = models.CharField(max_length=30,blank=True,)
     payment_type = models.CharField(max_length=30,blank=True,)
     dispatch_date = models.DateTimeField(null=True,blank=True,)
     delivery_date = models.DateTimeField(null=True,blank=True,)
     state = models.CharField(max_length=100,blank=True,)
-    marketplace_fee = models.DecimalField(max_digits=10,decimal_places=2,null=True,blank=True,)
+    mktp_fee = models.DecimalField(max_digits=10,decimal_places=2,null=True,blank=True,)
     shipping_charge = models.DecimalField(max_digits=10,decimal_places=2,null=True,blank=True,)
     tax = models.DecimalField(max_digits=10,decimal_places=2,null=True,blank=True,)
     net_amount = models.DecimalField(max_digits=10,decimal_places=2,null=True,blank=True,)

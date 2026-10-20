@@ -1,7 +1,7 @@
 import json
 
-from ..core.models import Product, Order, OrderItem, Marketplace, ProductMarketplace, ImageData
-from .framework import (ProductManager,CategoryManager,SubCategoryManager,DesignManager,ColorManager,OrderManager,ImageDataManager,UserManager)
+from ..core.models import Product, Order, OrderItem, Mktp, ProductMktp, ImageData
+from .framework import (ProductManager,CategoryManager,SubCatManager,DesignManager,ColorManager,OrderManager,ImageDataManager,UserManager)
 
 from decimal import Decimal
 from django.db import transaction, DatabaseError
@@ -22,7 +22,7 @@ class PSQLProductManager(ProductManager):
     
     def get_all_products(self, all_images=False):
         try:
-            website = Marketplace.objects.get(code="WEBSITE")
+            website = Mktp.objects.get(code="WEBSITE")
             if all_images:
                 qs=ImageData.objects.all()
             # elif isinstance(all_images, int):
@@ -32,28 +32,24 @@ class PSQLProductManager(ProductManager):
             else:
                 qs=ImageData.objects.filter(display_order=1)
                 #raise ValueError("image nos not recognized")
-            products = Product.objects.filter(is_active=True).select_related("design__subcategory","color").prefetch_related(Prefetch("marketplace_data",queryset=ProductMarketplace.objects.filter(marketplace=website,is_active=True)),Prefetch("images",queryset=qs))
+            products = Product.objects.filter(is_active=True).select_related("design__subcat","color").prefetch_related(Prefetch("mktp_data",queryset=ProductMktp.objects.filter(mktp=website,is_active=True)),Prefetch("images",queryset=qs))
             products_json = []
             for p in products:
-                marketplace = p.marketplace_data.first()
+                mktp = p.mktp_data.first()
                 images=p.images.all()
-                if p.legacy_product_id is not None:
-                    p_id = p.legacy_product_id
-                else:
-                    p_id = p.product_id
-                logger.debug(f"{len(images)}// pid:{p_id}")
+                logger.debug(f"{len(images)}// pid:{p.product_id}")
                 products_json.append({
                     "Name": p.product_id,
-                    "Price": float(marketplace.price) if marketplace else 0,
+                    "Price": float(mktp.price) if mktp else 0,
                     "Title": p.title,
                     "Description": p.description,
-                    "Product_ID": p_id,
-                    "Sub_Category": p.design.subcategory.name,
+                    "Product_ID": p.product_id,
+                    "Sub_Category": p.design.subcat.name,
                     "Base_Color": p.color.base_color,
                     "Highlight": p.color.highlight,
                     "Design": p.design.design_code,
                     "Bar Code": "",
-                    "Sub-Cat Code": p.design.subcategory.code,
+                    "Sub-Cat Code": p.design.subcat.code,
                     "images": [i.public_id for i in images]
                 })
             logger.info(f"Fetched {len(products_json)} products from PostgreSQL.")
@@ -80,7 +76,7 @@ class PSQLProductManager(ProductManager):
     def filter_products(
         self,
         categories=None,
-        subcategories=None,
+        subcats=None,
         colors=None,
         materials=None,
     ):
@@ -103,21 +99,21 @@ class PSQLCategoryManager(CategoryManager):
     def delete_category(self, category):
         raise NotImplementedError
 
-class PSQLSubCategoryManager(SubCategoryManager):
+class PSQLSubCatManager(SubCatManager):
 
-    def get_all_subcategories(self):
+    def get_all_subcats(self):
         raise NotImplementedError
 
-    def get_subcategory(self, category, subcategory):
+    def get_subcat(self, category, subcat):
         raise NotImplementedError
 
-    def create_subcategory(self, data):
+    def create_subcat(self, data):
         raise NotImplementedError
 
-    def update_subcategory(self, category, subcategory, data):
+    def update_subcat(self, category, subcat, data):
         raise NotImplementedError
 
-    def delete_subcategory(self, category, subcategory):
+    def delete_subcat(self, category, subcat):
         raise NotImplementedError
 
 class PSQLDesignManager(DesignManager):
@@ -346,26 +342,26 @@ class PSQLUserManager(UserManager):
         user.delete()
         
 class PSQLImageDataManager(ImageDataManager):
-    def create_ImageData(self, product,result,display_order, marketplaces=None):
+    def create_ImageData(self, product,result,display_order, mktps=None):
         try:
             product_image = ImageData.objects.create(product=product,public_id=result["public_id"],secure_url=result["secure_url"],display_order=display_order)
-            if marketplaces is not None:
-                product_image.marketplaces.set(marketplaces)
+            if mktps is not None:
+                product_image.mktps.set(mktps)
             else:
-                marketplaces = Marketplace.objects.all()
-                product_image.marketplaces.set(marketplaces)
+                mktps = Mktp.objects.all()
+                product_image.mktps.set(mktps)
             return True
         except Exception as e:
             logger.exception("Error creating ImageData")
             return False
     
-    def get_ImageData(self, p_id, marketplace_code="WEBSITE"):
+    def get_ImageData(self, p_id, mktp_code="WEBSITE"):
             try:
-                if not ProductMarketplace.objects.filter(product__product_id=p_id,marketplace__code=marketplace_code,is_active=True).exists():
-                    logger.warning('Product, Marketplace combination is not active')
+                if not ProductMktp.objects.filter(product__product_id=p_id,mktp__code=mktp_code,is_active=True).exists():
+                    logger.warning('Product, Mktp combination is not active')
                     return False
                 else:
-                    return list(ImageData.objects.filter(product__product_id=p_id, marketplaces__code=marketplace_code).order_by("display_order").values_list("public_id",flat=True))
+                    return list(ImageData.objects.filter(product__product_id=p_id, mktps__code=mktp_code).order_by("display_order").values_list("public_id",flat=True))
             except Exception as e:
-                logger.exception(f"Error retreiving public_id for {p_id} and marketplace {marketplace_code}, {e}")
+                logger.exception(f"Error retreiving public_id for {p_id} and mktp {mktp_code}, {e}")
                 return False

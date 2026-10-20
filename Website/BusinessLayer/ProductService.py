@@ -14,10 +14,10 @@ def get_all_products(request, all_images):
     except Exception as ex:
         return CustomJsonResponse(None, status="failed", error=f"Failed to fetch products: {ex}")
 
-def get_product_images(product_id, marketplace_code="WEBSITE"):
+def get_product_images(product_id, mktp_code="WEBSITE"):
     pm = DataFactory.get_imageData_manager()
     try:
-        images=pm.get_ImageData(product_id,marketplace_code)
+        images=pm.get_ImageData(product_id,mktp_code)
         if images:
             return CustomJsonResponse(images)
         else:

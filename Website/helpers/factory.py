@@ -4,7 +4,7 @@ from Website.PaymentLayer.RazorpayService import RazorpayService
 from Website.DataLayer.GoogleSheets import (
     GSProductManager,
     GSCategoryManager,
-    GSSubCategoryManager,
+    GSSubCatManager,
     GSDesignManager,
     GSColorManager,
     GSOrderManager,
@@ -15,7 +15,7 @@ from Website.DataLayer.PostgreSQL import (
     PSQLImageDataManager,
     PSQLProductManager,
     PSQLCategoryManager,
-    PSQLSubCategoryManager,
+    PSQLSubCatManager,
     PSQLDesignManager,
     PSQLColorManager,
     PSQLOrderManager,
@@ -33,7 +33,7 @@ class DataFactory:
         if settings.DATABASE_TYPE == "GOOGLE":
             cls._product_manager = GSProductManager()
             cls._category_manager = GSCategoryManager()
-            cls._subcategory_manager = GSSubCategoryManager()
+            cls._subcat_manager = GSSubCatManager()
             cls._design_manager = GSDesignManager()
             cls._color_manager = GSColorManager()
             cls._order_manager = GSOrderManager()
@@ -43,7 +43,7 @@ class DataFactory:
         elif settings.DATABASE_TYPE == "POSTGRESQL":
             cls._product_manager = PSQLProductManager()
             cls._category_manager = PSQLCategoryManager()
-            cls._subcategory_manager = PSQLSubCategoryManager()
+            cls._subcat_manager = PSQLSubCatManager()
             cls._design_manager = PSQLDesignManager()
             cls._color_manager = PSQLColorManager()
             cls._order_manager = PSQLOrderManager()
@@ -66,9 +66,9 @@ class DataFactory:
         return cls._category_manager
 
     @classmethod
-    def get_subcategory_manager(cls):
+    def get_subcat_manager(cls):
         cls.initialize()
-        return cls._subcategory_manager
+        return cls._subcat_manager
 
     @classmethod
     def get_design_manager(cls):

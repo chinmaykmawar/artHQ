@@ -136,12 +136,12 @@ function filterFormSubmit() {
   })
 
   $('#product_grid').html('Loading...')
-  updateFilterSubCategories(selected_Categories)
+  updateFilterSubCats(selected_Categories)
 }
 
-function updateFilterSubCategories(subCategories) {
-  if (Array.isArray(subCategories)) {
-    filterAttributes.Sub_Category = subCategories
+function updateFilterSubCats(subcats) {
+  if (Array.isArray(subcats)) {
+    filterAttributes.Sub_Category = subcats
   }
   sessionStorage.setItem('filterAttributes', JSON.stringify(filterAttributes))
   console.log('Sub_Category filter: ' + filterAttributes.Sub_Category)
@@ -174,7 +174,7 @@ function clearFilter() {
   var currTime = new Date().getTime() - startLoad
   console.log(currTime + ': entering clearFilter')
 
-  updateFilterSubCategories([...new Set(allProducts.map((product) => product.Sub_Category))])
+  updateFilterSubCats([...new Set(allProducts.map((product) => product.Sub_Category))])
 }
 
 function clickOutsideFilterPopup(event) {
@@ -184,8 +184,8 @@ function clickOutsideFilterPopup(event) {
   })
 
   if (filterAttributes.Sub_Category.length > 0) {
-    filterAttributes.Sub_Category.forEach(function (subCategory) {
-      $('#filter_checkbox_' + subCategory).prop('checked', true)
+    filterAttributes.Sub_Category.forEach(function (subcat) {
+      $('#filter_checkbox_' + subcat).prop('checked', true)
     })
   }
 
@@ -226,9 +226,9 @@ function setFilteredProducts() {
 }
 
 function setFilterPopupOptions() {
-  var subCategories = [...new Set(allProducts.map((product) => product.Sub_Category))]
+  var subcats = [...new Set(allProducts.map((product) => product.Sub_Category))]
   filter_options_html = ''
-  $.each(subCategories, function () {
+  $.each(subcats, function () {
     filter_options_html += '<div class="dropdown-item">\n'
     filter_options_html += '  <input class="" type="checkbox" id="filter_checkbox_' + this + '" />\n'
     filter_options_html += '  <label class="" for="filter_checkbox_' + this + '" id="filter_label_' + this + '">' + this + '</label>\n'
@@ -237,8 +237,8 @@ function setFilterPopupOptions() {
   $('#filter_options_div').html(filter_options_html)
   if (filterAttributes.Sub_Category != null) {
     if (filterAttributes.Sub_Category.length > 0) {
-      filterAttributes.Sub_Category.forEach(function (subCategory) {
-        $('#filter_checkbox_' + subCategory).prop('checked', true)
+      filterAttributes.Sub_Category.forEach(function (subcat) {
+        $('#filter_checkbox_' + subcat).prop('checked', true)
       })
     }
   }
@@ -332,11 +332,11 @@ function sortByPrice(a, b) {
 /////////////////////////Helper and UI Functions///////////////////
 ///////////////////////////////////////////////////////////////////
 
-function getCategory(subCategory) {
+function getCategory(subcat) {
   var category = null
 
   $.each(Category_dict, function (key, values) {
-    if (values.includes(subCategory)) {
+    if (values.includes(subcat)) {
       category = key
       return false // break $.each()
     }
@@ -344,14 +344,14 @@ function getCategory(subCategory) {
   return category
 }
 
-function getSubCategories(cat) {
-  var subCategories = []
+function getSubCats(cat) {
+  var subcats = []
   allProducts.forEach((p) => {
-    if (getCategory(p.Sub_Category) == cat && !subCategories.includes(p.Sub_Category)) {
-      subCategories.push(p.Sub_Category)
+    if (getCategory(p.Sub_Category) == cat && !subcats.includes(p.Sub_Category)) {
+      subcats.push(p.Sub_Category)
     }
   })
-  return subCategories
+  return subcats
 }
 
 function renderCategoryButtons() {
@@ -375,9 +375,9 @@ function renderCategoryButtons() {
     if (selected_Category[0] == 'ALL') {
       selected_Sub_Categories = null
     } else {
-      selected_Sub_Categories = getSubCategories(selected_Category[0])
+      selected_Sub_Categories = getSubCats(selected_Category[0])
     }
-    updateFilterSubCategories(selected_Sub_Categories)
+    updateFilterSubCats(selected_Sub_Categories)
   })
 }
 

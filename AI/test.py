@@ -3,7 +3,7 @@ import time
 
 details={
     "category":"Jewellery",
-    "subcategory":"Bracelets",
+    "subcat":"Bracelets",
     "primary_color":"Blue",
     "secondary_color":"Green",
     "design_code":"30001"

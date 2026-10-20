@@ -1,5 +1,5 @@
-from Website.core.models import Product,Marketplace,SubCategory, ProductMarketplace, ImageData
-from Marketplaces.models import MarketplaceSubcategory, MarketplaceSubcategoryField,MarketplaceFieldMapping, ValidValue
+from Website.core.models import Product,Mktp,SubCat, ProductMktp, ImageData
+from Mktps.models import MktpSubCat, MktpSubCatField,MktpFieldMapping, ValidValue
 from AI.Client import ollamaManager
 import base64
 import logging
@@ -13,11 +13,11 @@ from Website.helpers.image_utils import encode_image_to_base64
 logger=logging.getLogger("__name__")    
 
 class CSVGenerator:
-    def __init__(self, marketplace_code, subcategory_name):
+    def __init__(self, mktp_code, subcat_name):
         # Identifiers supplied by the caller
-        self.marketplace = Marketplace.objects.get(code=marketplace_code)
-        self.subcategory = SubCategory.objects.get(name=subcategory_name)
-        self.marketplace_subCategory= MarketplaceSubcategory.objects.get(marketplace=self.marketplace, subcategory=self.subcategory)
+        self.mktp = Mktp.objects.get(code=mktp_code)
+        self.subcat = SubCat.objects.get(name=subcat_name)
+        self.mktp_subcat= MktpSubCat.objects.get(mktp=self.mktp, subcat=self.subcat)
         self.fields = {}
         start=time.perf_counter()
         self.load_fields_and_mappings()
@@ -28,25 +28,25 @@ class CSVGenerator:
 
     def load_fields_and_mappings(self):
         fields = list(
-            MarketplaceSubcategoryField.objects
-            .filter(marketplace_subcategory=self.marketplace_subCategory)
-            .select_related("marketplace_field", "mapping")
+            MktpSubCatField.objects
+            .filter(mktp_subcat=self.mktp_subcat)
+            .select_related("mktp_field", "mapping")
             .prefetch_related(Prefetch(
-                "marketplace_field__valid_values",
+                "mktp_field__valid_values",
                 queryset=ValidValue.objects.order_by("id"),
                 to_attr="validValues",
                 )
             ).order_by("column_order")
         )
         if not fields:
-            logger.debug(f"No fields configured for {self.marketplace_subCategory} ")
-            raise ValueError(f"No fields configured for the MarketplaceSubcatgory")
+            logger.debug(f"No fields configured for {self.mktp_subcat} ")
+            raise ValueError(f"No fields configured for the MktpSubcatgory")
 
         # Every physical field must have exactly one mapping.
         for field in fields:
             try:
                 mapping = field.mapping
-            except MarketplaceFieldMapping.DoesNotExist:
+            except MktpFieldMapping.DoesNotExist:
                 logger.debug(f"Missing mapping for {field} ")
                 raise ValueError(f"Missing mapping for field ")
             if field.is_active and mapping.is_active:
@@ -57,9 +57,9 @@ class CSVGenerator:
                     "value_type":mapping.value_type,
                     "value":mapping.value,
                     "transformation":mapping.transformation,
-                    "name":field.marketplace_field.name,
-                    "description":field.marketplace_field.description,
-                    "valid_values":[v.value for v in field.marketplace_field.validValues]
+                    "name":field.mktp_field.name,
+                    "description":field.mktp_field.description,
+                    "valid_values":[v.value for v in field.mktp_field.validValues]
                 }
 
         # Ensure the configured physical columns are in sequence.
@@ -68,7 +68,7 @@ class CSVGenerator:
         if actual_order != list(range(1, len(fields) + 1)):
             logger.debug(f"Order : {actual_order}")
             raise ValueError("Invalid column_order sequence.")
-        logger.info(f"Loaded {len(self.fields)} fields mappings for {self.marketplace_subCategory}")
+        logger.info(f"Loaded {len(self.fields)} fields mappings for {self.mktp_subcat}")
         print(f"Loaded {len(self.fields)} fields and mappings")
 
     def create_csv(self,product_IDs):
@@ -77,7 +77,7 @@ class CSVGenerator:
             index=[product.id for product in self.products],
             columns=self.fields.keys()
             )
-        self.update_values()
+        self.update_values() 
         self.export_csv(r'.\backups\output_csv.csv')
     
     def load_products(self, product_IDs):
@@ -88,31 +88,31 @@ class CSVGenerator:
     
     def update_values(self):
         columns={}
-        for type in MarketplaceFieldMapping.ValueType:
+        for type in MktpFieldMapping.ValueType:
             columns[type]=[]
                 
         for column_order,field in self.fields.items():
             columns[field['value_type']].append(column_order)
         start=time.perf_counter()
-        if not self.resolve_constant(columns[MarketplaceFieldMapping.ValueType.CONSTANT]):
+        if not self.resolve_constant(columns[MktpFieldMapping.ValueType.CONSTANT]):
             logger.warning('Failed to resolve constants')
             raise ValueError()
         end=time.perf_counter()
         print(f'resolve_constant took {end-start}')
         start=end
-        if not self.resolve_database(columns[MarketplaceFieldMapping.ValueType.DATABASE]):
+        if not self.resolve_database(columns[MktpFieldMapping.ValueType.DATABASE]):
             logger.warning('Failed to resolve database colums')
             raise ValueError()
         end=time.perf_counter()
         print(f'resolve_database took {end-start}')
         start=end
-        if not self.resolve_image(columns[MarketplaceFieldMapping.ValueType.IMAGE]):
+        if not self.resolve_image(columns[MktpFieldMapping.ValueType.IMAGE]):
             logger.warning('Failed to resolve image colums')
             raise ValueError()
         end=time.perf_counter()
         print(f'resolve_image took {end-start}')
         start=end
-        if not self.resolve_ai(columns[MarketplaceFieldMapping.ValueType.AI]):
+        if not self.resolve_ai(columns[MktpFieldMapping.ValueType.AI]):
             logger.warning('Failed to resolve ai columns')
             raise ValueError()
         end=time.perf_counter()
@@ -120,13 +120,13 @@ class CSVGenerator:
                 f.write(f"resolve_ai took {end-start}\n")
         print(f'resolve_ai took {end-start}')
         start=end
-        if not self.resolve_calculated(columns[MarketplaceFieldMapping.ValueType.CALCULATED]):
+        if not self.resolve_calculated(columns[MktpFieldMapping.ValueType.CALCULATED]):
             logger.warning('Failed to resolve calculated colums')
             raise ValueError()
         end=time.perf_counter()
         print(f'resolve_calculated took {end-start}')
         start=end
-        if not self.resolve_blank(columns[MarketplaceFieldMapping.ValueType.BLANK]):
+        if not self.resolve_blank(columns[MktpFieldMapping.ValueType.BLANK]):
             logger.warning('Failed to resolve blank columns')
             raise ValueError()
         end=time.perf_counter()
@@ -154,10 +154,10 @@ class CSVGenerator:
                     for attribute in path:
                         value = getattr(value, attribute)
                     self.data.loc[product.id, column] = ("" if value is None else value)
-            elif path[0]=="product_marketplace":
+            elif path[0]=="product_mktp":
                 path = path[1:]
                 related_fields = path[:-1]
-                queryset = ProductMarketplace.objects.filter(product_id__in=product_pks,marketplace=self.marketplace_subCategory.marketplace,)
+                queryset = ProductMktp.objects.filter(product_id__in=product_pks,mktp=self.mktp_subcat.mktp,)
                 if related_fields:
                     queryset = queryset.select_related(*["__".join(related_fields[:i])for i in range(1, len(related_fields) + 1)])
                 for pm in queryset: 
@@ -183,7 +183,7 @@ class CSVGenerator:
             elif "Image Location" in name:
                 image_location_columns.append(column)
 
-        # Fetch images associated with the requested marketplace.
+        # Fetch images associated with the requested mktp.
         image_datas = (ImageData.objects
             .filter(product_id__in=product_pks)
             .order_by("product_id", "display_order", "pk")
@@ -244,7 +244,7 @@ class CSVGenerator:
                     images.append(encode_image_to_base64(response.content))
                 image_elapsed = time.perf_counter() - image_start
                 print(f"Product {product.product_id}: {len(public_ids)} images downloaded in {image_elapsed:.2f}s")
-                product_details = {"product_id": product.product_id,"design": str(product.design),"subcategory": product.design.subcategory.name,"color": str(product.color),}
+                product_details = {"product_id": product.product_id,"design": str(product.design),"subcat": product.design.subcat.name,"color": str(product.color),}
 
                 with open("gpu_usage.log", "a") as f:
                     f.write(f"===========Calling AI================\n")

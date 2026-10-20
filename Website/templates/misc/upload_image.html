@@ -15,11 +15,11 @@
   </div>
   <br />
   <div>
-    <strong>Marketplaces:</strong><br />
-    {% for marketplace in marketplaces %}
+    <strong>Mktps:</strong><br />
+    {% for mktp in mktps %}
     <label>
-      <input type="checkbox" name="marketplaces" value="{{ marketplace.id }}" />
-      {{ marketplace.name }} </label
+      <input type="checkbox" name="mktps" value="{{ mktp.id }}" />
+      {{ mktp.name }} </label
     ><br />
     {% endfor %}
   </div>

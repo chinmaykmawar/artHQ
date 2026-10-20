@@ -28,7 +28,7 @@ class ProductManager(ABC):
         pass
 
     @abstractmethod
-    def filter_products(self,categories=None,subcategories=None,colors=None,materials=None,):
+    def filter_products(self,categories=None,subcats=None,colors=None,materials=None,):
         pass
 
 class CategoryManager(ABC):
@@ -53,26 +53,26 @@ class CategoryManager(ABC):
     def delete_category(self, category):
         pass
 
-class SubCategoryManager(ABC):
+class SubCatManager(ABC):
 
     @abstractmethod
-    def get_all_subcategories(self):
+    def get_all_subcats(self):
         pass
 
     @abstractmethod
-    def get_subcategory(self, category, subcategory):
+    def get_subcat(self, category, subcat):
         pass
 
     @abstractmethod
-    def create_subcategory(self, data):
+    def create_subcat(self, data):
         pass
 
     @abstractmethod
-    def update_subcategory(self, category, subcategory, data):
+    def update_subcat(self, category, subcat, data):
         pass
 
     @abstractmethod
-    def delete_subcategory(self, category, subcategory):
+    def delete_subcat(self, category, subcat):
         pass
 
 class DesignManager(ABC):

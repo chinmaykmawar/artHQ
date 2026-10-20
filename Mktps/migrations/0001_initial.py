@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('core', '__first__'),
+        ('main', '__first__'),
     ]
 
     operations = [
@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('is_active', models.BooleanField(default=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('marketplace', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='fields', to='core.marketplace')),
+                ('marketplace', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='fields', to='main.marketplace')),
             ],
             options={
                 'verbose_name': 'Marketplace Field',
@@ -40,8 +40,8 @@ class Migration(migrations.Migration):
                 ('is_active', models.BooleanField(default=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('marketplace', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='marketplace_subcategories', to='core.marketplace')),
-                ('subcategory', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='marketplace_configurations', to='core.subcategory')),
+                ('marketplace', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='marketplace_subcategories', to='main.marketplace')),
+                ('subcategory', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='marketplace_configurations', to='main.subcategory')),
             ],
             options={
                 'verbose_name': 'Marketplace Subcategory',

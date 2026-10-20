@@ -9,7 +9,7 @@ class ProductImageInline(admin.TabularInline):
     model=ImageData
     template="product_image_inline.html"
     extra=0
-    fields=("image_preview","display_order","marketplaces")
+    fields=("image_preview","display_order","mktps")
     readonly_fields=("image_preview",)
     verbose_name="Product Image"
     verbose_name_plural="Product Images"

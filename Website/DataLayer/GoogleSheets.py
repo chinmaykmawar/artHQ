@@ -8,7 +8,7 @@ from Website.core import settings
 from .framework import (
     ProductManager,
     CategoryManager,
-    SubCategoryManager,
+    SubCatManager,
     DesignManager,
     ColorManager,
     OrderManager,
@@ -45,7 +45,7 @@ class GSProductManager(ProductManager):
     def filter_products(
         self,
         categories=None,
-        subcategories=None,
+        subcats=None,
         colors=None,
         materials=None,
     ):
@@ -68,21 +68,21 @@ class GSCategoryManager(CategoryManager):
     def delete_category(self, category):
         raise NotImplementedError
 
-class GSSubCategoryManager(SubCategoryManager):
+class GSSubCatManager(SubCatManager):
 
-    def get_all_subcategories(self):
+    def get_all_subcats(self):
         raise NotImplementedError
 
-    def get_subcategory(self, category, subcategory):
+    def get_subcat(self, category, subcat):
         raise NotImplementedError
 
-    def create_subcategory(self, data):
+    def create_subcat(self, data):
         raise NotImplementedError
 
-    def update_subcategory(self, category, subcategory, data):
+    def update_subcat(self, category, subcat, data):
         raise NotImplementedError
 
-    def delete_subcategory(self, category, subcategory):
+    def delete_subcat(self, category, subcat):
         raise NotImplementedError
 
 class GSDesignManager(DesignManager):

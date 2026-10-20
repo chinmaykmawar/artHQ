@@ -13,7 +13,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE","Website.core.settings")
 import django
 django.setup()
 
-from Marketplaces.Product_Upload.file_generator import CSVGenerator
+from Mktps.Product_Upload.file_generator import CSVGenerator
 
 gen=CSVGenerator('AMAZON', 'Bracelet')
 gen.create_csv('JBR30016ReW')
